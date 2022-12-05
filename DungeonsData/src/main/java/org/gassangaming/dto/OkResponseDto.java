@@ -1,0 +1,12 @@
+package org.gassangaming.dto;
+
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+
+@Builder
+@EqualsAndHashCode(callSuper = true)
+public class OkResponseDto extends DtoBase {
+    public OkResponseDto() {
+        super(0, null);
+    }
+}

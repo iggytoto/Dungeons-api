@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="test-data" author="gassan">
+        <preConditions>
+            <changeSetExecuted id="initial-sequence" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-table-users" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-table-tokens" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-table-units" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-table-accounts" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+        </preConditions>
+        <insert tableName="users">
+            <column name="id" value="1"/>
+            <column name="name" value="gassan"/>
+            <column name="password_sha" value=""/>
+        </insert>
+        <insert tableName="tokens">
+            <column name="id" value="1"/>
+            <column name="user_id" value="1"/>
+            <column name="permanent" value="true"/>
+            <column name="valid_to" value="3000-01-01 00:00:00.00"/>
+            <column name="value" value="permanent"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="1"/>
+            <column name="name" value="Niel"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="2"/>
+            <column name="name" value="Jean-Paul"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="3"/>
+            <column name="name" value="Tim"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="4"/>
+            <column name="name" value="Dan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units_for_sale">
+            <column name="id" value="1"/>
+            <column name="gold_amount" value="100" />
+            <column name="unit_id" value="1"/>
+        </insert>
+        <insert tableName="units_for_sale">
+            <column name="id" value="2"/>
+            <column name="gold_amount" value="100" />
+            <column name="unit_id" value="2"/>
+        </insert>
+        <insert tableName="units_for_sale">
+            <column name="id" value="3"/>
+            <column name="gold_amount" value="100" />
+            <column name="unit_id" value="3"/>
+        </insert>
+        <insert tableName="units_for_sale">
+            <column name="id" value="4"/>
+            <column name="gold_amount" value="100" />
+            <column name="unit_id" value="4"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

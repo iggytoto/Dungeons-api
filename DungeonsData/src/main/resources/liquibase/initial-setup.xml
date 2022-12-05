@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="initial-sequence" author="gassan">
+        <createSequence sequenceName="s_users_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_tokens_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_units_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_accounts_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_users_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_users_id" dataType="int" startValue="1" incrementBy="1"/>
+    </changeSet>
+    <changeSet id="initial-table-users" author="gassan">
+        <createTable tableName="users">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints notNullConstraintName="c_nn_users_name"/>
+            </column>
+            <column name="password_sha" type="varchar"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="initial-table-tokens" author="gassan">
+        <createTable tableName="tokens">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="value" type="varchar"/>
+            <column name="user_id" type="int">
+                <constraints notNullConstraintName="c_nn_tokens_user_id" unique="true"/>
+            </column>
+            <column name="valid_to" type="datetime">
+                <constraints notNullConstraintName="c_nn_tokens_valid_to"/>
+            </column>
+            <column name="permanent" type="boolean" defaultValue="false"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tokens"
+                                 baseColumnNames="user_id"
+                                 constraintName="tokens_fk_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="initial-table-units" author="gassan">
+        <createTable tableName="units">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar"/>
+            <column name="owner_id" type="int"/>
+            <column name="hp" type="int"/>
+            <column name="armor" type="int"/>
+            <column name="mr" type="int"/>
+            <column name="dmg" type="int"/>
+            <column name="training_exp" type="int"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="units"
+                                 baseColumnNames="owner_id"
+                                 constraintName="units_fk_owner_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <createTable tableName="units_for_sale">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_id" type="int">
+                <constraints unique="true"/>
+            </column>
+            <column name="gold_amount" type="int"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="units_for_sale"
+                                 baseColumnNames="unit_id"
+                                 constraintName="units_for_sale_fk_unit_id"
+                                 referencedTableName="units"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="initial-table-accounts" author="gassan">
+        <createTable tableName="accounts">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints unique="true"/>
+            </column>
+            <column name="gold_amount" type="int"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="accounts"
+                                 baseColumnNames="user_id"
+                                 constraintName="accounts_fk_unit_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <sql>
+            create or replace function f_t_accounts_insert()
+            returns trigger
+            language plpgsql as
+            $func$
+            begin
+            insert into accounts (id,user_id,gold_amount) values (nextval('s_users_id'),new.id, 0);
+            return null;
+            end
+            $func$;
+
+            create or replace trigger t_accounts_update
+            after insert on users
+            for each row
+            execute function f_t_accounts_insert();
+        </sql>
+    </changeSet>
+</databaseChangeLog>
