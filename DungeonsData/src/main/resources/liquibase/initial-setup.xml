@@ -2,23 +2,18 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <changeSet id="initial-sequence" author="gassan">
         <createSequence sequenceName="s_users_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_tokens_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_units_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_accounts_id" dataType="int" startValue="1" incrementBy="1"/>
-        <createSequence sequenceName="s_users_id" dataType="int" startValue="1" incrementBy="1"/>
-        <createSequence sequenceName="s_users_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_units_for_sale_id" dataType="int" startValue="1" incrementBy="1"/>
     </changeSet>
     <changeSet id="initial-table-users" author="gassan">
         <createTable tableName="users">
-            <column name="id" type="int">
+            <column name="id" type="int" defaultValueSequenceNext="s_users_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="varchar">
@@ -29,7 +24,7 @@
     </changeSet>
     <changeSet id="initial-table-tokens" author="gassan">
         <createTable tableName="tokens">
-            <column name="id" type="int">
+            <column name="id" type="int" defaultValueSequenceNext="s_tokens_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="value" type="varchar"/>
@@ -49,7 +44,7 @@
     </changeSet>
     <changeSet id="initial-table-units" author="gassan">
         <createTable tableName="units">
-            <column name="id" type="int">
+            <column name="id" type="int" defaultValueSequenceNext="s_units_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="varchar"/>
@@ -66,7 +61,7 @@
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
         <createTable tableName="units_for_sale">
-            <column name="id" type="int">
+            <column name="id" type="int" defaultValueSequenceNext="s_units_for_sale_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="unit_id" type="int">
@@ -82,7 +77,7 @@
     </changeSet>
     <changeSet id="initial-table-accounts" author="gassan">
         <createTable tableName="accounts">
-            <column name="id" type="int">
+            <column name="id" type="int" defaultValueSequenceNext="s_accounts_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="user_id" type="int">
