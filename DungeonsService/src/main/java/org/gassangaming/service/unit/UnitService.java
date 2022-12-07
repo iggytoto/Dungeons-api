@@ -18,4 +18,7 @@ public interface UnitService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     void buyUnit(long unitId, UserContext context) throws UnitServiceException;
+
+    @Transactional
+    void TrainUnit(long unitId, UserContext context) throws UnitServiceException;
 }

@@ -54,6 +54,7 @@
             <column name="mr" type="int"/>
             <column name="dmg" type="int"/>
             <column name="training_exp" type="int"/>
+            <column name="activity" type="varchar" defaultValue="Idle"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="units"
                                  baseColumnNames="owner_id"

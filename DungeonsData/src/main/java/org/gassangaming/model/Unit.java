@@ -25,7 +25,9 @@ public class Unit implements Serializable {
     public static final String MAGIC_RESIST_COLUMN_NAME = "mr";
     public static final String DAMAGE_COLUMN_NAME = "dmg";
     public static final String TRAINING_EXPERIENCE_COLUMN_NAME = "training_exp";
+    public static final String ACTIVITY_COLUMN_NAME = "activity";
     public static final String SEQUENCE_NAME = "s_units_id";
+
 
     @Id
     @Column
@@ -48,5 +50,8 @@ public class Unit implements Serializable {
     private int damage;
     @Column(name = TRAINING_EXPERIENCE_COLUMN_NAME)
     private int trainingExperience;
+    @Column(name = ACTIVITY_COLUMN_NAME)
+    @Enumerated(EnumType.STRING)
+    private Activity activity;
 
 }

@@ -1,18 +1,11 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.DtoBase;
-import org.gassangaming.dto.ErrorResponseDto;
-import org.gassangaming.dto.GetAvailableUnitsResponse;
+import org.gassangaming.dto.*;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.unit.UnitService;
 import org.gassangaming.service.unit.UnitServiceException;
-import org.hibernate.annotations.AttributeAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class BarrackController {
@@ -29,7 +22,13 @@ public class BarrackController {
         }
     }
 
-    private static UserContext extractContext(HttpServletRequest request) {
-        return (UserContext) request.getAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME);
+    @PostMapping
+    public DtoBase trainUnit(@RequestBody TrainUnitRequest request, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
+        try {
+            unitService.TrainUnit(request.getUnitId(), context);
+            return new OkResponseDto();
+        } catch (UnitServiceException e) {
+            return ErrorResponseDto.Of(e.getMessage());
+        }
     }
 }
