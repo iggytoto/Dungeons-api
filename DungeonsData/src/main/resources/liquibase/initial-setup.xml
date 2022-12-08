@@ -11,6 +11,7 @@
         <createSequence sequenceName="s_accounts_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_units_for_sale_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_unit_activity_log_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_matches_id" dataType="int" startValue="1" incrementBy="1"/>
     </changeSet>
     <changeSet id="initial-table-users" author="gassan">
         <createTable tableName="users">
@@ -93,7 +94,7 @@
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
         <sql>
-<!--            function to create account for user-->
+            <!--            function to create account for user-->
             create or replace function f_t_accounts_on_user_insert()
             returns trigger
             language plpgsql as
@@ -103,7 +104,7 @@
             return null;
             end
             $func$;
-<!--            trigger for account creation-->
+            <!--            trigger for account creation-->
             create or replace trigger t_accounts_on_user_insert
             after insert on users
             for each row
@@ -126,7 +127,7 @@
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
         <sql>
-<!--            function to create unit activity log on user creation-->
+            <!--            function to create unit activity log on user creation-->
             create or replace function f_t_unit_activity_log_on_unit_insert()
             returns trigger
             language plpgsql as
@@ -141,7 +142,7 @@
             after insert on units
             for each row
             execute function f_t_unit_activity_log_on_unit_insert();
-<!--            function to update activity log on user activity change-->
+            <!--            function to update activity log on user activity change-->
             create or replace function f_t_unit_activity_log_on_unit_activity_update()
             returns trigger
             language plpgsql as
@@ -157,5 +158,31 @@
             for each row
             execute function f_t_unit_activity_log_on_unit_activity_update();
         </sql>
+    </changeSet>
+    <changeSet id="initial-table-matches" author="gassan">
+        <createTable tableName="matches">
+            <column name="id" type="int" defaultValueSequenceNext="s_matches_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_one_id" type="int">
+                <constraints unique="true"/>
+            </column>
+            <column name="unit_two_id" type="int">
+                <constraints unique="true"/>
+            </column>
+            <column name="status" type="varchar"/>
+            <column name="address" type="varchar"/>
+            <column name="port" type="varchar"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="matches"
+                                 baseColumnNames="unit_one_id"
+                                 constraintName="matches_user_one_fk_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="matches"
+                                 baseColumnNames="unit_two_id"
+                                 constraintName="matches_user_two_fk_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

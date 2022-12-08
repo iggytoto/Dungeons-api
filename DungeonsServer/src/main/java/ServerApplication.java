@@ -1,5 +1,3 @@
-package org.gassangaming;
-
 import org.gassangaming.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,10 +7,10 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @SpringBootApplication
 @EntityScan(basePackageClasses = {User.class})
-public class AuthApplication {
+public class ServerApplication {
 
     public static void main(String... args) {
-        SpringApplication.run(AuthApplication.class, args);
+        SpringApplication.run(ServerApplication.class, args);
     }
 
     @Bean

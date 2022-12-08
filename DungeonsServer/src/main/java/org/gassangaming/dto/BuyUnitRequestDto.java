@@ -1,6 +1,5 @@
 package org.gassangaming.dto;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
