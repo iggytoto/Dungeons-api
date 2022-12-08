@@ -5,11 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-import static org.gassangaming.model.Match.TABLE_NAME;
-
-
 @Entity
-@Table(name = TABLE_NAME)
+@Table(name = Match.TABLE_NAME)
 @Getter
 @Setter
 public class Match {
