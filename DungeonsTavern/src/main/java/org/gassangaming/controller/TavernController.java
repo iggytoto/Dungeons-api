@@ -2,8 +2,8 @@ package org.gassangaming.controller;
 
 import org.gassangaming.dto.*;
 import org.gassangaming.service.UserContext;
-import org.gassangaming.service.unit.UnitService;
-import org.gassangaming.service.unit.UnitServiceException;
+import org.gassangaming.service.exception.ServiceException;
+import org.gassangaming.service.tavern.TavernService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class TavernController {
 
     @Autowired
-    UnitService unitService;
+    TavernService tavernService;
 
     @GetMapping("/tavern/availableUnits")
     public DtoBase getAvailableUnits(
@@ -19,9 +19,9 @@ public class TavernController {
         try {
             return GetAvailableUnitsResponseDto.
                     builder().
-                    units(unitService.getUnitsForSale(context)).
+                    units(tavernService.getUnitsForSale(context)).
                     build();
-        } catch (UnitServiceException e) {
+        } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
     }
@@ -32,9 +32,9 @@ public class TavernController {
             @RequestBody BuyUnitRequestDto buyUnitRequestDto,
             @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            unitService.buyUnit(buyUnitRequestDto.getUnitId(), context);
+            tavernService.buyUnit(buyUnitRequestDto.getUnitId(), context);
             return new OkResponseDto();
-        } catch (UnitServiceException e) {
+        } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
     }

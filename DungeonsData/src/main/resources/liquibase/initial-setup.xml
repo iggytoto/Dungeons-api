@@ -10,6 +10,7 @@
         <createSequence sequenceName="s_units_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_accounts_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_units_for_sale_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_unit_activity_log_id" dataType="int" startValue="1" incrementBy="1"/>
     </changeSet>
     <changeSet id="initial-table-users" author="gassan">
         <createTable tableName="users">
@@ -92,7 +93,8 @@
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
         <sql>
-            create or replace function f_t_accounts_insert()
+<!--            function to create account for user-->
+            create or replace function f_t_accounts_on_user_insert()
             returns trigger
             language plpgsql as
             $func$
@@ -101,11 +103,59 @@
             return null;
             end
             $func$;
-
-            create or replace trigger t_accounts_update
+<!--            trigger for account creation-->
+            create or replace trigger t_accounts_on_user_insert
             after insert on users
             for each row
-            execute function f_t_accounts_insert();
+            execute function f_t_accounts_on_user_insert();
+        </sql>
+    </changeSet>
+    <changeSet id="initial-table-activities" author="gassan">
+        <createTable tableName="unit_activity_log">
+            <column name="id" type="int" defaultValueSequenceNext="s_unit_activity_log_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_id" type="int">
+                <constraints unique="true"/>
+            </column>
+            <column name="started_at" type="datetime"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="unit_activity_log"
+                                 baseColumnNames="unit_id"
+                                 constraintName="unit_activity_log_fk_unit_id"
+                                 referencedTableName="units"
+                                 referencedColumnNames="id"/>
+        <sql>
+<!--            function to create unit activity log on user creation-->
+            create or replace function f_t_unit_activity_log_on_unit_insert()
+            returns trigger
+            language plpgsql as
+            $func$
+            begin
+            insert into unit_activity_log (id,unit_id) values (nextval('s_unit_activity_log_id'),new.id);
+            return null;
+            end
+            $func$;
+
+            create or replace trigger t_unit_activity_log_on_unit_insert
+            after insert on units
+            for each row
+            execute function f_t_unit_activity_log_on_unit_insert();
+<!--            function to update activity log on user activity change-->
+            create or replace function f_t_unit_activity_log_on_unit_activity_update()
+            returns trigger
+            language plpgsql as
+            $func$
+            begin
+            update unit_activity_log set started_at = now() where unit_id = new.id;
+            return null;
+            end
+            $func$;
+
+            create or replace trigger t_unit_activity_log_on_unit_activity_update
+            after update of activity on units
+            for each row
+            execute function f_t_unit_activity_log_on_unit_activity_update();
         </sql>
     </changeSet>
 </databaseChangeLog>

@@ -1,4 +1,4 @@
-package org.gassangaming.util;
+package org.gassangaming.service.util;
 
 import org.gassangaming.model.Account;
 import org.gassangaming.model.Valuable;

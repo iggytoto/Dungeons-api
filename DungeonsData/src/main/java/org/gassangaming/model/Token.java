@@ -21,7 +21,7 @@ public class Token implements Serializable {
 
     public static final String TABLE_NAME = "tokens";
     public static final String VALUE_COLUMN_NAME = "value";
-    public static final String VALID_TO_COLUMN_NAME = "valid_to";
+    public static final String VALID_TO_COLUMN_NAME = Constants.VALID_TO_COLUMN_NAME;
     public static final String USER_ID_COLUMN_NAME = Constants.USER_ID_FOREIGN_KEY_COLUMN_NAME;
     public static final String PERMANENT_COLUMN_NAME = "permanent";
     public static final String SEQUENCE_NAME = "s_tokens_id";

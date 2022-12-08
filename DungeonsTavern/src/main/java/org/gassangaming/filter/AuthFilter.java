@@ -2,9 +2,10 @@ package org.gassangaming.filter;
 
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.auth.AuthService;
-import org.gassangaming.service.auth.AuthServiceException;
+import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -24,8 +25,8 @@ public class AuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain) throws ServletException, IOException {
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain) throws ServletException, IOException {
         final var authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             final UserContext context;
@@ -36,7 +37,7 @@ public class AuthFilter extends OncePerRequestFilter {
                     filterChain.doFilter(request, response);
                     return;
                 }
-            } catch (AuthServiceException ignored) {
+            } catch (ServiceException ignored) {
             }
         }
         throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "");

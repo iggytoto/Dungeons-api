@@ -1,6 +1,8 @@
 package org.gassangaming.repository;
 
 public abstract class Constants {
-    public static final String UNIT_ID_PARAM = "unitId";
-    public static final String USER_ID_PARAM = "userId";
+
+    public static final String PARAM_1 = "p1";
+    public static final String PARAM_2 = "p2";
+
 }

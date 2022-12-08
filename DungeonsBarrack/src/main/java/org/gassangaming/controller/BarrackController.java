@@ -2,8 +2,8 @@ package org.gassangaming.controller;
 
 import org.gassangaming.dto.*;
 import org.gassangaming.service.UserContext;
-import org.gassangaming.service.unit.UnitService;
-import org.gassangaming.service.unit.UnitServiceException;
+import org.gassangaming.service.barrack.BarrackService;
+import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 public class BarrackController {
 
     @Autowired
-    UnitService unitService;
+    BarrackService barrackService;
 
     @GetMapping("/barrack/availableUnits")
     public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            return GetAvailableUnitsResponse.builder().units(unitService.getBarrackUnits(context)).build();
-        } catch (UnitServiceException e) {
+            return GetAvailableUnitsResponse.builder().units(barrackService.getBarrackUnits(context)).build();
+        } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
     }
@@ -25,9 +25,9 @@ public class BarrackController {
     @PostMapping
     public DtoBase trainUnit(@RequestBody TrainUnitRequest request, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            unitService.TrainUnit(request.getUnitId(), context);
+            barrackService.TrainUnit(request.getUnitId(), context);
             return new OkResponseDto();
-        } catch (UnitServiceException e) {
+        } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
     }

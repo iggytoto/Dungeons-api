@@ -2,6 +2,7 @@ package org.gassangaming.service.auth;
 
 import org.gassangaming.model.Token;
 import org.gassangaming.service.UserContext;
+import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,9 +17,9 @@ public interface AuthService {
      * @param login    login
      * @param password password
      * @return updated token
-     * @throws AuthServiceException in case login failed
+     * @throws ServiceException in case login failed
      */
-    Token login(String login, String password) throws AuthServiceException;
+    Token login(String login, String password) throws ServiceException;
 
     /**
      * Registers the use
@@ -26,15 +27,15 @@ public interface AuthService {
      * @param login    login
      * @param password password
      * @return userId in case everythis is ok
-     * @throws AuthServiceException in case register failed
+     * @throws ServiceException in case register failed
      */
-    long register(String login, String password) throws AuthServiceException;
+    long register(String login, String password) throws ServiceException;
 
     /**
      * Validates given token, if its valid prolongs its validation to +1 hour.
      *
      * @param token given token
-     * @throws AuthServiceException in case validation failed
+     * @throws ServiceException in case validation failed
      */
-    UserContext validateToken(String token) throws AuthServiceException;
+    UserContext validateToken(String token) throws ServiceException;
 }

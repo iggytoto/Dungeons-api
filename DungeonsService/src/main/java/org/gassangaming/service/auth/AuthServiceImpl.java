@@ -9,6 +9,7 @@ import org.gassangaming.model.User;
 import org.gassangaming.repository.TokenRepository;
 import org.gassangaming.repository.UserRepository;
 import org.gassangaming.service.UserContext;
+import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,17 +25,17 @@ public class AuthServiceImpl implements AuthService {
     TokenRepository tokenRepository;
 
     @Override
-    public Token login(String login, String password) throws AuthServiceException {
+    public Token login(String login, String password) throws ServiceException {
         final var u = userRepository.findUserByLogin(login);
         if (u != null) {
             final var passHash = hashString(password);
             if (u.getPasswordSha().equals(passHash)) {
                 return tokenRepository.save(getToken(u.getId()));
             } else {
-                throw new AuthServiceException("Incorrect password");
+                throw new ServiceException("Incorrect password");
             }
         } else {
-            throw new AuthServiceException("Unknown user");
+            throw new ServiceException("Unknown user");
         }
     }
 
@@ -52,10 +53,10 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public long register(String login, String password) throws AuthServiceException {
+    public long register(String login, String password) throws ServiceException {
         final var u = userRepository.findUserByLogin(login);
         if (u != null) {
-            throw new AuthServiceException("Login already in use");
+            throw new ServiceException("Login already in use");
         } else {
             final var passHash = hashString(password);
             final var registeredUser = userRepository.save(User.Of(login, passHash));
@@ -64,20 +65,23 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserContext validateToken(String t) throws AuthServiceException {
+    public UserContext validateToken(String t) throws ServiceException {
         try {
             final var now = new Date();
             final var token = Token.Of(new String(BaseEncoding.base64().decode(t)));
             final var actualToken = tokenRepository.findByUserId(token.getUserId());
+            if (actualToken == null) {
+                throw new ServiceException("Not authorized");
+            }
             if (actualToken.getValue().equals(token.getValue()) && (actualToken.isPermanent() || actualToken.getValidTo().after(now))) {
                 actualToken.setValidTo(DateUtils.addHours(now, 1));
                 final var updatedToken = tokenRepository.save(actualToken);
                 return UserContext.builder().token(updatedToken).build();
             } else {
-                throw new AuthServiceException("Invalid token");
+                throw new ServiceException("Invalid token");
             }
         } catch (JsonProcessingException e) {
-            throw new AuthServiceException(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
