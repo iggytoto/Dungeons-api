@@ -3,6 +3,7 @@ package org.gassangaming.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.gassangaming.dto.DtoBase;
 import org.gassangaming.model.UnitForSale;
 
 import java.util.Collection;

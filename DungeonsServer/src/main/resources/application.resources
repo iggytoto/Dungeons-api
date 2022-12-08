@@ -4,6 +4,4 @@ spring.datasource.username=postgres
 spring.datasource.password=postgrespw
 spring.liquibase.enabled=false
 spring.jpa.show-sql=true
-logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter=
-DEBUG
 spring.task.scheduling.pool.size=50

@@ -2,7 +2,12 @@ package org.gassangaming.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.io.BaseEncoding;
-import org.gassangaming.dto.*;
+import org.gassangaming.dto.LoginRequestDto;
+import org.gassangaming.dto.LoginResponseDto;
+import org.gassangaming.dto.RegisterRequestDto;
+import org.gassangaming.dto.RegisterResponseDto;
+import org.gassangaming.dto.DtoBase;
+import org.gassangaming.dto.ErrorResponseDto;
 import org.gassangaming.service.auth.AuthService;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
