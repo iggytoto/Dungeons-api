@@ -1,4 +1,5 @@
-import org.gassangaming.model.User;
+package org.gassangaming;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -7,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @SpringBootApplication
-@EntityScan(basePackageClasses = {User.class})
-@ComponentScan("org.gassangaming")
+@EntityScan(basePackageClasses = {org.gassangaming.model.User.class})
+@ComponentScan("org.gassangaming.*")
 public class ServerApplication {
 
     public static void main(String... args) {
