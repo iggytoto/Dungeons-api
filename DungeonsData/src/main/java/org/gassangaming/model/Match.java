@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = Match.TABLE_NAME)
 @Getter
 @Setter
-public class Match {
+public class Match implements Serializable {
     public static final String TABLE_NAME = "matches";
     public static final String USER_ONE_ID_COLUMN_NAME = "user_one_id";
     public static final String USER_TWO_ID_COLUMN_NAME = "user_two_id";
@@ -25,9 +26,9 @@ public class Match {
     @SequenceGenerator(name = SEQUENCE_NAME, allocationSize = 1)
     protected Long id;
     @Column(name = USER_ONE_ID_COLUMN_NAME)
-    private long userOneId;
+    private Long userOneId;
     @Column(name = USER_TWO_ID_COLUMN_NAME)
-    private long userTwoId;
+    private Long userTwoId;
     @Column(name = MATCH_STATUS_COLUMN_NAME)
     @Enumerated(EnumType.STRING)
     private MatchStatus status;
@@ -39,8 +40,7 @@ public class Match {
     protected Match() {
     }
 
-    public static Match Of(
-            long userOneId, MatchStatus status) {
+    public static Match Of(long userOneId, MatchStatus status) {
         final var m = new Match();
         m.setUserOneId(userOneId);
         m.setStatus(status);

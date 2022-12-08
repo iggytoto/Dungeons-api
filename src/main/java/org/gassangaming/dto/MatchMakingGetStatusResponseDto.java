@@ -3,11 +3,11 @@ package org.gassangaming.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.gassangaming.dto.DtoBase;
+import org.gassangaming.model.Match;
 
 @Builder
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class TrainUnitRequest extends DtoBase {
-    long unitId;
+public class MatchMakingGetStatusResponseDto extends DtoBase {
+    Match status;
 }

@@ -1,7 +1,7 @@
 package org.gassangaming.controller;
 
 import org.gassangaming.dto.BuyUnitRequestDto;
-import org.gassangaming.dto.GetAvailableUnitsResponseDto;
+import org.gassangaming.dto.GetAvailableUnitsForSaleResponseDto;
 import org.gassangaming.dto.*;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
@@ -19,7 +19,7 @@ public class TavernController {
     public DtoBase getAvailableUnits(
             @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            return GetAvailableUnitsResponseDto.
+            return GetAvailableUnitsForSaleResponseDto.
                     builder().
                     units(tavernService.getUnitsForSale(context)).
                     build();

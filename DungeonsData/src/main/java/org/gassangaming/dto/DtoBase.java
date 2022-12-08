@@ -15,7 +15,7 @@ import java.io.Serializable;
 public abstract class DtoBase implements Serializable {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    protected int code;
+    protected Long code;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     protected String message;
 }

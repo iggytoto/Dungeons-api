@@ -1,5 +1,7 @@
 package org.gassangaming.filter;
 
+import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
+import org.gassangaming.dto.ErrorResponseDto;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.auth.AuthService;
 import org.gassangaming.service.exception.ServiceException;
@@ -7,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -37,9 +38,23 @@ public class AuthFilter extends OncePerRequestFilter {
                     filterChain.doFilter(request, response);
                     return;
                 }
-            } catch (ServiceException ignored) {
+            } catch (ServiceException se) {
+                writeErrorResponse(response, HttpStatus.INTERNAL_SERVER_ERROR, se.getMessage());
+            } catch (InvalidDefinitionException jde) {
+                writeErrorResponse(response, HttpStatus.BAD_REQUEST, jde.getMessage());
+                return;
             }
         }
-        throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "");
+        writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "");
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return request.getRequestURI().contains("/auth");
+    }
+
+    private void writeErrorResponse(HttpServletResponse response, HttpStatus status, String message) throws IOException {
+        response.getWriter().write(ErrorResponseDto.Of(message).toJson());
+        response.getWriter().flush();
     }
 }

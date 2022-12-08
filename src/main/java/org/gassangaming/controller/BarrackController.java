@@ -1,7 +1,7 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.GetAvailableUnitsResponse;
-import org.gassangaming.dto.TrainUnitRequest;
+import org.gassangaming.dto.GetAvailableUnitsResponseDto;
+import org.gassangaming.dto.TrainUnitRequestDto;
 import org.gassangaming.dto.*;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.barrack.BarrackService;
@@ -18,14 +18,14 @@ public class BarrackController {
     @GetMapping("/barrack/availableUnits")
     public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            return GetAvailableUnitsResponse.builder().units(barrackService.getBarrackUnits(context)).build();
+            return GetAvailableUnitsResponseDto.builder().units(barrackService.getBarrackUnits(context)).build();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
     }
 
     @PostMapping
-    public DtoBase trainUnit(@RequestBody TrainUnitRequest request, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
+    public DtoBase trainUnit(@RequestBody TrainUnitRequestDto request, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
             barrackService.TrainUnit(request.getUnitId(), context);
             return new OkResponseDto();

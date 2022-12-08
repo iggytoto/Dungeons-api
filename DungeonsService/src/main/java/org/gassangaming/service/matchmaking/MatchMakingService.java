@@ -40,6 +40,7 @@ public interface MatchMakingService {
      *
      * @param context User context
      * @return state of given user mm status
+     * @throws ServiceException in case status is not found
      */
-    Match getStatus(UserContext context);
+    Match getStatus(UserContext context) throws ServiceException;
 }

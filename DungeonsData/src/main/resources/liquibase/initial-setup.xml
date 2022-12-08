@@ -164,23 +164,23 @@
             <column name="id" type="int" defaultValueSequenceNext="s_matches_id">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="unit_one_id" type="int">
-                <constraints unique="true"/>
+            <column name="user_one_id" type="int">
+                <constraints unique="true" nullable="true"/>
             </column>
-            <column name="unit_two_id" type="int">
-                <constraints unique="true"/>
+            <column name="user_two_id" type="int">
+                <constraints unique="true" nullable="true"/>
             </column>
             <column name="status" type="varchar"/>
             <column name="address" type="varchar"/>
             <column name="port" type="varchar"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="matches"
-                                 baseColumnNames="unit_one_id"
+                                 baseColumnNames="user_one_id"
                                  constraintName="matches_user_one_fk_user_id"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="matches"
-                                 baseColumnNames="unit_two_id"
+                                 baseColumnNames="user_two_id"
                                  constraintName="matches_user_two_fk_user_id"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>

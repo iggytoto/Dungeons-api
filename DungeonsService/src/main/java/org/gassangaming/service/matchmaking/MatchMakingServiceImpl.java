@@ -2,7 +2,7 @@ package org.gassangaming.service.matchmaking;
 
 import org.gassangaming.model.Match;
 import org.gassangaming.model.MatchStatus;
-import org.gassangaming.repository.MatchRepository;
+import org.gassangaming.repository.MatchMakingRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +14,15 @@ import java.util.Collection;
 public class MatchMakingServiceImpl implements MatchMakingService {
 
     @Autowired
-    MatchRepository matchRepository;
+    MatchMakingRepository matchRepository;
 
     @Override
     public void register(Collection<Long> rosterTeam, MatchMakingType type, UserContext context) throws ServiceException {
         final var userId = context.getToken().getUserId();
-        if (matchRepository.matchExistsForUser(userId)) {
+        if (matchRepository.hasRegistered(userId)) {
             throw new ServiceException("Match already exists");
         }
-        final var match = matchRepository.findFirstFreeToJoinMatch();
+        final var match = matchRepository.findFirstFree();
         if (match == null) {
             matchRepository.save(Match.Of(userId, MatchStatus.Searching));
         } else {
@@ -35,7 +35,7 @@ public class MatchMakingServiceImpl implements MatchMakingService {
     @Override
     public void cancelRegistration(UserContext context) throws ServiceException {
         final var userId = context.getToken().getUserId();
-        if (!matchRepository.matchExistsForUser(userId)) {
+        if (!matchRepository.hasRegistered(userId)) {
             throw new ServiceException("Match already exists");
         }
         final var match = matchRepository.findCancellableForUser(userId);
@@ -46,7 +46,11 @@ public class MatchMakingServiceImpl implements MatchMakingService {
     }
 
     @Override
-    public Match getStatus(UserContext context) {
-        return matchRepository.findForUser(context.getToken().getUserId());
+    public Match getStatus(UserContext context) throws ServiceException {
+        final var match = matchRepository.findForUser(context.getToken().getUserId());
+        if (match == null) {
+            throw new ServiceException("Match not found");
+        }
+        return match;
     }
 }
