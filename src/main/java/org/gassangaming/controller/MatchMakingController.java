@@ -43,4 +43,9 @@ public class MatchMakingController {
         }
     }
 
+    @PostMapping("/matchmaking/applyServer")
+    public DtoBase applyServer(@RequestBody MatchMakingServerApplyRequestDto requestDto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
+        return MatchMakingServerApplyResponseDto.builder().match(matchMakingService.applyServer(requestDto.getIp(), requestDto.getPort())).build();
+    }
+
 }

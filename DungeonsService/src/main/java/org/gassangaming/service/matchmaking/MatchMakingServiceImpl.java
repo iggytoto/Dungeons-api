@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 public class MatchMakingServiceImpl implements MatchMakingService {
@@ -24,7 +25,7 @@ public class MatchMakingServiceImpl implements MatchMakingService {
         }
         final var match = matchRepository.findFirstFree();
         if (match == null) {
-            matchRepository.save(Match.Of(userId, MatchStatus.Searching));
+            matchRepository.save(Match.Of(userId, MatchStatus.Searching, new Date()));
         } else {
             match.setUserTwoId(userId);
             match.setStatus(MatchStatus.PlayersFound);
@@ -52,5 +53,13 @@ public class MatchMakingServiceImpl implements MatchMakingService {
             throw new ServiceException("Match not found");
         }
         return match;
+    }
+
+    @Override
+    public Match applyServer(String ip, String port) {
+        final var match = matchRepository.findFirstOldestAwaitingServer();
+        match.setServerIpAddress(ip);
+        match.setServerPort(port);
+        return matchRepository.save(match);
     }
 }

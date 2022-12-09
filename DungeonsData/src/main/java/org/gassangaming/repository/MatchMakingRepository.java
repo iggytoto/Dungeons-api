@@ -13,6 +13,7 @@ public interface MatchMakingRepository extends JpaRepository<Match, Long> {
     String FIND_FOR_USER_QUERY = "select m from Match m where m.userOneId=:" + PARAM_1 + " or m.userTwoId=:" + PARAM_1;
     String FIND_FIRST_FREE_TO_JOIN_MATCH_QUERY = "SELECT * FROM matches m WHERE m.user_two_id=NULL LIMIT 1";
     String FIND_CANCELLABLE_FOR_USER_QUERY = "select m from Match m where m.userOneId=:" + PARAM_1 + " and m.status='Searching'";
+    String FIND_FIRST_OLDEST_AWAITING_SERVER = "SELECT * FROM matches m WHERE m.status ='PlayersFound' ORDER by m.created_at LIMIT 1";
 
 
     @Query(value = MATCH_EXISTS_FOR_USER_QUERY, nativeQuery = true)
@@ -26,4 +27,7 @@ public interface MatchMakingRepository extends JpaRepository<Match, Long> {
 
     @Query(value = FIND_FOR_USER_QUERY)
     Match findForUser(@Param(PARAM_1) long userId);
+
+    @Query(value = FIND_FIRST_OLDEST_AWAITING_SERVER, nativeQuery = true)
+    Match findFirstOldestAwaitingServer();
 }

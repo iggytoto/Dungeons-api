@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = Match.TABLE_NAME)
@@ -17,6 +18,7 @@ public class Match implements Serializable {
     public static final String MATCH_STATUS_COLUMN_NAME = "status";
     public static final String SERVER_ADDRESS_COLUMN_NAME = "address";
     public static final String SERVER_PORT_COLUMN_NAME = "port";
+    public static final String CREATED_AT_COLUMN_NAME = "created_at";
 
     public static final String SEQUENCE_NAME = "s_matches_id";
 
@@ -36,14 +38,17 @@ public class Match implements Serializable {
     private String serverIpAddress;
     @Column(name = SERVER_PORT_COLUMN_NAME)
     private String serverPort;
+    @Column(name = CREATED_AT_COLUMN_NAME)
+    private Date createdAt;
 
     protected Match() {
     }
 
-    public static Match Of(long userOneId, MatchStatus status) {
+    public static Match Of(long userOneId, MatchStatus status, Date createdAt) {
         final var m = new Match();
         m.setUserOneId(userOneId);
         m.setStatus(status);
+        m.setCreatedAt(createdAt);
         return m;
     }
 }

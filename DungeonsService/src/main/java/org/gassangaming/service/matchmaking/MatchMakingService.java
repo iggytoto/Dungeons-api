@@ -43,4 +43,11 @@ public interface MatchMakingService {
      * @throws ServiceException in case status is not found
      */
     Match getStatus(UserContext context) throws ServiceException;
+
+    /**
+     * Server application to make a match. Server suggests its services
+     *
+     * @return Match info in case server applied on the match, null other cases
+     */
+    Match applyServer(String ip, String port);
 }
