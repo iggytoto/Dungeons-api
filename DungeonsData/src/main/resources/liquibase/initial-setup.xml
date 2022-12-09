@@ -173,6 +173,7 @@
             <column name="status" type="varchar"/>
             <column name="address" type="varchar"/>
             <column name="port" type="varchar"/>
+            <column name="created_at" type="datetime"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="matches"
                                  baseColumnNames="user_one_id"

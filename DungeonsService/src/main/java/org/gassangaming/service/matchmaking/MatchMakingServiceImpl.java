@@ -58,8 +58,12 @@ public class MatchMakingServiceImpl implements MatchMakingService {
     @Override
     public Match applyServer(String ip, String port) {
         final var match = matchRepository.findFirstOldestAwaitingServer();
+        if (match == null) {
+            return null;
+        }
         match.setServerIpAddress(ip);
         match.setServerPort(port);
+        match.setStatus(MatchStatus.ServerFound);
         return matchRepository.save(match);
     }
 }

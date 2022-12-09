@@ -7,6 +7,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class OkResponseDto extends DtoBase {
     public OkResponseDto() {
-        super(0, null);
+        super(0L, null);
     }
 }
