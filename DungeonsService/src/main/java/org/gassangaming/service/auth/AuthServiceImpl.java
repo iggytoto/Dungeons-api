@@ -59,7 +59,7 @@ public class AuthServiceImpl implements AuthService {
             throw new ServiceException("Login already in use");
         } else {
             final var passHash = hashString(password);
-            final var registeredUser = userRepository.save(User.Of(login, passHash));
+            final var registeredUser = userRepository.save(User.PlayerOf(login, passHash));
             return registeredUser.getId();
         }
     }

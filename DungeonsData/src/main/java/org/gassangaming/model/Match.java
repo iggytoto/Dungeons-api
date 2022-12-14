@@ -19,7 +19,6 @@ public class Match implements Serializable {
     public static final String SERVER_ADDRESS_COLUMN_NAME = "address";
     public static final String SERVER_PORT_COLUMN_NAME = "port";
     public static final String CREATED_AT_COLUMN_NAME = "created_at";
-
     public static final String SEQUENCE_NAME = "s_matches_id";
 
     @Id

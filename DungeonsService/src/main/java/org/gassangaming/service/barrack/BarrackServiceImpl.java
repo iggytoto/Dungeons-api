@@ -35,7 +35,7 @@ public class BarrackServiceImpl implements BarrackService {
         if (u == null) {
             throw new ServiceException("Unit not found");
         }
-        if (context.getToken().getUserId() != u.getOwnerId()) {
+        if (u.getOwnerId() == null || context.getToken().getUserId() != u.getOwnerId()) {
             throw new ServiceException("You dont have right to train not your units");
         }
     }

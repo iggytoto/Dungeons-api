@@ -1,7 +1,6 @@
 package org.gassangaming.controller;
 
 import org.gassangaming.dto.BuyUnitRequestDto;
-import org.gassangaming.dto.GetAvailableUnitsForSaleResponseDto;
 import org.gassangaming.dto.*;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
@@ -16,13 +15,9 @@ public class TavernController {
     TavernService tavernService;
 
     @GetMapping("/tavern/availableUnits")
-    public DtoBase getAvailableUnits(
-            @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
+    public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            return GetAvailableUnitsForSaleResponseDto.
-                    builder().
-                    units(tavernService.getUnitsForSale(context)).
-                    build();
+            return UnitListResponseDto.Of(tavernService.getUnitsForSale(context));
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
@@ -30,9 +25,7 @@ public class TavernController {
 
 
     @PostMapping("/tavern/buyUnit")
-    public DtoBase buyUnit(
-            @RequestBody BuyUnitRequestDto buyUnitRequestDto,
-            @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
+    public DtoBase buyUnit(@RequestBody BuyUnitRequestDto buyUnitRequestDto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
             tavernService.buyUnit(buyUnitRequestDto.getUnitId(), context);
             return new OkResponseDto();

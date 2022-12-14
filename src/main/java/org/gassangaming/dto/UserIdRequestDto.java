@@ -4,9 +4,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class TrainUnitRequestDto extends DtoBase {
-    long unitId;
+public class UserIdRequestDto extends DtoBase {
+    long userId;
 }

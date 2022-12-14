@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthController {
 
+    public static final String PATH = "/auth";
+
     @Autowired
     private AuthService authService;
 
-    @PostMapping("/auth/login")
+    @PostMapping(PATH + "/login")
     public DtoBase login(@RequestBody LoginRequestDto request) throws JsonProcessingException {
         try {
             final var token = authService.login(request.getLogin(), request.getPassword());
@@ -31,7 +33,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/auth/register")
+    @PostMapping(PATH + "/register")
     public DtoBase register(@RequestBody RegisterRequestDto request) {
         try {
             return RegisterResponseDto.builder().userId(authService.register(request.getLogin(), request.getPassword())).build();

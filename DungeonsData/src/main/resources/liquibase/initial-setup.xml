@@ -12,6 +12,7 @@
         <createSequence sequenceName="s_units_for_sale_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_unit_activity_log_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_matches_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_match_results_id" dataType="int" startValue="1" incrementBy="1"/>
     </changeSet>
     <changeSet id="initial-table-users" author="gassan">
         <createTable tableName="users">
@@ -22,6 +23,9 @@
                 <constraints notNullConstraintName="c_nn_users_name"/>
             </column>
             <column name="password_sha" type="varchar"/>
+            <column name="role" type="varchar">
+                <constraints notNullConstraintName="c_nn_users_role"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="initial-table-tokens" author="gassan">
@@ -184,6 +188,25 @@
                                  baseColumnNames="user_two_id"
                                  constraintName="matches_user_two_fk_user_id"
                                  referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="initial-table-training-units" author="gassan">
+        <createTable tableName="training_units">
+            <column name="user_id" type="int"/>
+            <column name="unit_id" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="training_units"
+                       columnNames="user_id,unit_id"
+                       constraintName="pk_training_units"/>
+        <addForeignKeyConstraint baseTableName="training_units"
+                                 baseColumnNames="user_id"
+                                 constraintName="training_units_fk_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="training_units"
+                                 baseColumnNames="unit_id"
+                                 constraintName="training_units_fk_unit_id"
+                                 referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

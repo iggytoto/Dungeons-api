@@ -15,6 +15,12 @@
         <insert tableName="users">
             <column name="name" value="gassan"/>
             <column name="password_sha" value=""/>
+            <column name="role" value="Player"/>
+        </insert>
+        <insert tableName="users">
+            <column name="name" value="server"/>
+            <column name="password_sha" value="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"/>
+            <column name="role" value="Server"/>
         </insert>
         <insert tableName="tokens">
             <column name="user_id" value="1"/>
@@ -55,19 +61,19 @@
             <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units_for_sale">
-            <column name="gold_amount" value="100" />
+            <column name="gold_amount" value="100"/>
             <column name="unit_id" value="1"/>
         </insert>
         <insert tableName="units_for_sale">
-            <column name="gold_amount" value="100" />
+            <column name="gold_amount" value="100"/>
             <column name="unit_id" value="2"/>
         </insert>
         <insert tableName="units_for_sale">
-            <column name="gold_amount" value="100" />
+            <column name="gold_amount" value="100"/>
             <column name="unit_id" value="3"/>
         </insert>
         <insert tableName="units_for_sale">
-            <column name="gold_amount" value="100" />
+            <column name="gold_amount" value="100"/>
             <column name="unit_id" value="4"/>
         </insert>
 

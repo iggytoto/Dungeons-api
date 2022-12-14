@@ -1,6 +1,7 @@
 package org.gassangaming.service.matchmaking;
 
 import org.gassangaming.model.Match;
+import org.gassangaming.model.MatchType;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public interface MatchMakingService {
      * @throws org.gassangaming.service.exception.ServiceException in case registration for this user already exists or match already setup
      */
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    void register(Collection<Long> rosterTeam, MatchMakingType type, UserContext context) throws ServiceException;
+    void register(Collection<Long> rosterTeam, MatchType type, UserContext context) throws ServiceException;
 
     /**
      * Cancel mm request

@@ -1,9 +1,10 @@
 package org.gassangaming.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.gassangaming.service.Role;
+
 import javax.persistence.*;
-
-import lombok.*;
-
 import java.io.Serializable;
 
 import static org.gassangaming.model.User.TABLE_NAME;
@@ -17,14 +18,16 @@ public class User implements Serializable {
     public static final String TABLE_NAME = "users";
     public static final String LOGIN_COLUMN_NAME = "name";
     public static final String PASSWORD_SHA_COLUMN_NAME = "password_sha";
+    public static final String ROLE_COLUMN_NAME = "role";
     public static final String SEQUENCE_NAME = "s_users_id";
 
     protected User() {
     }
 
-    protected User(String login, String passwordSha) {
+    protected User(String login, String passwordSha, Role role) {
         this.login = login;
         this.passwordSha = passwordSha;
+        this.role = role;
     }
 
     @Id
@@ -39,7 +42,11 @@ public class User implements Serializable {
     @Column(name = PASSWORD_SHA_COLUMN_NAME)
     private String passwordSha;
 
-    public static User Of(String login, String passwordSha) {
-        return new User(login, passwordSha);
+    @Column(name = ROLE_COLUMN_NAME)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public static User PlayerOf(String login, String passwordSha) {
+        return new User(login, passwordSha, Role.Player);
     }
 }

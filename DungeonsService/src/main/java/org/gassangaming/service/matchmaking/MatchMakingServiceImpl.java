@@ -1,8 +1,11 @@
 package org.gassangaming.service.matchmaking;
 
 import org.gassangaming.model.Match;
+import org.gassangaming.model.MatchType;
 import org.gassangaming.model.MatchStatus;
+import org.gassangaming.model.TrainingUnit;
 import org.gassangaming.repository.MatchMakingRepository;
+import org.gassangaming.repository.TrainingUnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Service
 public class MatchMakingServiceImpl implements MatchMakingService {
@@ -17,8 +21,11 @@ public class MatchMakingServiceImpl implements MatchMakingService {
     @Autowired
     MatchMakingRepository matchRepository;
 
+    @Autowired
+    TrainingUnitRepository trainingUnitRepository;
+
     @Override
-    public void register(Collection<Long> rosterTeam, MatchMakingType type, UserContext context) throws ServiceException {
+    public void register(Collection<Long> rosterTeam, MatchType type, UserContext context) throws ServiceException {
         final var userId = context.getToken().getUserId();
         if (matchRepository.hasRegistered(userId)) {
             throw new ServiceException("Match already exists");
@@ -31,6 +38,7 @@ public class MatchMakingServiceImpl implements MatchMakingService {
             match.setStatus(MatchStatus.PlayersFound);
             matchRepository.save(match);
         }
+        trainingUnitRepository.saveAll(rosterTeam.stream().map(unitId -> TrainingUnit.Of(userId, unitId)).collect(Collectors.toList()));
     }
 
     @Override
@@ -44,6 +52,7 @@ public class MatchMakingServiceImpl implements MatchMakingService {
             throw new ServiceException("Failed to cancel the match, probably already started");
         }
         matchRepository.delete(match);
+        trainingUnitRepository.deleteAllForUser(userId);
     }
 
     @Override

@@ -1,11 +1,13 @@
 package org.gassangaming.filter;
 
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
-import org.gassangaming.dto.ErrorResponseDto;
+import org.gassangaming.controller.AuthController;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.auth.AuthService;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class AuthFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -39,22 +42,19 @@ public class AuthFilter extends OncePerRequestFilter {
                     return;
                 }
             } catch (ServiceException se) {
-                writeErrorResponse(response, HttpStatus.INTERNAL_SERVER_ERROR, se.getMessage());
+                FilterUtils.writeErrorResponse(response, HttpStatus.INTERNAL_SERVER_ERROR, se.getMessage());
             } catch (InvalidDefinitionException jde) {
-                writeErrorResponse(response, HttpStatus.BAD_REQUEST, jde.getMessage());
+                FilterUtils.writeErrorResponse(response, HttpStatus.BAD_REQUEST, jde.getMessage());
                 return;
             }
         }
-        writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "");
+        FilterUtils.writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "");
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return request.getRequestURI().contains("/auth");
+        return request.getRequestURI().contains(AuthController.PATH);
     }
 
-    private void writeErrorResponse(HttpServletResponse response, HttpStatus status, String message) throws IOException {
-        response.getWriter().write(ErrorResponseDto.Of(message).toJson());
-        response.getWriter().flush();
-    }
+
 }
