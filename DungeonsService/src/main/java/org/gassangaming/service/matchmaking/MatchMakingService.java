@@ -5,7 +5,6 @@ import org.gassangaming.model.MatchType;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
@@ -24,7 +23,7 @@ public interface MatchMakingService {
      * @param context    User context
      * @throws org.gassangaming.service.exception.ServiceException in case registration for this user already exists or match already setup
      */
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional
     void register(Collection<Long> rosterTeam, MatchType type, UserContext context) throws ServiceException;
 
     /**
@@ -33,7 +32,7 @@ public interface MatchMakingService {
      * @param context user context
      * @throws org.gassangaming.service.exception.ServiceException in case there is no registration for this user or match already in progress
      */
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional
     void cancelRegistration(UserContext context) throws ServiceException;
 
     /**
@@ -50,5 +49,6 @@ public interface MatchMakingService {
      *
      * @return Match info in case server applied on the match, null other cases
      */
+    @Transactional
     Match applyServer(String ip, String port);
 }

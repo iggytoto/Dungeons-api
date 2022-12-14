@@ -1,11 +1,9 @@
 package org.gassangaming.service.matchmaking;
 
-import org.gassangaming.model.Match;
-import org.gassangaming.model.MatchType;
-import org.gassangaming.model.MatchStatus;
-import org.gassangaming.model.TrainingUnit;
+import org.gassangaming.model.*;
 import org.gassangaming.repository.MatchMakingRepository;
 import org.gassangaming.repository.TrainingUnitRepository;
+import org.gassangaming.repository.UnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,9 @@ public class MatchMakingServiceImpl implements MatchMakingService {
     @Autowired
     TrainingUnitRepository trainingUnitRepository;
 
+    @Autowired
+    UnitRepository unitRepository;
+
     @Override
     public void register(Collection<Long> rosterTeam, MatchType type, UserContext context) throws ServiceException {
         final var userId = context.getToken().getUserId();
@@ -39,6 +40,8 @@ public class MatchMakingServiceImpl implements MatchMakingService {
             matchRepository.save(match);
         }
         trainingUnitRepository.saveAll(rosterTeam.stream().map(unitId -> TrainingUnit.Of(userId, unitId)).collect(Collectors.toList()));
+        rosterTeam.forEach(unitId -> unitRepository.updateActivityByUnitId(unitId, Activity.Training));
+
     }
 
     @Override

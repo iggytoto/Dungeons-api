@@ -22,14 +22,10 @@ public interface UnitRepository extends JpaRepository<Unit, Long> {
     @Modifying
     @Query(value = SET_OWNER_QUERY, nativeQuery = true)
     void setOwner(@Param(PARAM_1) long unitId, @Param(PARAM_2) long userId);
-
     @Query(value = FIND_BY_OWNER_ID_QUERY)
     Collection<Unit> findByOwnerIdD(@Param(PARAM_1) long userId);
-
     @Query(value = FIND_BY_ID_QUERY)
     Unit findById(@Param(PARAM_1) long unitId);
-
-
     @Modifying
     @Query(value = UPDATE_ACTIVITY_BY_UNIT_ID)
     void updateActivityByUnitId(@Param(PARAM_1) long unitId, @Param(PARAM_2) Activity idle);
