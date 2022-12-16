@@ -33,7 +33,9 @@
             <column name="armor" value="100"/>
             <column name="dmg" value="100"/>
             <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
             <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units">
@@ -41,7 +43,9 @@
             <column name="armor" value="100"/>
             <column name="dmg" value="100"/>
             <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
             <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units">
@@ -49,7 +53,9 @@
             <column name="armor" value="100"/>
             <column name="dmg" value="100"/>
             <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
             <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units">
@@ -57,7 +63,9 @@
             <column name="armor" value="100"/>
             <column name="dmg" value="100"/>
             <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
             <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units_for_sale">

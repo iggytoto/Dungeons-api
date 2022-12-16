@@ -12,5 +12,7 @@ public interface TrainingService {
 
     Collection<Unit> getTrainingRosterForUser(long userId) throws ServiceException;
 
+    void saveRosters(Collection<Unit> unitsToUpdate) throws ServiceException;
+
     void saveTrainingResult(MatchResult result) throws ServiceException;
 }

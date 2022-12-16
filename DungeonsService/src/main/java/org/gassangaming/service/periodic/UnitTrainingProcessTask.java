@@ -1,4 +1,4 @@
-package org.gassangaming.service.barrack;
+package org.gassangaming.service.periodic;
 
 import org.gassangaming.model.Activity;
 import org.gassangaming.model.UnitActivityLog;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
-public class BarrackUnitTrainingProcessTask {
+public class UnitTrainingProcessTask {
 
     private static final int TRAINING_TIME_MILLS = 1000 * 60 * 60 * 8;
 

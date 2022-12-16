@@ -6,6 +6,7 @@ import org.gassangaming.model.Unit;
 import org.gassangaming.repository.MatchResultRepository;
 import org.gassangaming.repository.TrainingUnitRepository;
 import org.gassangaming.repository.UnitRepository;
+import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,11 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public Collection<Unit> getTrainingRosterForUser(long userId) {
         return unitRepository.findAllById(trainingUnitRepository.getUnitsForUser(userId).stream().map(TrainingUnit::getUnitId).collect(Collectors.toList()));
+    }
+
+    @Override
+    public void saveRosters(Collection<Unit> unitsToUpdate) throws ServiceException {
+        unitRepository.saveAll(unitsToUpdate);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class BarrackServiceImpl implements BarrackService {
 
     @Override
     public Collection<Unit> getBarrackUnits(UserContext context) {
-        return unitRepository.findByOwnerIdD(context.getToken().getUserId());
+        return unitRepository.findByOwnerId(context.getToken().getUserId());
     }
 
     @Override
