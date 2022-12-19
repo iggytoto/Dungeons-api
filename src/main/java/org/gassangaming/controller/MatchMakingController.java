@@ -36,11 +36,7 @@ public class MatchMakingController {
 
     @GetMapping("/matchMaking/status")
     public DtoBase getStatus(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        try {
-            return MatchMakingGetStatusResponseDto.builder().status(matchMakingService.getStatus(context)).build();
-        } catch (ServiceException e) {
-            return ErrorResponseDto.Of(e.getMessage());
-        }
+        return MatchMakingGetStatusResponseDto.builder().status(matchMakingService.getStatus(context)).build();
     }
 
     @PostMapping("/matchmaking/applyServer")

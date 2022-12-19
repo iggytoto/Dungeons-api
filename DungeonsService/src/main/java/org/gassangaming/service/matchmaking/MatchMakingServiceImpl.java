@@ -59,12 +59,8 @@ public class MatchMakingServiceImpl implements MatchMakingService {
     }
 
     @Override
-    public Match getStatus(UserContext context) throws ServiceException {
-        final var match = matchRepository.findForUser(context.getToken().getUserId());
-        if (match == null) {
-            throw new ServiceException("Match not found");
-        }
-        return match;
+    public Match getStatus(UserContext context) {
+        return matchRepository.findForUser(context.getToken().getUserId());
     }
 
     @Override
