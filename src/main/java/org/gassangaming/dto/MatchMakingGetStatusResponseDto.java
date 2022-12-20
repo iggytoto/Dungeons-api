@@ -9,5 +9,5 @@ import org.gassangaming.model.Match;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class MatchMakingGetStatusResponseDto extends DtoBase {
-    Match status;
+    Match match;
 }
