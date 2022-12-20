@@ -13,14 +13,28 @@
             <changeSetExecuted id="initial-table-accounts" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
         </preConditions>
         <insert tableName="users">
+            <column name="id" value="1"/>
             <column name="name" value="gassan"/>
             <column name="password_sha" value=""/>
             <column name="role" value="Player"/>
         </insert>
         <insert tableName="users">
+            <column name="id" value="2"/>
             <column name="name" value="server"/>
             <column name="password_sha" value="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"/>
             <column name="role" value="Server"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" value="3"/>
+            <column name="name" value="test1"/>
+            <column name="password_sha" value="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"/>
+            <column name="role" value="Player"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" value="4"/>
+            <column name="name" value="test2"/>
+            <column name="password_sha" value="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"/>
+            <column name="role" value="Player"/>
         </insert>
         <insert tableName="tokens">
             <column name="user_id" value="1"/>
@@ -60,6 +74,72 @@
         </insert>
         <insert tableName="units">
             <column name="name" value="Dan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="owner_id" value="3"/>
+            <column name="name" value="Frost"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="owner_id" value="3"/>
+            <column name="name" value="Tufan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="owner_id" value="3"/>
+            <column name="name" value="Gassan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="owner_id" value="4"/>
+            <column name="name" value="Hint"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="owner_id" value="4"/>
+            <column name="name" value="Naus"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="training_exp" value="100"/>
+        </insert>
+        <insert tableName="units">
+            <column name="owner_id" value="4"/>
+            <column name="name" value="Kaban"/>
             <column name="armor" value="100"/>
             <column name="dmg" value="100"/>
             <column name="hp" value="100"/>

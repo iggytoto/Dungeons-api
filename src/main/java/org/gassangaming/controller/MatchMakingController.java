@@ -17,8 +17,7 @@ public class MatchMakingController {
     @PostMapping("/matchMaking/register")
     public DtoBase register(@RequestBody MatchMakingRegisterRequestDto request, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            matchMakingService.register(request.getRosterUnitsIds(), MatchType.MatchMaking3x3, context);
-            return OkResponseDto.builder().build();
+            return ObjectResponseDto.builder().obj(matchMakingService.register(request.getRosterUnitsIds(), MatchType.MatchMaking3x3, context)).build();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
@@ -39,7 +38,7 @@ public class MatchMakingController {
         return MatchMakingGetStatusResponseDto.builder().status(matchMakingService.getStatus(context)).build();
     }
 
-    @PostMapping("/matchmaking/applyServer")
+    @PostMapping("/matchMaking/applyServer")
     public DtoBase applyServer(@RequestBody MatchMakingServerApplyRequestDto requestDto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         return MatchMakingServerApplyResponseDto.builder().match(matchMakingService.applyServer(requestDto.getIp(), requestDto.getPort())).build();
     }

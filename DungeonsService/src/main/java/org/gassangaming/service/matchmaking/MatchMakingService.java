@@ -24,7 +24,7 @@ public interface MatchMakingService {
      * @throws org.gassangaming.service.exception.ServiceException in case registration for this user already exists or match already setup
      */
     @Transactional
-    void register(Collection<Long> rosterTeam, MatchType type, UserContext context) throws ServiceException;
+    Match register(Collection<Long> rosterTeam, MatchType type, UserContext context) throws ServiceException;
 
     /**
      * Cancel mm request

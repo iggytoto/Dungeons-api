@@ -26,22 +26,22 @@ public class MatchMakingServiceImpl implements MatchMakingService {
     UnitRepository unitRepository;
 
     @Override
-    public void register(Collection<Long> rosterTeam, MatchType type, UserContext context) throws ServiceException {
+    public Match register(Collection<Long> rosterTeam, MatchType type, UserContext context) throws ServiceException {
         final var userId = context.getToken().getUserId();
         if (matchRepository.hasRegistered(userId)) {
             throw new ServiceException("Match already exists");
         }
-        final var match = matchRepository.findFirstFree();
-        if (match == null) {
-            matchRepository.save(Match.Of(userId, MatchStatus.Searching, new Date()));
-        } else {
-            match.setUserTwoId(userId);
-            match.setStatus(MatchStatus.PlayersFound);
-            matchRepository.save(match);
-        }
         trainingUnitRepository.saveAll(rosterTeam.stream().map(unitId -> TrainingUnit.Of(userId, unitId)).collect(Collectors.toList()));
         rosterTeam.forEach(unitId -> unitRepository.updateActivityByUnitId(unitId, Activity.Training));
 
+        final var match = matchRepository.findFirstFree();
+        if (match == null) {
+            return matchRepository.save(Match.Of(userId, MatchStatus.Searching, new Date()));
+        } else {
+            match.setUserTwoId(userId);
+            match.setStatus(MatchStatus.PlayersFound);
+            return matchRepository.save(match);
+        }
     }
 
     @Override
