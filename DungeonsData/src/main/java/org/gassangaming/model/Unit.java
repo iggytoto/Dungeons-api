@@ -29,6 +29,10 @@ public class Unit implements Serializable {
     public static final String ATTACK_SPEED_COLUMN_NAME = "atk_spd";
     public static final String TRAINING_EXPERIENCE_COLUMN_NAME = "training_exp";
     public static final String ACTIVITY_COLUMN_NAME = "activity";
+    public static final String ATTACK_RANGE_COLUMN_NAME = "attack_range";
+    public static final String MOVEMENT_SPEED_COLUMN_NAME = "movement_speed";
+    public static final String BATTLE_BEHAVIOR_COLUMN_NAME = "battle_behavior";
+    public static final String UNIT_TYPE_COLUMN_NAME = "unit_type";
     public static final String SEQUENCE_NAME = "s_units_id";
 
 
@@ -56,9 +60,19 @@ public class Unit implements Serializable {
     private float attackSpeed;
     @Column(name = TRAINING_EXPERIENCE_COLUMN_NAME)
     private int trainingExperience;
+    @Column(name = ATTACK_RANGE_COLUMN_NAME)
+    private float attackRange;
+    @Column(name = MOVEMENT_SPEED_COLUMN_NAME)
+    private float movementSpeed;
     @Column(name = ACTIVITY_COLUMN_NAME)
     @Enumerated(EnumType.STRING)
     private Activity activity;
+    @Column(name = BATTLE_BEHAVIOR_COLUMN_NAME)
+    @Enumerated(EnumType.STRING)
+    private BattleBehavior battleBehavior;
+    @Column(name = UNIT_TYPE_COLUMN_NAME)
+    @Enumerated(EnumType.STRING)
+    private UnitType unitType;
 
     @JsonIgnore
     public boolean isDamaged() {

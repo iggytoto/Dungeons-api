@@ -63,6 +63,10 @@
             <column name="atk_spd" type="real"/>
             <column name="training_exp" type="int"/>
             <column name="activity" type="varchar" defaultValue="Idle"/>
+            <column name="attack_range" type="real" defaultValue="2"/>
+            <column name="battle_behavior" type="varchar" defaultValue="StraightAttack"/>
+            <column name="movement_speed" type="real" defaultValue="4"/>
+            <column name="unit_type" type="varchar" defaultValue="Dummy"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="units"
                                  baseColumnNames="owner_id"
