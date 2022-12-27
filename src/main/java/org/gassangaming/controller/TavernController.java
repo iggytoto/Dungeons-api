@@ -8,6 +8,8 @@ import org.gassangaming.service.tavern.TavernService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+
 @RestController
 public class TavernController {
 
@@ -17,7 +19,7 @@ public class TavernController {
     @GetMapping("/tavern/availableUnits")
     public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            return UnitListResponseDto.Of(tavernService.getUnitsForSale(context));
+            return UnitListResponseDto.Of(tavernService.getUnitsForSale(context).stream().map(UnitDto::Of).collect(Collectors.toList()));
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }

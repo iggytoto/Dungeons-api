@@ -2,7 +2,6 @@ package org.gassangaming.controller;
 
 import org.gassangaming.dto.*;
 import org.gassangaming.model.MatchResult;
-import org.gassangaming.model.Unit;
 import org.gassangaming.service.exception.ServiceException;
 import org.gassangaming.service.training.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.stream.Collectors;
 
 @RestController
 public class TrainingController {
@@ -25,16 +26,16 @@ public class TrainingController {
     @GetMapping(PATH + GET_ROSTER_FOR_USER_PATH)
     public DtoBase getRosterForUser(@RequestBody UserIdRequestDto request) {
         try {
-            return UnitListResponseDto.builder().units(trainingService.getTrainingRosterForUser(request.getUserId())).build();
+            return UnitListResponseDto.builder().units(trainingService.getTrainingRosterForUser(request.getUserId()).stream().map(UnitDto::Of).collect(Collectors.toList())).build();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
     }
 
     @PostMapping(PATH + SAVE_ROSTERS_PATH)
-    public DtoBase saveRosters(@RequestBody UnitListRequestDto<Unit> units) {
+    public DtoBase saveRosters(@RequestBody UnitListRequestDto<UnitDto> units) {
         try {
-            trainingService.saveRosters(units.getUnits());
+            trainingService.saveRosters(units.getUnits().stream().map(UnitDto::ToDomain).collect(Collectors.toList()));
             return new OkResponseDto();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());

@@ -1,12 +1,9 @@
 package org.gassangaming.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-
-import java.io.Serializable;
 
 import static org.gassangaming.model.Unit.TABLE_NAME;
 
@@ -15,8 +12,7 @@ import static org.gassangaming.model.Unit.TABLE_NAME;
 @Entity
 @Getter
 @Setter
-@DiscriminatorValue("Unit")
-public class Unit implements Serializable {
+public class Unit {
 
     public static final String TABLE_NAME = "units";
     public static final String OWNER_ID_COLUMN_NAME = "owner_id";
@@ -74,7 +70,6 @@ public class Unit implements Serializable {
     @Enumerated(EnumType.STRING)
     private UnitType unitType;
 
-    @JsonIgnore
     public boolean isDamaged() {
         return maxHitPoints >= hitPoints;
     }

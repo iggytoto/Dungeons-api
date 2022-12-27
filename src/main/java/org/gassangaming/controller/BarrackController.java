@@ -8,6 +8,8 @@ import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+
 @RestController
 public class BarrackController {
 
@@ -17,7 +19,7 @@ public class BarrackController {
     @GetMapping("/barrack/availableUnits")
     public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            return UnitListResponseDto.builder().units(barrackService.getBarrackUnits(context)).build();
+            return UnitListResponseDto.builder().units(barrackService.getBarrackUnits(context).stream().map(UnitDto::Of).collect(Collectors.toList())).build();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }

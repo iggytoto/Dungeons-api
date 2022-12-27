@@ -215,4 +215,31 @@
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="initial-table-match-results" author="gassan">
+        <createTable tableName="match_results">
+            <column name="id" type="int" defaultValueSequenceNext="s_match_results_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_one_id" type="int"/>
+            <column name="user_two_id" type="int"/>
+            <column name="winner_user_id" type="int"/>
+            <column name="match_type" type="varchar"/>
+            <column name="date" type="datetime"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="match_results"
+                                 baseColumnNames="user_one_id"
+                                 constraintName="match_results_fk_user_one_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="match_results"
+                                 baseColumnNames="user_two_id"
+                                 constraintName="match_results_fk_user_two_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="match_results"
+                                 baseColumnNames="winner_user_id"
+                                 constraintName="match_results_fk_winner_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>
