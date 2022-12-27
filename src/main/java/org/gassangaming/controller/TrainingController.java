@@ -35,7 +35,12 @@ public class TrainingController {
     @PostMapping(PATH + SAVE_ROSTERS_PATH)
     public DtoBase saveRosters(@RequestBody UnitListRequestDto<UnitDto> units) {
         try {
-            trainingService.saveRosters(units.getUnits().stream().map(UnitDto::ToDomain).collect(Collectors.toList()));
+            trainingService.saveRosters(
+                    units
+                            .getUnits()
+                            .stream()
+                            .map(UnitDto::ToDomain)
+                            .collect(Collectors.toList()));
             return new OkResponseDto();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());

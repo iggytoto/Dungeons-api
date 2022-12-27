@@ -1,5 +1,6 @@
 package org.gassangaming.service.training;
 
+import org.gassangaming.model.Activity;
 import org.gassangaming.model.MatchResult;
 import org.gassangaming.model.TrainingUnit;
 import org.gassangaming.model.Unit;
@@ -38,6 +39,8 @@ public class TrainingServiceImpl implements TrainingService {
     public void saveTrainingResult(MatchResult result) {
         matchResultRepository.save(result);
         trainingUnitRepository.deleteAllForUser(result.getUserOneId());
+        trainingUnitRepository.getUnitsForUser(result.getUserOneId()).forEach(u -> unitRepository.updateActivityByUnitId(u.getUnitId(), Activity.Idle));
         trainingUnitRepository.deleteAllForUser(result.getUserTwoId());
+        trainingUnitRepository.getUnitsForUser(result.getUserOneId()).forEach(u -> unitRepository.updateActivityByUnitId(u.getUnitId(), Activity.Idle));
     }
 }

@@ -55,6 +55,7 @@ public class MatchMakingServiceImpl implements MatchMakingService {
             throw new ServiceException("Failed to cancel the match, probably already started");
         }
         matchRepository.delete(match);
+        trainingUnitRepository.getUnitsForUser(userId).forEach(u -> unitRepository.updateActivityByUnitId(u.getUnitId(), Activity.Idle));
         trainingUnitRepository.deleteAllForUser(userId);
     }
 
