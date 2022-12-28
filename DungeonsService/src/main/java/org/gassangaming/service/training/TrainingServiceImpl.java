@@ -7,7 +7,6 @@ import org.gassangaming.model.Unit;
 import org.gassangaming.repository.MatchResultRepository;
 import org.gassangaming.repository.TrainingUnitRepository;
 import org.gassangaming.repository.UnitRepository;
-import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,23 +23,32 @@ public class TrainingServiceImpl implements TrainingService {
     @Autowired
     UnitRepository unitRepository;
 
-
     @Override
     public Collection<Unit> getTrainingRosterForUser(long userId) {
         return unitRepository.findAllById(trainingUnitRepository.getUnitsForUser(userId).stream().map(TrainingUnit::getUnitId).collect(Collectors.toList()));
     }
 
     @Override
-    public void saveRosters(Collection<Unit> unitsToUpdate) throws ServiceException {
-        unitRepository.saveAll(unitsToUpdate);
-    }
-
-    @Override
-    public void saveTrainingResult(MatchResult result) {
+    public void saveTrainingResult(MatchResult result, Collection<Unit> unitsState) {
         matchResultRepository.save(result);
         trainingUnitRepository.deleteAllForUser(result.getUserOneId());
-        trainingUnitRepository.getUnitsForUser(result.getUserOneId()).forEach(u -> unitRepository.updateActivityByUnitId(u.getUnitId(), Activity.Idle));
         trainingUnitRepository.deleteAllForUser(result.getUserTwoId());
-        trainingUnitRepository.getUnitsForUser(result.getUserOneId()).forEach(u -> unitRepository.updateActivityByUnitId(u.getUnitId(), Activity.Idle));
+        unitRepository.saveAll(unitsState.stream().map(this::mergeUnit).collect(Collectors.toList()));
     }
+
+    /**
+     * Merges only params that can be updated after training match.
+     * During training results we can change only:
+     * - current hit points is modified by the server
+     * - training experience is modified by the server
+     * - activity should be set to Idle
+     */
+    private Unit mergeUnit(Unit unit) {
+        final var u = unitRepository.findById(unit.getId()).orElseThrow();
+        u.setTrainingExperience(unit.getTrainingExperience());
+        u.setHitPoints(unit.getHitPoints());
+        u.setActivity(Activity.Idle);
+        return u;
+    }
+
 }

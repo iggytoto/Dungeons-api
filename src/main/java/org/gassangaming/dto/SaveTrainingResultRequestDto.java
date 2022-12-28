@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.gassangaming.model.MatchType;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Data
@@ -13,7 +14,8 @@ import java.util.Date;
 public class SaveTrainingResultRequestDto extends DtoBase {
     long userOneId;
     long userTwoId;
-    long winnerId;
+    long winnerUserId;
     MatchType matchType;
     Date date;
+    ArrayList<UnitDto> unitsState;
 }

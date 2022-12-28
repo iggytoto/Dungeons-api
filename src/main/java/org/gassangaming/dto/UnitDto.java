@@ -17,6 +17,7 @@ import java.io.Serializable;
 @Setter
 public class UnitDto implements Serializable {
     private long id;
+    private long ownerId;
     private String name;
     private int hitPoints;
     private int maxHitPoints;
@@ -48,6 +49,7 @@ public class UnitDto implements Serializable {
                 .activity(u.getActivity())
                 .battleBehavior(u.getBattleBehavior())
                 .unitType(u.getUnitType())
+                .ownerId(u.getOwnerId())
                 .build();
     }
 
@@ -66,6 +68,9 @@ public class UnitDto implements Serializable {
         result.setActivity(activity);
         result.setBattleBehavior(battleBehavior);
         result.setUnitType(unitType);
+        result.setOwnerId(ownerId);
+        result.setTrainingExperience(trainingExperience);
+        result.setAttackRange(attackRange);
         return result;
     }
 }

@@ -32,26 +32,15 @@ public class TrainingController {
         }
     }
 
-    @PostMapping(PATH + SAVE_ROSTERS_PATH)
-    public DtoBase saveRosters(@RequestBody UnitListRequestDto<UnitDto> units) {
-        try {
-            trainingService.saveRosters(
-                    units
-                            .getUnits()
-                            .stream()
-                            .map(UnitDto::ToDomain)
-                            .collect(Collectors.toList()));
-            return new OkResponseDto();
-        } catch (ServiceException e) {
-            return ErrorResponseDto.Of(e.getMessage());
-        }
-
-    }
-
     @PostMapping(PATH + SAVE_TRAINING_RESULT_PATH)
     public DtoBase saveTrainingResult(@RequestBody SaveTrainingResultRequestDto request) {
         try {
-            trainingService.saveTrainingResult(MatchResult.Of(request.getUserOneId(), request.getUserTwoId(), request.getWinnerId(), request.getMatchType(), request.getDate()));
+            final var matchResult = MatchResult.Of(request.getUserOneId(), request.getUserTwoId(), request.getWinnerUserId(), request.getMatchType(), request.getDate());
+            final var unitsState = request.getUnitsState()
+                    .stream()
+                    .map(UnitDto::ToDomain)
+                    .toList();
+            trainingService.saveTrainingResult(matchResult, unitsState);
             return new OkResponseDto();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
