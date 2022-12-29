@@ -14,4 +14,7 @@ public interface BarrackService {
 
     @Transactional
     void TrainUnit(long unitId, UserContext context) throws ServiceException;
+
+    @Transactional
+    void ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException;
 }

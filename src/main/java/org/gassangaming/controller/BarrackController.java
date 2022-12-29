@@ -12,11 +12,15 @@ import java.util.stream.Collectors;
 
 @RestController
 public class BarrackController {
+    public static final String PATH = "/barrack";
+    public static final String GET_AVAILABLE_UNITS_PATH = "/availableUnits";
+    public static final String TRAIN_UNIT_PATH = "/trainUnit";
+    public static final String CHANGE_UNIT_NAME_PATH = "/changeUnitPath";
 
     @Autowired
     BarrackService barrackService;
 
-    @GetMapping("/barrack/availableUnits")
+    @GetMapping(PATH + GET_AVAILABLE_UNITS_PATH)
     public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
             return UnitListResponseDto.builder().units(barrackService.getBarrackUnits(context).stream().map(UnitDto::Of).collect(Collectors.toList())).build();
@@ -25,10 +29,20 @@ public class BarrackController {
         }
     }
 
-    @PostMapping("/barrack/trainUnit")
+    @PostMapping(PATH + TRAIN_UNIT_PATH)
     public DtoBase trainUnit(@RequestBody TrainUnitRequestDto request, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
             barrackService.TrainUnit(request.getUnitId(), context);
+            return new OkResponseDto();
+        } catch (ServiceException e) {
+            return ErrorResponseDto.Of(e.getMessage());
+        }
+    }
+
+    @PostMapping(PATH + CHANGE_UNIT_NAME_PATH)
+    public DtoBase changeUnitName(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitNameRequestDto request) {
+        try {
+            barrackService.ChangeUnitName(request.getUnitId(), request.getNewName(), context);
             return new OkResponseDto();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());

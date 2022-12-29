@@ -18,7 +18,6 @@ public class TrainingController {
     public static final String PATH = "/training";
     public static final String GET_ROSTER_FOR_USER_PATH = "/getRosterForUser";
     public static final String SAVE_TRAINING_RESULT_PATH = "/saveTrainingResult";
-    public static final String SAVE_ROSTERS_PATH = "/saveRosters";
 
     @Autowired
     TrainingService trainingService;

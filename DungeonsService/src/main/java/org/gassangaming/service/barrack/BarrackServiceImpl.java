@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+
 @Service
 public class BarrackServiceImpl implements BarrackService {
 
@@ -31,12 +32,20 @@ public class BarrackServiceImpl implements BarrackService {
         unitRepository.save(unitToTrain);
     }
 
+    @Override
+    public void ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException {
+        final var unit = unitRepository.findById(unitId);
+        checkRights(unit, context);
+        unit.setName(newName);
+        unitRepository.save(unit);
+    }
+
     private void checkRights(Unit u, UserContext context) throws ServiceException {
         if (u == null) {
             throw new ServiceException("Unit not found");
         }
         if (u.getOwnerId() == null || context.getToken().getUserId() != u.getOwnerId()) {
-            throw new ServiceException("You dont have right to train not your units");
+            throw new ServiceException("You dont have right to change not your units");
         }
     }
 }
