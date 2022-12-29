@@ -1,7 +1,7 @@
 package org.gassangaming.repository;
 
-import org.gassangaming.model.Activity;
-import org.gassangaming.model.Unit;
+import org.gassangaming.model.unit.Activity;
+import org.gassangaming.model.unit.Unit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

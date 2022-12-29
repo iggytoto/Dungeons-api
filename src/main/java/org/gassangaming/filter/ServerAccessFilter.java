@@ -1,5 +1,6 @@
 package org.gassangaming.filter;
 
+import org.gassangaming.controller.MatchMakingController;
 import org.gassangaming.controller.TrainingController;
 import org.gassangaming.repository.UserRepository;
 import org.gassangaming.service.Role;
@@ -34,6 +35,6 @@ public class ServerAccessFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return !request.getRequestURI().contains(TrainingController.PATH);
+        return !request.getRequestURI().contains(TrainingController.PATH) && !request.getRequestURI().contains(MatchMakingController.PATH + MatchMakingController.APPLY_SERVER_PATH);
     }
 }

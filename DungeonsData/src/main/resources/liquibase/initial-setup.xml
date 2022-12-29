@@ -9,10 +9,10 @@
         <createSequence sequenceName="s_tokens_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_units_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_accounts_id" dataType="int" startValue="1" incrementBy="1"/>
-        <createSequence sequenceName="s_units_for_sale_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_unit_activity_log_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_matches_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_match_results_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_unit_equip_id" dataType="int" startValue="1" incrementBy="1"/>
     </changeSet>
     <changeSet id="initial-table-users" author="gassan">
         <createTable tableName="users">
@@ -67,24 +67,30 @@
             <column name="battle_behavior" type="varchar" defaultValue="StraightAttack"/>
             <column name="movement_speed" type="real" defaultValue="4"/>
             <column name="unit_type" type="varchar" defaultValue="Dummy"/>
+            <column name="unit_equip_id" type="int"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="units"
                                  baseColumnNames="owner_id"
                                  constraintName="units_fk_owner_id"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
-        <createTable tableName="units_for_sale">
-            <column name="id" type="int" defaultValueSequenceNext="s_units_for_sale_id">
+    </changeSet>
+    <changeSet id="unit-equip-human-warrior" author="gassan">
+        <createTable tableName="human_warrior_equip">
+            <column name="id" type="int" defaultValueSequenceNext="s_unit_equip_id">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="unit_id" type="int">
-                <constraints unique="true"/>
+            <column name="unit_id" type="int"/>
+            <column name="defence_points" type="int">
+                <constraints notNullConstraintName="c_human_warrior_equip_nn_defence_points"/>
             </column>
-            <column name="gold_amount" type="int"/>
+            <column name="offence_points" type="int">
+                <constraints notNullConstraintName="c_human_warrior_equip_nn_offence_points"/>
+            </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="units_for_sale"
+        <addForeignKeyConstraint baseTableName="human_warrior_equip"
                                  baseColumnNames="unit_id"
-                                 constraintName="units_for_sale_fk_unit_id"
+                                 constraintName="human_warrior_equip_fk_unit_id"
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>

@@ -1,8 +1,9 @@
 package org.gassangaming.service.tavern;
 
-import org.gassangaming.model.UnitForSale;
+import org.gassangaming.model.euqipment.UnitEquipHelper;
+import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.repository.AccountRepository;
-import org.gassangaming.repository.UnitForSaleRepository;
+import org.gassangaming.repository.UnitEquipRepository;
 import org.gassangaming.repository.UnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
@@ -16,33 +17,34 @@ import java.util.Collection;
 public class TavernServiceImpl implements TavernService {
 
     @Autowired
-    UnitForSaleRepository unitForSaleRepository;
-
-    @Autowired
     AccountRepository accountRepository;
 
     @Autowired
     UnitRepository unitRepository;
 
-    @Override
-    public Collection<UnitForSale> getUnitsForSale(UserContext context) {
-        return unitForSaleRepository.findAll();
-    }
+    @Autowired
+    Collection<UnitEquipRepository> equipRepositories;
 
     @Override
-    public void buyUnit(long unitId, UserContext context) throws ServiceException {
-        final var unitForSale = unitForSaleRepository.findById(unitId);
+    public void buyUnit(UnitType type, UserContext context) throws ServiceException {
+        final var unitForSale = UnitForSale.Of(type);
         final var playerAccount = accountRepository.findByUserId(context.getToken().getUserId());
         if (CostUtility.isAccountHasEnoughFor(playerAccount, unitForSale)) {
             CostUtility.reduceAccountOn(playerAccount, unitForSale);
-            unitForSaleRepository.delete(unitForSale);
-            unitRepository.setOwner(unitForSale.getUnitId(), context.getToken().getUserId());
+            final var unitToSave = unitForSale.getUnit();
+            unitToSave.setOwnerId(context.getToken().getUserId());
+            final var savedUnit = unitRepository.save(unitToSave);
+            final var equip = UnitEquipHelper.getDefaultInstanceFor(savedUnit);
+            if (equip != null) {
+                equip.setUnitId(savedUnit.getId());
+                final var equipRepo = equipRepositories.stream().filter(r -> r.getTargetType().equals(equip.getClass())).findFirst().orElseThrow();
+                equipRepo.save(equip);
+            }
             accountRepository.save(playerAccount);
         } else {
             throw new ServiceException("Player account has not enough to buy this.");
         }
     }
-
 
 
 }

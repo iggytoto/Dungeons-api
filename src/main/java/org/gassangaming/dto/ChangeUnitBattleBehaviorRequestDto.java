@@ -2,7 +2,7 @@ package org.gassangaming.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.gassangaming.model.BattleBehavior;
+import org.gassangaming.model.unit.BattleBehavior;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

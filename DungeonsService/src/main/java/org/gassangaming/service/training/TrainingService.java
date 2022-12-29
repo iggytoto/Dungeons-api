@@ -1,7 +1,7 @@
 package org.gassangaming.service.training;
 
 import org.gassangaming.model.MatchResult;
-import org.gassangaming.model.Unit;
+import org.gassangaming.model.unit.Unit;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

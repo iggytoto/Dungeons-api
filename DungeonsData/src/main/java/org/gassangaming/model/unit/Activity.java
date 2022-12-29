@@ -1,4 +1,4 @@
-package org.gassangaming.model;
+package org.gassangaming.model.unit;
 
 public enum Activity {
     Idle,

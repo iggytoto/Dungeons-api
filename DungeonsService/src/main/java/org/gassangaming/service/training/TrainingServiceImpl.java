@@ -1,9 +1,9 @@
 package org.gassangaming.service.training;
 
-import org.gassangaming.model.Activity;
+import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.MatchResult;
-import org.gassangaming.model.TrainingUnit;
-import org.gassangaming.model.Unit;
+import org.gassangaming.model.unit.TrainingUnit;
+import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.MatchResultRepository;
 import org.gassangaming.repository.TrainingUnitRepository;
 import org.gassangaming.repository.UnitRepository;

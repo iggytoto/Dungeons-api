@@ -1,7 +1,6 @@
 package org.gassangaming.service.barrack;
 
-import org.gassangaming.model.BattleBehavior;
-import org.gassangaming.model.Unit;
+import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import java.util.Collection;
 
 @Service
 public interface BarrackService {
-    Collection<Unit> getBarrackUnits(UserContext context) throws ServiceException;
+    Collection<UnitState> getBarrackUnits(UserContext context) throws ServiceException;
 
     @Transactional
     void TrainUnit(long unitId, UserContext context) throws ServiceException;

@@ -1,7 +1,7 @@
 package org.gassangaming.service.periodic;
 
-import org.gassangaming.model.Activity;
-import org.gassangaming.model.UnitActivityLog;
+import org.gassangaming.model.unit.Activity;
+import org.gassangaming.model.unit.UnitActivityLog;
 import org.gassangaming.repository.UnitActivityLogRepository;
 import org.gassangaming.repository.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;

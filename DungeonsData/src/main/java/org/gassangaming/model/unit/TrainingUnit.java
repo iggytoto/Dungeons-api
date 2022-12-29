@@ -1,13 +1,14 @@
-package org.gassangaming.model;
+package org.gassangaming.model.unit;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.gassangaming.model.Constants;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
 
-import static org.gassangaming.model.TrainingUnit.TABLE_NAME;
+import static org.gassangaming.model.unit.TrainingUnit.TABLE_NAME;
 
 @Entity
 @Table(name = TABLE_NAME)

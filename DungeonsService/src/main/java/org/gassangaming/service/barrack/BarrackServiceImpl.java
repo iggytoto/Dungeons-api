@@ -1,8 +1,11 @@
 package org.gassangaming.service.barrack;
 
-import org.gassangaming.model.Activity;
-import org.gassangaming.model.BattleBehavior;
-import org.gassangaming.model.Unit;
+import org.gassangaming.model.euqipment.UnitEquip;
+import org.gassangaming.model.euqipment.UnitEquipHelper;
+import org.gassangaming.model.unit.Activity;
+import org.gassangaming.model.unit.BattleBehavior;
+import org.gassangaming.model.unit.Unit;
+import org.gassangaming.repository.UnitEquipRepository;
 import org.gassangaming.repository.UnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
@@ -10,16 +13,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 @Service
 public class BarrackServiceImpl implements BarrackService {
 
     @Autowired
     UnitRepository unitRepository;
+    @Autowired
+    Collection<UnitEquipRepository> equipRepositories;
+
+    private final HashMap<Class<? extends Unit>, UnitEquipRepository> unitRepoCache = new HashMap<>();
 
     @Override
-    public Collection<Unit> getBarrackUnits(UserContext context) {
-        return unitRepository.findByOwnerId(context.getToken().getUserId());
+    public Collection<UnitState> getBarrackUnits(UserContext context) {
+        return unitRepository
+                .findByOwnerId(context.getToken().getUserId())
+                .stream()
+                .map(unit -> new UnitState(unit, getEquipForUnit(unit)))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -56,5 +69,26 @@ public class BarrackServiceImpl implements BarrackService {
         if (u.getOwnerId() == null || context.getToken().getUserId() != u.getOwnerId()) {
             throw new ServiceException("You dont have right to change not your units");
         }
+    }
+
+    private UnitEquip getEquipForUnit(Unit u) {
+        final var r = getRepoForUnit(u);
+        if (r != null) {
+            return r.getByUnitId(u.getId());
+        }
+        return null;
+    }
+
+    private UnitEquipRepository getRepoForUnit(Unit u) {
+        final var unitClass = u.getClass();
+        if (!unitRepoCache.containsKey(unitClass)) {
+            unitRepoCache.put(
+                    unitClass,
+                    equipRepositories
+                            .stream()
+                            .filter(r -> r.getTargetType().equals(UnitEquipHelper.getClassInstanceForClassName(unitClass.getName())))
+                            .findFirst().orElse(null));
+        }
+        return unitRepoCache.get(unitClass);
     }
 }

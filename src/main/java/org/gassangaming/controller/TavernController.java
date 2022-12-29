@@ -2,6 +2,8 @@ package org.gassangaming.controller;
 
 import org.gassangaming.dto.BuyUnitRequestDto;
 import org.gassangaming.dto.*;
+import org.gassangaming.dto.unit.UnitDto;
+import org.gassangaming.service.tavern.UnitForSale;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.gassangaming.service.tavern.TavernService;
@@ -13,23 +15,21 @@ import java.util.stream.Collectors;
 @RestController
 public class TavernController {
 
+    public static final String PATH = "/tavern";
+    public static final String BUY_UNIT_PATH = "/buyUnit";
+    public static final String GET_AVAILABLE_UNITS_PATH = "/availableUnits";
     @Autowired
     TavernService tavernService;
 
-    @GetMapping("/tavern/availableUnits")
-    public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        try {
-            return UnitListResponseDto.Of(tavernService.getUnitsForSale(context).stream().map(UnitDto::Of).collect(Collectors.toList()));
-        } catch (ServiceException e) {
-            return ErrorResponseDto.Of(e.getMessage());
-        }
+    @GetMapping(PATH + GET_AVAILABLE_UNITS_PATH)
+    public DtoBase getAvailableUnits() {
+        return UnitListResponseDto.Of(UnitForSale.All().stream().map(UnitForSale::getUnit).map(UnitDto::of).collect(Collectors.toList()));
     }
 
-
-    @PostMapping("/tavern/buyUnit")
+    @PostMapping(PATH + BUY_UNIT_PATH)
     public DtoBase buyUnit(@RequestBody BuyUnitRequestDto buyUnitRequestDto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            tavernService.buyUnit(buyUnitRequestDto.getUnitId(), context);
+            tavernService.buyUnit(buyUnitRequestDto.getType(), context);
             return new OkResponseDto();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());

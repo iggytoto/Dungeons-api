@@ -1,17 +1,19 @@
-package org.gassangaming.model;
+package org.gassangaming.model.unit;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-import static org.gassangaming.model.Unit.TABLE_NAME;
+import static org.gassangaming.model.unit.Unit.TABLE_NAME;
+import static org.gassangaming.model.unit.Unit.UNIT_TYPE_COLUMN_NAME;
 
 @Table(name = TABLE_NAME)
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 @Getter
 @Setter
+@DiscriminatorColumn(name = UNIT_TYPE_COLUMN_NAME)
 public class Unit {
 
     public static final String TABLE_NAME = "units";
@@ -39,38 +41,39 @@ public class Unit {
     protected Long id;
 
     @Column(name = NAME_COLUMN_NAME)
-    private String name;
+    protected String name;
     @Column(name = OWNER_ID_COLUMN_NAME)
-    private Long ownerId;
+    protected Long ownerId;
     @Column(name = HIT_POINTS_COLUMN_NAME)
-    private int hitPoints;
+    protected int hitPoints;
     @Column(name = MAX_HIT_POINTS_COLUMN_NAME)
-    private int maxHitPoints;
+    protected int maxHitPoints;
     @Column(name = ARMOR_COLUMN_NAME)
-    private int armor;
+    protected int armor;
     @Column(name = MAGIC_RESIST_COLUMN_NAME)
-    private int magicResistance;
+    protected int magicResistance;
     @Column(name = DAMAGE_COLUMN_NAME)
-    private int damage;
+    protected int damage;
     @Column(name = ATTACK_SPEED_COLUMN_NAME)
-    private float attackSpeed;
+    protected float attackSpeed;
     @Column(name = TRAINING_EXPERIENCE_COLUMN_NAME)
-    private int trainingExperience;
+    protected int trainingExperience;
     @Column(name = ATTACK_RANGE_COLUMN_NAME)
-    private float attackRange;
+    protected float attackRange;
     @Column(name = MOVEMENT_SPEED_COLUMN_NAME)
-    private float movementSpeed;
+    protected float movementSpeed;
     @Column(name = ACTIVITY_COLUMN_NAME)
     @Enumerated(EnumType.STRING)
-    private Activity activity;
+    protected Activity activity;
     @Column(name = BATTLE_BEHAVIOR_COLUMN_NAME)
     @Enumerated(EnumType.STRING)
-    private BattleBehavior battleBehavior;
-    @Column(name = UNIT_TYPE_COLUMN_NAME)
+    protected BattleBehavior battleBehavior;
+    @Column(name = UNIT_TYPE_COLUMN_NAME, insertable = false, updatable = false)
     @Enumerated(EnumType.STRING)
-    private UnitType unitType;
+    protected UnitType unitType;
 
     public boolean isDamaged() {
         return maxHitPoints >= hitPoints;
     }
+
 }

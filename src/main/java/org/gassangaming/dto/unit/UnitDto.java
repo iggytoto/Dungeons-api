@@ -1,11 +1,13 @@
-package org.gassangaming.dto;
+package org.gassangaming.dto.unit;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.gassangaming.model.Activity;
-import org.gassangaming.model.BattleBehavior;
-import org.gassangaming.model.Unit;
-import org.gassangaming.model.UnitType;
+import org.gassangaming.model.euqipment.UnitEquip;
+import org.gassangaming.model.unit.Activity;
+import org.gassangaming.model.unit.BattleBehavior;
+import org.gassangaming.model.unit.Unit;
+import org.gassangaming.model.unit.UnitType;
+import org.gassangaming.service.barrack.UnitState;
 
 import java.io.Serializable;
 
@@ -16,8 +18,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class UnitDto implements Serializable {
-    private long id;
-    private long ownerId;
+    private Long id;
+    private Long ownerId;
     private String name;
     private int hitPoints;
     private int maxHitPoints;
@@ -32,7 +34,10 @@ public class UnitDto implements Serializable {
     private BattleBehavior battleBehavior;
     private UnitType unitType;
 
-    public static UnitDto Of(Unit u) {
+    private UnitEquip unitEquip;
+
+    @Deprecated
+    public static UnitDto of(Unit u) {
         return UnitDto
                 .builder()
                 .id(u.getId())
@@ -50,6 +55,28 @@ public class UnitDto implements Serializable {
                 .battleBehavior(u.getBattleBehavior())
                 .unitType(u.getUnitType())
                 .ownerId(u.getOwnerId())
+                .build();
+    }
+
+    public static UnitDto of(UnitState us) {
+        return UnitDto
+                .builder()
+                .id(us.getUnit().getId())
+                .name(us.getUnit().getName())
+                .hitPoints(us.getUnit().getHitPoints())
+                .maxHitPoints(us.getUnit().getMaxHitPoints())
+                .armor(us.getUnit().getArmor())
+                .magicResistance(us.getUnit().getMagicResistance())
+                .damage(us.getUnit().getDamage())
+                .attackSpeed(us.getUnit().getAttackSpeed())
+                .trainingExperience(us.getUnit().getTrainingExperience())
+                .attackRange(us.getUnit().getAttackRange())
+                .movementSpeed(us.getUnit().getMovementSpeed())
+                .activity(us.getUnit().getActivity())
+                .battleBehavior(us.getUnit().getBattleBehavior())
+                .unitType(us.getUnit().getUnitType())
+                .ownerId(us.getUnit().getOwnerId())
+                .unitEquip(us.getEquip())
                 .build();
     }
 
