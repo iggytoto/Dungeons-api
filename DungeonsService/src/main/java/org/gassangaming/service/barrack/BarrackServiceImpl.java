@@ -1,6 +1,7 @@
 package org.gassangaming.service.barrack;
 
 import org.gassangaming.model.Activity;
+import org.gassangaming.model.BattleBehavior;
 import org.gassangaming.model.Unit;
 import org.gassangaming.repository.UnitRepository;
 import org.gassangaming.service.UserContext;
@@ -37,6 +38,14 @@ public class BarrackServiceImpl implements BarrackService {
         final var unit = unitRepository.findById(unitId);
         checkRights(unit, context);
         unit.setName(newName);
+        unitRepository.save(unit);
+    }
+
+    @Override
+    public void ChangeUnitBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext context) throws ServiceException {
+        final var unit = unitRepository.findById(unitId);
+        checkRights(unit, context);
+        unit.setBattleBehavior(newBattleBehavior);
         unitRepository.save(unit);
     }
 

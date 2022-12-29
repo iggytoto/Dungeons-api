@@ -1,5 +1,6 @@
 package org.gassangaming.service.barrack;
 
+import org.gassangaming.model.BattleBehavior;
 import org.gassangaming.model.Unit;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
@@ -17,4 +18,7 @@ public interface BarrackService {
 
     @Transactional
     void ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException;
+
+    @Transactional
+    void ChangeUnitBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext context) throws ServiceException;
 }

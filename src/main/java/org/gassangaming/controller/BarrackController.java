@@ -15,7 +15,8 @@ public class BarrackController {
     public static final String PATH = "/barrack";
     public static final String GET_AVAILABLE_UNITS_PATH = "/availableUnits";
     public static final String TRAIN_UNIT_PATH = "/trainUnit";
-    public static final String CHANGE_UNIT_NAME_PATH = "/changeUnitPath";
+    public static final String CHANGE_UNIT_NAME_PATH = "/changeUnitName";
+    public static final String CHANGE_UNIT_BATTLE_BEHAVIOR_PATH = "/changeUnitBattleBehavior";
 
     @Autowired
     BarrackService barrackService;
@@ -43,6 +44,16 @@ public class BarrackController {
     public DtoBase changeUnitName(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitNameRequestDto request) {
         try {
             barrackService.ChangeUnitName(request.getUnitId(), request.getNewName(), context);
+            return new OkResponseDto();
+        } catch (ServiceException e) {
+            return ErrorResponseDto.Of(e.getMessage());
+        }
+    }
+
+    @PostMapping(PATH + CHANGE_UNIT_BATTLE_BEHAVIOR_PATH)
+    public DtoBase changeUnitName(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitBattleBehaviorRequestDto request) {
+        try {
+            barrackService.ChangeUnitBattleBehavior(request.getUnitId(), request.getNewBattleBehavior(), context);
             return new OkResponseDto();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
