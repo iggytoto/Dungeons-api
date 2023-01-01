@@ -11,6 +11,4 @@ import static org.gassangaming.repository.Constants.PARAM_1;
 public interface UnitEquipRepository<T extends UnitEquip> extends JpaRepository<T, Long> {
 
     T getByUnitId(@Param(PARAM_1) long unitId);
-
-    Class<T> getTargetType();
 }

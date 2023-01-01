@@ -2,6 +2,7 @@ package org.gassangaming.model.unit;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.gassangaming.model.Valuable;
 
 import javax.persistence.*;
 
@@ -74,6 +75,10 @@ public class Unit {
 
     public boolean isDamaged() {
         return maxHitPoints >= hitPoints;
+    }
+
+    public Valuable getTrainingCost() {
+        return () -> 100;
     }
 
 }

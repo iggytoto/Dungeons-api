@@ -2,6 +2,7 @@ package org.gassangaming.controller;
 
 import org.gassangaming.dto.TrainUnitRequestDto;
 import org.gassangaming.dto.*;
+import org.gassangaming.dto.equip.UpgradeUnitEquipmentRequestDto;
 import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.barrack.BarrackService;
@@ -18,24 +19,14 @@ public class BarrackController {
     public static final String TRAIN_UNIT_PATH = "/trainUnit";
     public static final String CHANGE_UNIT_NAME_PATH = "/changeUnitName";
     public static final String CHANGE_UNIT_BATTLE_BEHAVIOR_PATH = "/changeUnitBattleBehavior";
+    public static final String UPGRADE_UNIT_EQUIPMENT_PATH = "/upgradeUnitEquipment";
 
     @Autowired
     BarrackService barrackService;
 
     @GetMapping(PATH + GET_AVAILABLE_UNITS_PATH)
     public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        try {
-            return UnitListResponseDto
-                    .builder()
-                    .units(barrackService
-                            .getBarrackUnits(context)
-                            .stream()
-                            .map(UnitDto::of)
-                            .collect(Collectors.toList()))
-                    .build();
-        } catch (ServiceException e) {
-            return ErrorResponseDto.Of(e.getMessage());
-        }
+        return UnitListResponseDto.builder().units(barrackService.getBarrackUnits(context).stream().map(UnitDto::of).collect(Collectors.toList())).build();
     }
 
     @PostMapping(PATH + TRAIN_UNIT_PATH)
@@ -62,6 +53,16 @@ public class BarrackController {
     public DtoBase changeUnitName(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitBattleBehaviorRequestDto request) {
         try {
             barrackService.ChangeUnitBattleBehavior(request.getUnitId(), request.getNewBattleBehavior(), context);
+            return new OkResponseDto();
+        } catch (ServiceException e) {
+            return ErrorResponseDto.Of(e.getMessage());
+        }
+    }
+
+    @PostMapping(PATH + UPGRADE_UNIT_EQUIPMENT_PATH)
+    public DtoBase UpgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitEquipmentRequestDto request) {
+        try {
+            barrackService.UpgradeUnitEquipment(request.getEquipmentId(), request.getUnitType(), request.getParamNameToUpgrade(), context);
             return new OkResponseDto();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());

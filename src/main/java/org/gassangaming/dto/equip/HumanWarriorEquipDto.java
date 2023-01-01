@@ -11,8 +11,8 @@ import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 public class HumanWarriorEquipDto extends UnitEquipTableDto {
-    private long defencePoints;
-    private long offencePoints;
+    private int defencePoints;
+    private int offencePoints;
 
 
     public static HumanWarriorEquipDto Of(HumanWarriorEquipment t) {

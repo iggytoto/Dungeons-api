@@ -13,8 +13,4 @@ public interface HumanWarriorEquipmentRepository extends UnitEquipRepository<Hum
     @Query(value = GET_BY_UNIT_ID_QUERY)
     @Override
     HumanWarriorEquipment getByUnitId(@Param(PARAM_1) long unitId);
-
-    default Class<HumanWarriorEquipment> getTargetType() {
-        return HumanWarriorEquipment.class;
-    }
 }
