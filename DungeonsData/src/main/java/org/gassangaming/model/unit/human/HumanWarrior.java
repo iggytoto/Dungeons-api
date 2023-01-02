@@ -29,4 +29,16 @@ public class HumanWarrior extends Unit {
         damage = 50;
         unitType = UnitType.HumanWarrior;
     }
+
+    public static HumanWarrior of(Activity activity) {
+        final var result = new HumanWarrior();
+        result.activity = activity;
+        return result;
+    }
+
+    public static HumanWarrior of(long unitId, Activity activity) {
+        final var result = HumanWarrior.of(activity);
+        result.id = unitId;
+        return result;
+    }
 }

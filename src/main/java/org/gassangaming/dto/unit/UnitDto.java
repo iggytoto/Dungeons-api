@@ -36,7 +36,6 @@ public class UnitDto implements Serializable {
 
     private UnitEquip unitEquip;
 
-    @Deprecated
     public static UnitDto of(Unit u) {
         return UnitDto
                 .builder()

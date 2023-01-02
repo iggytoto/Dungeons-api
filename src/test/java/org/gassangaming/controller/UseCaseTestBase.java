@@ -45,6 +45,11 @@ public class UseCaseTestBase {
         return saved.getId();
     }
 
+    protected long addUnit(Unit u) {
+        final var saved = unitRepository.save(u);
+        return saved.getId();
+    }
+
     protected long registerUser(String login, String password) throws ServiceException {
         final var userId = authService.register(login, password);
         final var account = new Account();
