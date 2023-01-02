@@ -40,12 +40,10 @@ public class TrainingServiceImpl implements TrainingService {
      * Merges only params that can be updated after training match.
      * During training results we can change only:
      * - current hit points is modified by the server
-     * - training experience is modified by the server
      * - activity should be set to Idle
      */
     private Unit mergeUnit(Unit unit) {
         final var u = unitRepository.findById(unit.getId()).orElseThrow();
-        u.setTrainingExperience(unit.getTrainingExperience());
         u.setHitPoints(unit.getHitPoints());
         u.setActivity(Activity.Idle);
         return u;

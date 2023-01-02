@@ -61,7 +61,6 @@
             <column name="mr" type="int"/>
             <column name="dmg" type="int"/>
             <column name="atk_spd" type="real"/>
-            <column name="training_exp" type="int"/>
             <column name="activity" type="varchar" defaultValue="Idle"/>
             <column name="attack_range" type="real" defaultValue="2"/>
             <column name="battle_behavior" type="varchar" defaultValue="StraightAttack"/>

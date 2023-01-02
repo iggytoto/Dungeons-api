@@ -27,7 +27,6 @@ public class UnitDto implements Serializable {
     private int magicResistance;
     private int damage;
     private float attackSpeed;
-    private int trainingExperience;
     private float attackRange;
     private float movementSpeed;
     private Activity activity;
@@ -47,7 +46,6 @@ public class UnitDto implements Serializable {
                 .magicResistance(u.getMagicResistance())
                 .damage(u.getDamage())
                 .attackSpeed(u.getAttackSpeed())
-                .trainingExperience(u.getTrainingExperience())
                 .attackRange(u.getAttackRange())
                 .movementSpeed(u.getMovementSpeed())
                 .activity(u.getActivity())
@@ -68,7 +66,6 @@ public class UnitDto implements Serializable {
                 .magicResistance(us.getUnit().getMagicResistance())
                 .damage(us.getUnit().getDamage())
                 .attackSpeed(us.getUnit().getAttackSpeed())
-                .trainingExperience(us.getUnit().getTrainingExperience())
                 .attackRange(us.getUnit().getAttackRange())
                 .movementSpeed(us.getUnit().getMovementSpeed())
                 .activity(us.getUnit().getActivity())
@@ -95,7 +92,6 @@ public class UnitDto implements Serializable {
         result.setBattleBehavior(battleBehavior);
         result.setUnitType(unitType);
         result.setOwnerId(ownerId);
-        result.setTrainingExperience(trainingExperience);
         result.setAttackRange(attackRange);
         return result;
     }

@@ -51,7 +51,6 @@
             <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
             <column name="atk_spd" value="1"/>
-            <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units">
             <column name="owner_id" value="3"/>
@@ -62,7 +61,6 @@
             <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
             <column name="atk_spd" value="1"/>
-            <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units">
             <column name="owner_id" value="3"/>
@@ -73,7 +71,6 @@
             <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
             <column name="atk_spd" value="1"/>
-            <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units">
             <column name="owner_id" value="4"/>
@@ -84,7 +81,6 @@
             <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
             <column name="atk_spd" value="1"/>
-            <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units">
             <column name="owner_id" value="4"/>
@@ -95,7 +91,6 @@
             <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
             <column name="atk_spd" value="1"/>
-            <column name="training_exp" value="100"/>
         </insert>
         <insert tableName="units">
             <column name="owner_id" value="4"/>
@@ -106,7 +101,6 @@
             <column name="max_hp" value="100"/>
             <column name="mr" value="100"/>
             <column name="atk_spd" value="1"/>
-            <column name="training_exp" value="100"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

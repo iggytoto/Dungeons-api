@@ -26,7 +26,6 @@ public class Unit {
     public static final String MAGIC_RESIST_COLUMN_NAME = "mr";
     public static final String DAMAGE_COLUMN_NAME = "dmg";
     public static final String ATTACK_SPEED_COLUMN_NAME = "atk_spd";
-    public static final String TRAINING_EXPERIENCE_COLUMN_NAME = "training_exp";
     public static final String ACTIVITY_COLUMN_NAME = "activity";
     public static final String ATTACK_RANGE_COLUMN_NAME = "attack_range";
     public static final String MOVEMENT_SPEED_COLUMN_NAME = "movement_speed";
@@ -57,8 +56,6 @@ public class Unit {
     protected int damage;
     @Column(name = ATTACK_SPEED_COLUMN_NAME)
     protected float attackSpeed;
-    @Column(name = TRAINING_EXPERIENCE_COLUMN_NAME)
-    protected int trainingExperience;
     @Column(name = ATTACK_RANGE_COLUMN_NAME)
     protected float attackRange;
     @Column(name = MOVEMENT_SPEED_COLUMN_NAME)

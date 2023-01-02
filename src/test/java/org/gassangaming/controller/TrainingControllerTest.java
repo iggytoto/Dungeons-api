@@ -25,9 +25,6 @@ import java.util.Date;
 @SpringBootTest
 public class TrainingControllerTest extends UseCaseTestBase {
 
-    private final static String LOGIN = "asinenpij";
-    private final static String PASS = "aldkjnfieriugn";
-
     private final static Date DATE = new Date();
 
     private long u1Id;
