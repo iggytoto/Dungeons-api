@@ -24,11 +24,11 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping(PATH + "/login")
-    public DtoBase login(@RequestBody LoginRequestDto request) throws JsonProcessingException {
+    public DtoBase login(@RequestBody LoginRequestDto request) {
         try {
             final var token = authService.login(request.getLogin(), request.getPassword());
             return LoginResponseDto.builder().token(BaseEncoding.base64().encode(token.toJson().getBytes())).build();
-        } catch (ServiceException ase) {
+        } catch (ServiceException | JsonProcessingException ase) {
             return ErrorResponseDto.Of(ase.getMessage());
         }
     }

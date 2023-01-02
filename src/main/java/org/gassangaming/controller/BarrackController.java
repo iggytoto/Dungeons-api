@@ -50,7 +50,7 @@ public class BarrackController {
     }
 
     @PostMapping(PATH + CHANGE_UNIT_BATTLE_BEHAVIOR_PATH)
-    public DtoBase changeUnitName(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitBattleBehaviorRequestDto request) {
+    public DtoBase changeUnitBehavior(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitBattleBehaviorRequestDto request) {
         try {
             barrackService.ChangeUnitBattleBehavior(request.getUnitId(), request.getNewBattleBehavior(), context);
             return new OkResponseDto();
