@@ -35,7 +35,7 @@ public class HumanWarrior extends Unit {
         attackSpeed = ATTACK_SPEED_BASE;
         movementSpeed = MOVE_SPEED_BASE;
         damage = DAMAGE_BASE;
-        maxMana = 100;
+        maxMana = 50;
         unitType = UnitType.HumanWarrior;
     }
 
