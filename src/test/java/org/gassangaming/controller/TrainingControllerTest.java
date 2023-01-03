@@ -43,9 +43,9 @@ public class TrainingControllerTest extends UseCaseTestBase {
             registerDefaultUser();
         } catch (ServiceException ignored) {
         }
-        u1Id = addUnit(HumanWarrior.of(Activity.Training), userId);
-        u2Id = addUnit(HumanWarrior.of(Activity.Training), userId);
-        u3Id = addUnit(HumanWarrior.of(Activity.Training), userId);
+        u1Id = addUnit(HumanWarrior.of(Activity.Training), userId).getId();
+        u2Id = addUnit(HumanWarrior.of(Activity.Training), userId).getId();
+        u3Id = addUnit(HumanWarrior.of(Activity.Training), userId).getId();
         final var trainingUnits = new ArrayList<TrainingUnit>();
         trainingUnits.add(TrainingUnit.Of(userId, u1Id));
         trainingUnits.add(TrainingUnit.Of(userId, u2Id));

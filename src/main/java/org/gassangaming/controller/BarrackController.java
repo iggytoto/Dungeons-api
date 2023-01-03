@@ -60,7 +60,7 @@ public class BarrackController {
     }
 
     @PostMapping(PATH + UPGRADE_UNIT_EQUIPMENT_PATH)
-    public DtoBase UpgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitEquipmentRequestDto request) {
+    public DtoBase upgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitEquipmentRequestDto request) {
         try {
             barrackService.UpgradeUnitEquipment(request.getEquipmentId(), request.getUnitType(), request.getParamNameToUpgrade(), context);
             return new OkResponseDto();

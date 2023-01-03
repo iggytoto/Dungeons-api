@@ -20,5 +20,5 @@ public interface UnitService {
 
     void changeBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext userContext) throws ServiceException;
 
-    void createNewUnit(Unit unitToSave, UserContext context) throws ServiceException;
+    Unit createNewUnit(Unit unitToSave, UserContext context) throws ServiceException;
 }

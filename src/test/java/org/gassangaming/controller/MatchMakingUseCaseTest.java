@@ -55,12 +55,12 @@ public class MatchMakingUseCaseTest extends UseCaseTestBase {
         long serverId = registerServerUser(SERVER_NAME, SERVER_PASS);
         long user1Id = registerUser(USER_1_NAME, USER_1_PASS);
         long user2Id = registerUser(USER_2_NAME, USER_2_PASS);
-        user1Units.add(addUnit(new HumanWarrior(), user1Id));
-        user1Units.add(addUnit(new HumanWarrior(), user1Id));
-        user1Units.add(addUnit(new HumanWarrior(), user1Id));
-        user2Units.add(addUnit(new HumanWarrior(), user2Id));
-        user2Units.add(addUnit(new HumanWarrior(), user2Id));
-        user2Units.add(addUnit(new HumanWarrior(), user2Id));
+        user1Units.add(addUnit(new HumanWarrior(), user1Id).getId());
+        user1Units.add(addUnit(new HumanWarrior(), user1Id).getId());
+        user1Units.add(addUnit(new HumanWarrior(), user1Id).getId());
+        user2Units.add(addUnit(new HumanWarrior(), user2Id).getId());
+        user2Units.add(addUnit(new HumanWarrior(), user2Id).getId());
+        user2Units.add(addUnit(new HumanWarrior(), user2Id).getId());
         user1Context = login(USER_1_NAME, USER_1_PASS);
         user2Context = login(USER_2_NAME, USER_2_PASS);
         serverContext = login(SERVER_NAME, SERVER_PASS);

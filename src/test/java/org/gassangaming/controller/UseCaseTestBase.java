@@ -39,15 +39,13 @@ public class UseCaseTestBase {
         return id;
     }
 
-    protected long addUnit(Unit u, long userId) {
+    protected <T extends Unit> T addUnit(T u, long userId) {
         u.setOwnerId(userId);
-        final var saved = unitRepository.save(u);
-        return saved.getId();
+        return unitRepository.save(u);
     }
 
-    protected long addUnit(Unit u) {
-        final var saved = unitRepository.save(u);
-        return saved.getId();
+    protected Unit addUnit(Unit u) {
+        return unitRepository.save(u);
     }
 
     protected long registerUser(String login, String password) throws ServiceException {

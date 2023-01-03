@@ -1,5 +1,6 @@
 package org.gassangaming.service.tavern;
 
+import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
@@ -14,5 +15,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface TavernService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    void buyUnit(UnitType type, UserContext context) throws ServiceException;
+    Unit buyUnit(UnitType type, UserContext context) throws ServiceException;
 }

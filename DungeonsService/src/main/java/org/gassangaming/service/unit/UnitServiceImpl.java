@@ -23,7 +23,6 @@ public class UnitServiceImpl implements UnitService {
     UnitRepository unitRepository;
     @Autowired
     CommonUnitEquipmentService unitEquipmentService;
-
     @Autowired
     AccountService accountService;
 
@@ -62,7 +61,7 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public void createNewUnit(Unit unitToSave, UserContext context) throws ServiceException {
+    public Unit createNewUnit(Unit unitToSave, UserContext context) throws ServiceException {
         if (unitToSave.getOwnerId() != null) {
             throw new ServiceException("Unit already belongs to someone, cannot save it for given user.");
         }
@@ -73,6 +72,7 @@ public class UnitServiceImpl implements UnitService {
             equip.setUnitId(savedUnit.getId());
             unitEquipmentService.saveEquipment(equip, context);
         }
+        return savedUnit;
     }
 
     private void checkRights(Unit u, UserContext context) throws ServiceException {
