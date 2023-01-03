@@ -5,7 +5,7 @@ import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.TrainingUnit;
 import org.gassangaming.repository.MatchMakingRepository;
 import org.gassangaming.repository.TrainingUnitRepository;
-import org.gassangaming.repository.UnitRepository;
+import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;

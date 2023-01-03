@@ -4,7 +4,7 @@ import org.gassangaming.dto.BuyUnitRequestDto;
 import org.gassangaming.dto.UnitListResponseDto;
 import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.model.unit.UnitType;
-import org.gassangaming.repository.UnitRepository;
+import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.exception.ServiceException;
 import org.junit.Before;
 import org.junit.Test;

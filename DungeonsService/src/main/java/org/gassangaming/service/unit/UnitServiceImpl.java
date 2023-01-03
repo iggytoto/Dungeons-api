@@ -4,7 +4,7 @@ import org.gassangaming.model.euqipment.UnitEquipHelper;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;
-import org.gassangaming.repository.UnitRepository;
+import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.barrack.UnitState;

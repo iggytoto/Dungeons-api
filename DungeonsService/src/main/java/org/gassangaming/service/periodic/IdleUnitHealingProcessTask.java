@@ -2,7 +2,7 @@ package org.gassangaming.service.periodic;
 
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.Unit;
-import org.gassangaming.repository.UnitRepository;
+import org.gassangaming.repository.unit.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

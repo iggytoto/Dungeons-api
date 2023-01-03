@@ -1,4 +1,4 @@
-package org.gassangaming.repository;
+package org.gassangaming.repository.unit.equip;
 
 import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
 import org.springframework.data.jpa.repository.Query;

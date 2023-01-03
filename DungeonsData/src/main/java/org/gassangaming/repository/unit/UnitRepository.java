@@ -1,4 +1,4 @@
-package org.gassangaming.repository;
+package org.gassangaming.repository.unit;
 
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.Unit;

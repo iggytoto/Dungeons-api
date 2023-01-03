@@ -4,7 +4,7 @@ package org.gassangaming.controller;
 import org.gassangaming.model.Account;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.AccountRepository;
-import org.gassangaming.repository.UnitRepository;
+import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.repository.UserRepository;
 import org.gassangaming.service.Role;
 import org.gassangaming.service.UserContext;

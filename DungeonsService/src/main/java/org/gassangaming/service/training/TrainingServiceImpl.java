@@ -6,7 +6,7 @@ import org.gassangaming.model.unit.TrainingUnit;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.MatchResultRepository;
 import org.gassangaming.repository.TrainingUnitRepository;
-import org.gassangaming.repository.UnitRepository;
+import org.gassangaming.repository.unit.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

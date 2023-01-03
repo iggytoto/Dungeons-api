@@ -8,7 +8,7 @@ import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.human.HumanWarrior;
-import org.gassangaming.repository.UnitRepository;
+import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.exception.ServiceException;
 import org.junit.Assert;
 import org.junit.Before;

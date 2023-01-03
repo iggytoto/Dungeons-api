@@ -13,19 +13,18 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-@DiscriminatorValue("HumanWarrior")
-public class HumanWarrior extends Unit {
-
+@DiscriminatorValue("HumanArcher")
+public class HumanArcher extends Unit {
     public static final float ATTACK_SPEED_BASE = 1;
-    public static final float ATTACK_RANGE_BASE = 2;
-    public static final int DAMAGE_BASE = 50;
-    public static final int HP_BASE = 100;
-    public static final int ARMOR_BASE = 15;
+    public static final float ATTACK_RANGE_BASE = 10;
+    public static final int DAMAGE_BASE = 35;
+    public static final int HP_BASE = 50;
+    public static final int ARMOR_BASE = 5;
     public static final float MOVE_SPEED_BASE = 6;
     public static final int MR_BASE = 0;
-    public static final int MANA_BASE = 50;
+    public static final int MANA_BASE = 75;
 
-    public HumanWarrior() {
+    public HumanArcher() {
         hitPoints = HP_BASE;
         maxHitPoints = HP_BASE;
         armor = ARMOR_BASE;
@@ -37,17 +36,17 @@ public class HumanWarrior extends Unit {
         movementSpeed = MOVE_SPEED_BASE;
         damage = DAMAGE_BASE;
         maxMana = MANA_BASE;
-        unitType = UnitType.HumanWarrior;
+        unitType = UnitType.HumanArcher;
     }
 
-    public static HumanWarrior of(Activity activity) {
-        final var result = new HumanWarrior();
+    public static HumanArcher of(Activity activity) {
+        final var result = new HumanArcher();
         result.activity = activity;
         return result;
     }
 
-    public static HumanWarrior of(long unitId, Activity activity) {
-        final var result = HumanWarrior.of(activity);
+    public static HumanArcher of(long unitId, Activity activity) {
+        final var result = HumanArcher.of(activity);
         result.id = unitId;
         return result;
     }
