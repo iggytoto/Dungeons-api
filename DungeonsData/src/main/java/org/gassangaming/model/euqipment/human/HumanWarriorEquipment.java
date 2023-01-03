@@ -21,28 +21,28 @@ public class HumanWarriorEquipment extends UnitEquip {
     public static final String TABLE_NAME = "human_warrior_equip";
 
     @Column(name = DEFENCE_POINTS_COLUMN_NAME)
-    private int defencePoints = 1;
+    private int defencePoints;
     @Column(name = OFFENCE_POINTS_COLUMN_NAME)
-    private int offencePoints = 1;
+    private int offencePoints;
 
     public Valuable getDefenceUpgradeValue() {
         return switch (defencePoints) {
-            case 0 -> () -> 1;
-            case 1 -> () -> 10;
-            case 2 -> () -> 100;
-            case 3 -> () -> 1000;
-            case 4 -> () -> 10000;
+            case 0 -> () -> 10;
+            case 1 -> () -> 100;
+            case 2 -> () -> 1000;
+            case 3 -> () -> 10000;
+            case 4 -> () -> 100000;
             default -> null;
         };
     }
 
     public Valuable getOffenceUpgradeValue() {
         return switch (offencePoints) {
-            case 0 -> () -> 1;
-            case 1 -> () -> 10;
-            case 2 -> () -> 100;
-            case 3 -> () -> 1000;
-            case 4 -> () -> 10000;
+            case 0 -> () -> 10;
+            case 1 -> () -> 100;
+            case 2 -> () -> 1000;
+            case 3 -> () -> 10000;
+            case 4 -> () -> 100000;
             default -> null;
         };
     }

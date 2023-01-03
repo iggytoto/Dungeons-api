@@ -16,17 +16,25 @@ import javax.persistence.Entity;
 @DiscriminatorValue("HumanWarrior")
 public class HumanWarrior extends Unit {
 
+    public static final float ATTACK_SPEED_BASE = 1;
+    public static final float ATTACK_RANGE_BASE = 2;
+    public static final int DAMAGE_BASE = 50;
+    public static final int HP_BASE = 100;
+    public static final int ARMOR_BASE = 15;
+    public static final float MOVE_SPEED_BASE = 6;
+    public static final int MR_BASE = 0;
+
     public HumanWarrior() {
-        hitPoints = 100;
-        maxHitPoints = 100;
-        armor = 15;
-        magicResistance = 0;
+        hitPoints = HP_BASE;
+        maxHitPoints = HP_BASE;
+        armor = ARMOR_BASE;
+        magicResistance = MR_BASE;
         activity = Activity.Idle;
         battleBehavior = BattleBehavior.StraightAttack;
-        attackRange = 2;
-        attackSpeed = 1;
-        movementSpeed = 6;
-        damage = 50;
+        attackRange = ATTACK_RANGE_BASE;
+        attackSpeed = ATTACK_SPEED_BASE;
+        movementSpeed = MOVE_SPEED_BASE;
+        damage = DAMAGE_BASE;
         maxMana = 100;
         unitType = UnitType.HumanWarrior;
     }

@@ -2,8 +2,11 @@ package org.gassangaming.service.unit.equipment;
 
 import org.gassangaming.model.Valuable;
 import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
+import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
+import org.gassangaming.model.unit.human.HumanWarrior;
 import org.gassangaming.repository.HumanWarriorEquipmentRepository;
+import org.gassangaming.repository.UnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.exception.ServiceException;
@@ -20,6 +23,8 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
     HumanWarriorEquipmentRepository repository;
     @Autowired
     AccountService accountService;
+    @Autowired
+    private UnitRepository unitRepository;
 
 
     @Override
@@ -34,7 +39,7 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
 
     @Override
     public void upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
-        var eqState = repository.getReferenceById(eqId);
+        final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (OffenceParamName.equals(paramNameToUpgrade)) {
             upgrade = eqState.getOffenceUpgradeValue();
@@ -51,6 +56,74 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
         }
         accountService.buyItem(upgrade, context);
         repository.save(eqState);
+        unitRepository.save(upgradeUnitChars(eqState, paramNameToUpgrade));
+    }
+
+    private Unit upgradeUnitChars(HumanWarriorEquipment eqState, String paramNameToUpgrade) {
+        final var u = unitRepository.findById(eqState.getUnitId());
+        if (paramNameToUpgrade.equals(OffenceParamName)) {
+            switch (eqState.getOffencePoints()) {
+                case 1 -> {
+                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.5f);
+                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .1f);
+                    u.setDamage(HumanWarrior.DAMAGE_BASE + 10);
+                }
+                case 2 -> {
+                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.66f);
+                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .11f);
+                    u.setDamage(HumanWarrior.DAMAGE_BASE + 15);
+                }
+                case 3 -> {
+                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.75f);
+                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .12f);
+                    u.setDamage(HumanWarrior.DAMAGE_BASE + 20);
+                }
+                case 4 -> {
+                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.8f);
+                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .125f);
+                    u.setDamage(HumanWarrior.DAMAGE_BASE + 25);
+                }
+                case 5 -> {
+                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.85f);
+                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .125f);
+                    u.setDamage(HumanWarrior.DAMAGE_BASE + 30);
+                }
+                default -> {
+                }
+            }
+        } else {
+            switch (eqState.getDefencePoints()) {
+                case 1 -> {
+                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 50);
+                    u.setArmor(HumanWarrior.ARMOR_BASE + 10);
+                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - .5f);
+                }
+                case 2 -> {
+                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 75);
+                    u.setArmor(HumanWarrior.ARMOR_BASE + 20);
+                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - 1f);
+                }
+                case 3 -> {
+                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 100);
+                    u.setArmor(HumanWarrior.ARMOR_BASE + 25);
+                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - 1.25f);
+                }
+                case 4 -> {
+                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 125);
+                    u.setArmor(HumanWarrior.ARMOR_BASE + 30);
+                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - 1.5f);
+                }
+                case 5 -> {
+                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 135);
+                    u.setArmor(HumanWarrior.ARMOR_BASE + 30);
+                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - 1.5f);
+                    u.setMagicResistance(HumanWarrior.MR_BASE + 15);
+                }
+                default -> {
+                }
+            }
+        }
+        return u;
     }
 
     @Override
