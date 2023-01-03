@@ -22,6 +22,8 @@ public class Unit {
     public static final String NAME_COLUMN_NAME = "name";
     public static final String HIT_POINTS_COLUMN_NAME = "hp";
     public static final String MAX_HIT_POINTS_COLUMN_NAME = "max_hp";
+    public static final String MANA_COLUMN_NAME = "mana";
+    public static final String MAX_MANA_POINTS_COLUMN_NAME = "max_mana";
     public static final String ARMOR_COLUMN_NAME = "armor";
     public static final String MAGIC_RESIST_COLUMN_NAME = "mr";
     public static final String DAMAGE_COLUMN_NAME = "dmg";
@@ -48,6 +50,10 @@ public class Unit {
     protected int hitPoints;
     @Column(name = MAX_HIT_POINTS_COLUMN_NAME)
     protected int maxHitPoints;
+    @Column(name = MANA_COLUMN_NAME)
+    protected int mana;
+    @Column(name = MAX_MANA_POINTS_COLUMN_NAME)
+    protected int maxMana;
     @Column(name = ARMOR_COLUMN_NAME)
     protected int armor;
     @Column(name = MAGIC_RESIST_COLUMN_NAME)

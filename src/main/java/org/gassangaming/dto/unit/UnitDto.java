@@ -23,6 +23,8 @@ public class UnitDto implements Serializable {
     private String name;
     private int hitPoints;
     private int maxHitPoints;
+    private int mana;
+    private int maxMana;
     private int armor;
     private int magicResistance;
     private int damage;
@@ -42,6 +44,8 @@ public class UnitDto implements Serializable {
                 .name(u.getName())
                 .hitPoints(u.getHitPoints())
                 .maxHitPoints(u.getMaxHitPoints())
+                .mana(u.getMana())
+                .maxMana(u.getMaxMana())
                 .armor(u.getArmor())
                 .magicResistance(u.getMagicResistance())
                 .damage(u.getDamage())
@@ -62,6 +66,8 @@ public class UnitDto implements Serializable {
                 .name(us.getUnit().getName())
                 .hitPoints(us.getUnit().getHitPoints())
                 .maxHitPoints(us.getUnit().getMaxHitPoints())
+                .mana(us.getUnit().getMana())
+                .maxMana(us.getUnit().getMaxMana())
                 .armor(us.getUnit().getArmor())
                 .magicResistance(us.getUnit().getMagicResistance())
                 .damage(us.getUnit().getDamage())
@@ -82,6 +88,8 @@ public class UnitDto implements Serializable {
         result.setId(id);
         result.setName(name);
         result.setHitPoints(hitPoints);
+        result.setMana(mana);
+        result.setMaxMana(maxMana);
         result.setMaxHitPoints(maxHitPoints);
         result.setArmor(armor);
         result.setMagicResistance(magicResistance);
