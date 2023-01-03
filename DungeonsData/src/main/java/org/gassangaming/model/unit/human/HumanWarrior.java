@@ -27,6 +27,7 @@ public class HumanWarrior extends Unit {
         attackSpeed = 1;
         movementSpeed = 6;
         damage = 50;
+        maxMana = 100;
         unitType = UnitType.HumanWarrior;
     }
 
