@@ -1,5 +1,6 @@
 package org.gassangaming.service.barrack;
 
+import org.gassangaming.model.euqipment.UnitEquip;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
@@ -40,7 +41,7 @@ public class BarrackServiceImpl implements BarrackService {
     }
 
     @Override
-    public void UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException {
-        unitEquipmentService.UpgradeUnitEquipment(equipmentId, unitType, paramNameToUpgrade, context);
+    public UnitEquip UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException {
+        return unitEquipmentService.UpgradeUnitEquipment(equipmentId, unitType, paramNameToUpgrade, context);
     }
 }

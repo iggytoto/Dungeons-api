@@ -1,5 +1,6 @@
 package org.gassangaming.service.barrack;
 
+import org.gassangaming.model.euqipment.UnitEquip;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
@@ -39,5 +40,5 @@ public interface BarrackService {
     void ChangeUnitBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext context) throws ServiceException;
 
     @Transactional
-    void UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException;
+    UnitEquip UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException;
 }

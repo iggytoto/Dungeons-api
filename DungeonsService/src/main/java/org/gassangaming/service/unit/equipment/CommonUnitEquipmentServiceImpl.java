@@ -17,8 +17,8 @@ public class CommonUnitEquipmentServiceImpl implements CommonUnitEquipmentServic
     Collection<UnitEquipmentService> concreteUnitEquipServices;
 
     @Override
-    public void UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException {
-        getServiceByUnitType(unitType).upgrade(equipmentId, paramNameToUpgrade, context);
+    public UnitEquip UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException {
+        return getServiceByUnitType(unitType).upgrade(equipmentId, paramNameToUpgrade, context);
     }
 
     @Override

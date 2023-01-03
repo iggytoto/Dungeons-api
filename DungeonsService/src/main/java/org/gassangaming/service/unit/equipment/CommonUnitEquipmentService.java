@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface CommonUnitEquipmentService {
 
     @Transactional
-    void UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException;
+    UnitEquip UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException;
 
     @Transactional
     void saveEquipment(UnitEquip e, UserContext context) throws ServiceException;

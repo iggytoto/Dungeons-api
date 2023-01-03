@@ -10,17 +10,21 @@ import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class HumanWarriorEquipDto extends UnitEquipTableDto {
+public class HumanWarriorEquipmentDto extends UnitEquipDto {
     private int defencePoints;
     private int offencePoints;
 
-
-    public static HumanWarriorEquipDto Of(HumanWarriorEquipment t) {
-        return HumanWarriorEquipDto.builder().defencePoints(t.getDefencePoints()).offencePoints(t.getOffencePoints()).build();
+    public static HumanWarriorEquipmentDto ofDomain(HumanWarriorEquipment t) {
+        final var result = HumanWarriorEquipmentDto.builder().defencePoints(t.getDefencePoints()).offencePoints(t.getOffencePoints()).build();
+        result.setId(t.getId());
+        result.setUnitId(t.getUnitId());
+        return result;
     }
 
     public HumanWarriorEquipment toDomain() {
         final var result = new HumanWarriorEquipment();
+        result.setId(id);
+        result.setUnitId(unitId);
         result.setDefencePoints(defencePoints);
         result.setOffencePoints(offencePoints);
         return result;

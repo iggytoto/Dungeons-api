@@ -38,7 +38,7 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
     }
 
     @Override
-    public void upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanWarriorEquipment upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
         final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (OffenceParamName.equals(paramNameToUpgrade)) {
@@ -57,6 +57,7 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
         accountService.buyItem(upgrade, context);
         repository.save(eqState);
         unitRepository.save(upgradeUnitChars(eqState, paramNameToUpgrade));
+        return eqState;
     }
 
     private Unit upgradeUnitChars(HumanWarriorEquipment eqState, String paramNameToUpgrade) {

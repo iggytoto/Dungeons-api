@@ -15,7 +15,7 @@ public interface UnitEquipmentService<T extends UnitEquip> {
     UnitType getTargetUnitType();
 
     @Transactional
-    void upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException;
+    T upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException;
 
     @Transactional
     T saveOrUpdate(T e);

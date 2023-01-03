@@ -37,7 +37,7 @@ public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService
     }
 
     @Override
-    public void upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanArcherEquipment upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
         final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (MID_RANGE_PARAM.equals(paramNameToUpgrade)) {
@@ -78,6 +78,7 @@ public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService
         accountService.buyItem(upgrade, context);
         repository.save(eqState);
         unitRepository.save(upgradeUnitChars(eqState, paramNameToUpgrade));
+        return eqState;
     }
 
     private Unit upgradeUnitChars(HumanArcherEquipment eqState, String paramNameToUpgrade) {

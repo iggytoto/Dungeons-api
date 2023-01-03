@@ -1,7 +1,7 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.TrainUnitRequestDto;
 import org.gassangaming.dto.*;
+import org.gassangaming.dto.equip.UnitEquipDto;
 import org.gassangaming.dto.equip.UpgradeUnitEquipmentRequestDto;
 import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.service.UserContext;
@@ -62,8 +62,8 @@ public class BarrackController {
     @PostMapping(PATH + UPGRADE_UNIT_EQUIPMENT_PATH)
     public DtoBase upgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitEquipmentRequestDto request) {
         try {
-            barrackService.UpgradeUnitEquipment(request.getEquipmentId(), request.getUnitType(), request.getParamNameToUpgrade(), context);
-            return new OkResponseDto();
+            final var eq = barrackService.UpgradeUnitEquipment(request.getEquipmentId(), request.getUnitType(), request.getParamNameToUpgrade(), context);
+            return ObjectResponseDto.builder().obj(UnitEquipDto.of(eq)).build();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
