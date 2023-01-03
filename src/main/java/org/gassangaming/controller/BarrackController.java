@@ -63,7 +63,7 @@ public class BarrackController {
     public DtoBase upgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitEquipmentRequestDto request) {
         try {
             final var eq = barrackService.UpgradeUnitEquipment(request.getEquipmentId(), request.getUnitType(), request.getParamNameToUpgrade(), context);
-            return ObjectResponseDto.builder().obj(UnitEquipDto.of(eq)).build();
+            return UnitEquipDto.of(eq);
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }

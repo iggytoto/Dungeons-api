@@ -21,7 +21,8 @@ public class MatchMakingController {
     @PostMapping(PATH + REGISTER_PATH)
     public DtoBase register(@RequestBody MatchMakingRegisterRequestDto request, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            return ObjectResponseDto.builder().obj(matchMakingService.register(request.getRosterUnitsIds(), MatchType.MatchMaking3x3, context)).build();
+            final var match = matchMakingService.register(request.getRosterUnitsIds(), MatchType.MatchMaking3x3, context);
+            return MatchDto.ofDomain(match);
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }

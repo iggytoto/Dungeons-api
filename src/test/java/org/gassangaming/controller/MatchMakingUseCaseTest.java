@@ -1,10 +1,9 @@
 package org.gassangaming.controller;
 
+import org.gassangaming.dto.MatchDto;
 import org.gassangaming.dto.MatchMakingGetStatusResponseDto;
 import org.gassangaming.dto.MatchMakingRegisterRequestDto;
 import org.gassangaming.dto.MatchMakingServerApplyRequestDto;
-import org.gassangaming.dto.ObjectResponseDto;
-import org.gassangaming.model.Match;
 import org.gassangaming.model.MatchStatus;
 import org.gassangaming.model.unit.human.HumanWarrior;
 import org.gassangaming.service.UserContext;
@@ -71,14 +70,14 @@ public class MatchMakingUseCaseTest extends UseCaseTestBase {
         //user 1 register
         final var user1matchMakingRegisterRequestDto = new MatchMakingRegisterRequestDto();
         user1matchMakingRegisterRequestDto.setRosterUnitsIds(user1Units);
-        final var user1Req = ((ObjectResponseDto<Match>) matchMakingController.register(user1matchMakingRegisterRequestDto, user1Context)).getObj();
+        final var user1Req = ((MatchDto) matchMakingController.register(user1matchMakingRegisterRequestDto, user1Context));
         Assert.notNull(user1Req, "Should be match presented");
         //user 1 cancel
         matchMakingController.cancel(user1Context);
         //user 2 register
         final var user2matchMakingRegisterRequestDto = new MatchMakingRegisterRequestDto();
         user2matchMakingRegisterRequestDto.setRosterUnitsIds(user2Units);
-        final var user2Req = ((ObjectResponseDto<Match>) matchMakingController.register(user2matchMakingRegisterRequestDto, user2Context)).getObj();
+        final var user2Req = ((MatchDto) matchMakingController.register(user2matchMakingRegisterRequestDto, user2Context));
         Assert.notNull(user2Req, "Should be match presented");
         //status check
         final var user2Status = ((MatchMakingGetStatusResponseDto) matchMakingController.getStatus(user2Context)).getMatch();

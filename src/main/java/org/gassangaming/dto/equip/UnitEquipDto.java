@@ -2,16 +2,15 @@ package org.gassangaming.dto.equip;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.gassangaming.dto.DtoBase;
 import org.gassangaming.model.euqipment.UnitEquip;
 import org.gassangaming.model.euqipment.human.HumanArcherEquipment;
 import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
 
-import java.io.Serializable;
-
 
 @Getter
 @Setter
-public abstract class UnitEquipDto implements Serializable {
+public abstract class UnitEquipDto extends DtoBase {
 
     protected Long id;
     protected long unitId;
