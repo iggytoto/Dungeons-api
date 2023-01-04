@@ -110,7 +110,7 @@
             <column name="fire_arrows" type="boolean">
                 <constraints notNullConstraintName="c_human_archer_equip_nn_fire"/>
             </column>
-            <column name="poison_arrows_arrows" type="boolean">
+            <column name="poison_arrows" type="boolean">
                 <constraints notNullConstraintName="c_human_archer_equip_nn_poison"/>
             </column>
         </createTable>

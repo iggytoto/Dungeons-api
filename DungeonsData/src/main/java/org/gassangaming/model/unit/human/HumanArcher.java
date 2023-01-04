@@ -39,6 +39,12 @@ public class HumanArcher extends Unit {
         unitType = UnitType.HumanArcher;
     }
 
+
+    public static HumanArcher ofName(String name){
+        final var result = new HumanArcher();
+        result.name = name;
+        return result;
+    }
     public static HumanArcher of(Activity activity) {
         final var result = new HumanArcher();
         result.activity = activity;

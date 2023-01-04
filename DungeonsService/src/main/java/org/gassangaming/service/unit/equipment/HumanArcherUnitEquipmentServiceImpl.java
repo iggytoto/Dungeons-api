@@ -11,7 +11,9 @@ import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService<HumanArcherEquipment> {
 
     public static final String MID_RANGE_PARAM = "midRange";
@@ -38,7 +40,7 @@ public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService
 
     @Override
     public HumanArcherEquipment upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
-        final var eqState = repository.getReferenceById(eqId);
+        final var eqState = repository.findById(eqId).orElseThrow();
         Valuable upgrade;
         if (MID_RANGE_PARAM.equals(paramNameToUpgrade)) {
             upgrade = eqState.getMidRangeUpgradeValue();
@@ -49,7 +51,7 @@ public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService
                 eqState.setMidRangePoints(eqState.getMidRangePoints() + 1);
             }
         } else if (LONG_RANGE_PARAM.equals(paramNameToUpgrade)) {
-            upgrade = eqState.getMidRangeUpgradeValue();
+            upgrade = eqState.getLongRangeUpgradeValue();
             if (eqState.getLongRangePoints() == 4) {
                 throw new ServiceException("Cannot upgrade. Its maximum level already");
             }

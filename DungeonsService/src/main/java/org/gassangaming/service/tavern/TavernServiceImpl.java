@@ -20,6 +20,8 @@ public class TavernServiceImpl implements TavernService {
     @Override
     public Unit buyUnit(UnitType type, UserContext context) throws ServiceException {
         final var unitForSale = UnitForSale.Of(type);
+        unitForSale.getUnit().setId(null);
+        unitForSale.getUnit().setOwnerId(null);
         accountService.buyItem(unitForSale, context);
         return unitService.createNewUnit(unitForSale.getUnit(), context);
     }

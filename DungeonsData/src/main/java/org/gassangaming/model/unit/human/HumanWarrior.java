@@ -40,6 +40,12 @@ public class HumanWarrior extends Unit {
         unitType = UnitType.HumanWarrior;
     }
 
+    public static HumanWarrior ofName(String name){
+        final var result = new HumanWarrior();
+        result.name = name;
+        return result;
+    }
+
     public static HumanWarrior of(Activity activity) {
         final var result = new HumanWarrior();
         result.activity = activity;

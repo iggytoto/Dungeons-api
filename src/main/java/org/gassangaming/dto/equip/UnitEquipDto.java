@@ -16,6 +16,9 @@ public abstract class UnitEquipDto extends DtoBase {
     protected long unitId;
 
     public static UnitEquipDto of(UnitEquip eq) {
+        if (eq == null) {
+            return null;
+        }
         if (eq instanceof HumanWarriorEquipment) {
             return HumanWarriorEquipmentDto.ofDomain((HumanWarriorEquipment) eq);
         } else if (eq instanceof HumanArcherEquipment) {

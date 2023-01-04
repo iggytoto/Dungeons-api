@@ -2,14 +2,14 @@ package org.gassangaming.dto.unit;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.gassangaming.model.euqipment.UnitEquip;
+import org.gassangaming.dto.DtoBase;
+import org.gassangaming.dto.equip.UnitEquipDto;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.barrack.UnitState;
-
-import java.io.Serializable;
+import org.gassangaming.service.tavern.UnitForSale;
 
 @Builder
 @Data
@@ -17,7 +17,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UnitDto implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class UnitDto extends DtoBase {
     private Long id;
     private Long ownerId;
     private String name;
@@ -28,6 +29,7 @@ public class UnitDto implements Serializable {
     private int armor;
     private int magicResistance;
     private int damage;
+    private long goldAmount;
     private float attackSpeed;
     private float attackRange;
     private float movementSpeed;
@@ -35,7 +37,14 @@ public class UnitDto implements Serializable {
     private BattleBehavior battleBehavior;
     private UnitType unitType;
 
-    private UnitEquip unitEquip;
+    private UnitEquipDto unitEquip;
+
+
+    public static UnitDto of(UnitForSale u) {
+        final var result = of(u.getUnit());
+        result.setGoldAmount(u.getGoldAmount());
+        return result;
+    }
 
     public static UnitDto of(Unit u) {
         return UnitDto
@@ -78,7 +87,7 @@ public class UnitDto implements Serializable {
                 .battleBehavior(us.getUnit().getBattleBehavior())
                 .unitType(us.getUnit().getUnitType())
                 .ownerId(us.getUnit().getOwnerId())
-                .unitEquip(us.getEquip())
+                .unitEquip(UnitEquipDto.of(us.getEquip()))
                 .build();
     }
 

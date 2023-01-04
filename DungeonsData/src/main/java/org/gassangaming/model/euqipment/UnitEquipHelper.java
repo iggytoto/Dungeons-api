@@ -1,5 +1,6 @@
 package org.gassangaming.model.euqipment;
 
+import org.gassangaming.model.euqipment.human.HumanArcherEquipment;
 import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
 import org.gassangaming.model.unit.UnitType;
 
@@ -12,6 +13,7 @@ public class UnitEquipHelper {
 
     static {
         unitsToEquipMap.put(UnitType.HumanWarrior, HumanWarriorEquipment.class);
+        unitsToEquipMap.put(UnitType.HumanArcher, HumanArcherEquipment.class);
     }
 
     public static UnitEquip getDefaultInstanceFor(UnitType type) {

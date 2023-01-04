@@ -37,29 +37,29 @@ public class HumanArcherEquipment extends UnitEquip {
 
     public Valuable getMidRangeUpgradeValue() {
         return switch (midRangePoints) {
-            case 0 -> () -> 50;
-            case 1 -> () -> 500;
-            case 2 -> () -> 5000;
-            case 3 -> () -> 50000;
+            case 0 -> () -> 0;
+            case 1 -> () -> 0;
+            case 2 -> () -> 0;
+            case 3 -> () -> 0;
             default -> null;
         };
     }
 
     public Valuable getLongRangeUpgradeValue() {
         return switch (longRangePoints) {
-            case 0 -> () -> 50;
-            case 1 -> () -> 500;
-            case 2 -> () -> 5000;
-            case 3 -> () -> 50000;
+            case 0 -> () -> 0;
+            case 1 -> () -> 0;
+            case 2 -> () -> 0;
+            case 3 -> () -> 0;
             default -> null;
         };
     }
 
     public Valuable getFireArrowsUpgradeValue() {
-        return () -> 10000;
+        return () -> 0;
     }
 
     public Valuable getPoisonArrowsUpgradeValue() {
-        return () -> 10000;
+        return () -> 0;
     }
 }

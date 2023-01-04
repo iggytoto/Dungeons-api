@@ -27,22 +27,22 @@ public class HumanWarriorEquipment extends UnitEquip {
 
     public Valuable getDefenceUpgradeValue() {
         return switch (defencePoints) {
-            case 0 -> () -> 10;
-            case 1 -> () -> 100;
-            case 2 -> () -> 1000;
-            case 3 -> () -> 10000;
-            case 4 -> () -> 100000;
+            case 0 -> () -> 0;
+            case 1 -> () -> 0;
+            case 2 -> () -> 0;
+            case 3 -> () -> 0;
+            case 4 -> () -> 0;
             default -> null;
         };
     }
 
     public Valuable getOffenceUpgradeValue() {
         return switch (offencePoints) {
-            case 0 -> () -> 10;
-            case 1 -> () -> 100;
-            case 2 -> () -> 1000;
-            case 3 -> () -> 10000;
-            case 4 -> () -> 100000;
+            case 0 -> () -> 0;
+            case 1 -> () -> 0;
+            case 2 -> () -> 0;
+            case 3 -> () -> 0;
+            case 4 -> () -> 0;
             default -> null;
         };
     }
