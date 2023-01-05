@@ -120,6 +120,25 @@
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="unit-equip-human-spearman" author="gassan">
+        <createTable tableName="human_spearman_equip">
+            <column name="id" type="int" defaultValueSequenceNext="s_unit_equip_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_id" type="int"/>
+            <column name="double_edge_points" type="int">
+                <constraints notNullConstraintName="c_human_spearman_equip_nn_long_points"/>
+            </column>
+            <column name="mid_range_points" type="int">
+                <constraints notNullConstraintName="c_human_spearman_equip_nn_mid_points"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="human_spearman_equip"
+                                 baseColumnNames="unit_id"
+                                 constraintName="human_spearman_equip_fk_unit_id"
+                                 referencedTableName="units"
+                                 referencedColumnNames="id"/>
+    </changeSet>
     <changeSet id="initial-table-accounts" author="gassan">
         <createTable tableName="accounts">
             <column name="id" type="int" defaultValueSequenceNext="s_accounts_id">

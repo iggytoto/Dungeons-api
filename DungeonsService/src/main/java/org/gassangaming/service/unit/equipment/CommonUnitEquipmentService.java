@@ -17,6 +17,5 @@ public interface CommonUnitEquipmentService {
     @Transactional
     void saveEquipment(UnitEquip e, UserContext context) throws ServiceException;
 
-
     UnitEquip getEquipmentForUnit(Unit u);
 }

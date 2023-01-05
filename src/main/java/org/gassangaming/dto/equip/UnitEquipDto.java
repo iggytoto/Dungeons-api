@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.gassangaming.dto.DtoBase;
 import org.gassangaming.model.euqipment.UnitEquip;
 import org.gassangaming.model.euqipment.human.HumanArcherEquipment;
+import org.gassangaming.model.euqipment.human.HumanSpearmanEquipment;
 import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
 
 
@@ -23,6 +24,8 @@ public abstract class UnitEquipDto extends DtoBase {
             return HumanWarriorEquipmentDto.ofDomain((HumanWarriorEquipment) eq);
         } else if (eq instanceof HumanArcherEquipment) {
             return HumanArcherEquipmentDto.ofDomain((HumanArcherEquipment) eq);
+        } else if (eq instanceof HumanSpearmanEquipment) {
+            HumanSpearmanEquipmentDto.ofDomain((HumanSpearmanEquipment) eq);
         }
         throw new IllegalStateException();
     }
