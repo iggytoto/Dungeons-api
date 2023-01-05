@@ -34,7 +34,7 @@ public class HumanClericEquipment extends UnitEquip {
     @Column(name = PURGE_COLUMN_NAME)
     boolean purge;
 
-    public Valuable getMidRangeUpgradeValue() {
+    public Valuable getDisciplineUpgradeValue() {
         return switch (disciplinePoints) {
             case 0 -> () -> 0;
             case 1 -> () -> 0;

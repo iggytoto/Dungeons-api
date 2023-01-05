@@ -34,7 +34,7 @@ public class HumanSpearmanUnitEquipmentServiceImpl implements UnitEquipmentServi
 
     @Override
     public UnitType getTargetUnitType() {
-        return UnitType.HumanWarrior;
+        return UnitType.HumanSpearman;
     }
 
     @Override
