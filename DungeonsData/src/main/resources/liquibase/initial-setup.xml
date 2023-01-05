@@ -120,6 +120,31 @@
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="unit-equip-human-archer" author="gassan">
+        <createTable tableName="human_cleric_equip">
+            <column name="id" type="int" defaultValueSequenceNext="s_unit_equip_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unit_id" type="int"/>
+            <column name="discipline_points" type="int">
+                <constraints notNullConstraintName="c_human_cleric_equip_nn_discipline_points"/>
+            </column>
+            <column name="shatter" type="boolean">
+                <constraints notNullConstraintName="c_human_cleric_equip_nn_shatter"/>
+            </column>
+            <column name="divine" type="boolean">
+                <constraints notNullConstraintName="c_human_cleric_equip_nn_divine"/>
+            </column>
+            <column name="purge" type="boolean">
+                <constraints notNullConstraintName="c_human_cleric_equip_nn_purge"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="human_cleric_equip"
+                                 baseColumnNames="unit_id"
+                                 constraintName="human_cleric_equip_fk_unit_id"
+                                 referencedTableName="units"
+                                 referencedColumnNames="id"/>
+    </changeSet>
     <changeSet id="unit-equip-human-spearman" author="gassan">
         <createTable tableName="human_spearman_equip">
             <column name="id" type="int" defaultValueSequenceNext="s_unit_equip_id">

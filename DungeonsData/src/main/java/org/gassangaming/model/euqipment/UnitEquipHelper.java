@@ -1,6 +1,7 @@
 package org.gassangaming.model.euqipment;
 
 import org.gassangaming.model.euqipment.human.HumanArcherEquipment;
+import org.gassangaming.model.euqipment.human.HumanClericEquipment;
 import org.gassangaming.model.euqipment.human.HumanSpearmanEquipment;
 import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
 import org.gassangaming.model.unit.UnitType;
@@ -16,6 +17,7 @@ public class UnitEquipHelper {
         unitsToEquipMap.put(UnitType.HumanWarrior, HumanWarriorEquipment.class);
         unitsToEquipMap.put(UnitType.HumanArcher, HumanArcherEquipment.class);
         unitsToEquipMap.put(UnitType.HumanSpearman, HumanSpearmanEquipment.class);
+        unitsToEquipMap.put(UnitType.HumanCleric, HumanClericEquipment.class);
     }
 
     public static UnitEquip getDefaultInstanceFor(UnitType type) {
@@ -29,9 +31,5 @@ public class UnitEquipHelper {
             }
         }
         return null;
-    }
-
-    public static Class<? extends UnitEquip> getClassInstanceForClassName(UnitType u) {
-        return unitsToEquipMap.getOrDefault(u, null);
     }
 }

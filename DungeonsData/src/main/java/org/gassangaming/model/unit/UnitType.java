@@ -3,5 +3,7 @@ package org.gassangaming.model.unit;
 public enum UnitType {
     Dummy,
     HumanWarrior,
-    HumanSpearman, HumanArcher
+    HumanSpearman,
+    HumanCleric,
+    HumanArcher
 }
