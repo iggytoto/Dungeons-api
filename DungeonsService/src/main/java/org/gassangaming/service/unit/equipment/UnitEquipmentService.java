@@ -7,11 +7,22 @@ import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Concrete equipment service specification.
+ *
+ * @param <T> - concrete type of unit equipment
+ */
 @Service
 public interface UnitEquipmentService<T extends UnitEquip> {
 
+    /**
+     * @return concrete class that this service process
+     */
     Class<T> getTargetEquipClass();
 
+    /**
+     * @return concrete unit type to which unit equipment refer to
+     */
     UnitType getTargetUnitType();
 
     @Transactional

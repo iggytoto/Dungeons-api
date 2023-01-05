@@ -39,6 +39,17 @@ public interface BarrackService {
     @Transactional
     void ChangeUnitBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext context) throws ServiceException;
 
+    /**
+     * Upgrades unit equipment. As unit equipment permanently affects unit characteristics changes unit characteristics
+     * that it belongs.
+     *
+     * @param equipmentId        equipment id to upgrade
+     * @param unitType           unit type, this is key mapper because different unit type have different set of equipment
+     * @param paramNameToUpgrade key of what concrete should be upgraded
+     * @param context            player context
+     * @return upgraded unit equipment state
+     * @throws ServiceException when it cant be upgraded anymore or equipment id belongs to unit that is not owned by player
+     */
     @Transactional
     UnitEquip UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException;
 }
