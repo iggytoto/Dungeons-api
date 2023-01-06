@@ -26,11 +26,6 @@ public class BarrackServiceImpl implements BarrackService {
     }
 
     @Override
-    public void TrainUnit(long unitId, UserContext context) throws ServiceException {
-        unitService.trainUnit(unitId, context);
-    }
-
-    @Override
     public void ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException {
         unitService.changeName(unitId, newName, context);
     }

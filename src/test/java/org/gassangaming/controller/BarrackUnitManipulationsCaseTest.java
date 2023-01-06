@@ -2,10 +2,8 @@ package org.gassangaming.controller;
 
 import org.gassangaming.dto.ChangeUnitBattleBehaviorRequestDto;
 import org.gassangaming.dto.ChangeUnitNameRequestDto;
-import org.gassangaming.dto.TrainUnitRequestDto;
 import org.gassangaming.dto.UnitListResponseDto;
 import org.gassangaming.dto.unit.UnitDto;
-import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.human.HumanWarrior;
 import org.gassangaming.repository.unit.UnitRepository;
@@ -75,12 +73,5 @@ public class BarrackUnitManipulationsCaseTest extends UseCaseTestBase {
         barrackController.changeUnitBehavior(context, changeUnitBbRequestDto);
         final var changedUnitBb = unitRepository.findById(unitToChange.getId()).orElseThrow();
         Assert.assertEquals(BattleBehavior.GuardNearestAlly, changedUnitBb.getBattleBehavior());
-        //set training test
-        final var trainUnitRequestDto = new TrainUnitRequestDto();
-        trainUnitRequestDto.setUnitId(unitToChange.getId());
-        barrackController.trainUnit(trainUnitRequestDto, context);
-        final var changedUnitTraining = unitRepository.findById(unitToChange.getId()).orElseThrow();
-        Assert.assertEquals(Activity.Training, changedUnitTraining.getActivity());
-
     }
 }

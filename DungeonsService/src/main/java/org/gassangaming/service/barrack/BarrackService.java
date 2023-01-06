@@ -23,16 +23,6 @@ public interface BarrackService {
      */
     Collection<UnitState> getBarrackUnits(UserContext context);
 
-    /**
-     * Sets the unit to training for some time. After that it should gain some experience points
-     *
-     * @param unitId  unit id to train
-     * @param context player context
-     * @throws ServiceException in case player doesnt have enough resources to train or given unit id is not players
-     */
-    @Transactional
-    void TrainUnit(long unitId, UserContext context) throws ServiceException;
-
     @Transactional
     void ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException;
 

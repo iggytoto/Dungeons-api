@@ -1,7 +1,6 @@
 package org.gassangaming.service.unit;
 
 import org.gassangaming.model.euqipment.UnitEquipHelper;
-import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.unit.UnitRepository;
@@ -29,19 +28,6 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public Collection<UnitState> getByOwnerId(long ownerId) {
         return unitRepository.findByOwnerId(ownerId).stream().map(unit -> new UnitState(unit, unitEquipmentService.getEquipmentForUnit(unit))).collect(Collectors.toList());
-    }
-
-    @Override
-    public void trainUnit(long unitId, UserContext userContext) throws ServiceException {
-        final var unitToTrain = unitRepository.findById(unitId);
-        checkRights(unitToTrain, userContext);
-        if (!Activity.Idle.equals(unitToTrain.getActivity())) {
-            throw new ServiceException("Unit is busy already");
-        }
-        unitToTrain.setActivity(Activity.Training);
-        final var trainingCost = unitToTrain.getTrainingCost();
-        accountService.buyItem(trainingCost, userContext);
-        unitRepository.save(unitToTrain);
     }
 
     @Override

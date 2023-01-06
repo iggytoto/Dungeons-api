@@ -29,16 +29,6 @@ public class BarrackController {
         return UnitListResponseDto.builder().units(barrackService.getBarrackUnits(context).stream().map(UnitDto::of).collect(Collectors.toList())).build();
     }
 
-    @PostMapping(PATH + TRAIN_UNIT_PATH)
-    public DtoBase trainUnit(@RequestBody TrainUnitRequestDto request, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        try {
-            barrackService.TrainUnit(request.getUnitId(), context);
-            return new OkResponseDto();
-        } catch (ServiceException e) {
-            return ErrorResponseDto.Of(e.getMessage());
-        }
-    }
-
     @PostMapping(PATH + CHANGE_UNIT_NAME_PATH)
     public DtoBase changeUnitName(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitNameRequestDto request) {
         try {

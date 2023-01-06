@@ -17,12 +17,6 @@ public interface UnitService {
 
     Collection<UnitState> getByOwnerId(long ownerId);
 
-    /**
-     * @deprecated todo decided to remove training experience from the mvp, should be removed soon
-     */
-    @Deprecated
-    void trainUnit(long unitId, UserContext userContext) throws ServiceException;
-
     void changeName(long unitId, String newName, UserContext userContext) throws ServiceException;
 
     void changeBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext userContext) throws ServiceException;
