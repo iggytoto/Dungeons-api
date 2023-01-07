@@ -23,6 +23,9 @@ import org.springframework.util.Assert;
 @SpringBootTest
 public class TavernUnitManipulationTestCase extends UseCaseTestBase {
 
+    private static final String LOGIN = "noiunoqgoq";
+    private static final String PASSWORD = "noiunoqgoq";
+
     @Autowired
     TavernController tavernController;
     @Autowired
@@ -30,8 +33,8 @@ public class TavernUnitManipulationTestCase extends UseCaseTestBase {
 
     @Before
     public void setup() throws ServiceException {
-        registerDefaultUser();
-        loginAsDefaultUser();
+        userId = registerUser(LOGIN,PASSWORD);
+        context = login(LOGIN,PASSWORD);
     }
 
     @Test
