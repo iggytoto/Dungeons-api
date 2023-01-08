@@ -1,11 +1,11 @@
-package org.gassangaming.service.unit.equipment;
+package org.gassangaming.service.unit.skills;
 
 import org.gassangaming.model.Valuable;
-import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
+import org.gassangaming.model.euqipment.human.HumanWarriorSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.model.unit.human.HumanWarrior;
-import org.gassangaming.repository.unit.equip.HumanWarriorEquipmentRepository;
+import org.gassangaming.repository.unit.equip.HumanWarriorSkillsRepository;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentService<HumanWarriorEquipment> {
+public class HumanWarriorUnitSkillsServiceImpl implements UnitSkillsService<HumanWarriorSkills> {
 
     public static final String OffenceParamName = "offence";
     public static final String DefenceParamName = "defence";
 
     @Autowired
-    HumanWarriorEquipmentRepository repository;
+    HumanWarriorSkillsRepository repository;
     @Autowired
     AccountService accountService;
     @Autowired
@@ -28,8 +28,8 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
 
 
     @Override
-    public Class<HumanWarriorEquipment> getTargetEquipClass() {
-        return HumanWarriorEquipment.class;
+    public Class<HumanWarriorSkills> getTargetEquipClass() {
+        return HumanWarriorSkills.class;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
     }
 
     @Override
-    public HumanWarriorEquipment upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanWarriorSkills upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
         final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (OffenceParamName.equals(paramNameToUpgrade)) {
@@ -60,7 +60,7 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
         return eqState;
     }
 
-    private Unit upgradeUnitChars(HumanWarriorEquipment eqState, String paramNameToUpgrade) {
+    private Unit upgradeUnitChars(HumanWarriorSkills eqState, String paramNameToUpgrade) {
         final var u = unitRepository.findById(eqState.getUnitId());
         if (paramNameToUpgrade.equals(OffenceParamName)) {
             switch (eqState.getOffencePoints()) {
@@ -128,12 +128,12 @@ public class HumanWarriorUnitEquipmentServiceImpl implements UnitEquipmentServic
     }
 
     @Override
-    public HumanWarriorEquipment saveOrUpdate(HumanWarriorEquipment e) {
+    public HumanWarriorSkills saveOrUpdate(HumanWarriorSkills e) {
         return repository.save(e);
     }
 
     @Override
-    public HumanWarriorEquipment getByUnitId(long id) {
+    public HumanWarriorSkills getByUnitId(long id) {
         return repository.getByUnitId(id);
     }
 }

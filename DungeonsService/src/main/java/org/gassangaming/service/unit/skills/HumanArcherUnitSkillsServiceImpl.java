@@ -1,12 +1,12 @@
-package org.gassangaming.service.unit.equipment;
+package org.gassangaming.service.unit.skills;
 
 import org.gassangaming.model.Valuable;
-import org.gassangaming.model.euqipment.human.HumanArcherEquipment;
+import org.gassangaming.model.euqipment.human.HumanArcherSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.model.unit.human.HumanArcher;
 import org.gassangaming.repository.unit.UnitRepository;
-import org.gassangaming.repository.unit.equip.HumanArcherEquipmentRepository;
+import org.gassangaming.repository.unit.equip.HumanArcherSkillsRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.exception.ServiceException;
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService<HumanArcherEquipment> {
+public class HumanArcherUnitSkillsServiceImpl implements UnitSkillsService<HumanArcherSkills> {
 
     public static final String MID_RANGE_PARAM = "midRange";
     public static final String LONG_RANGE_PARAM = "longRange";
@@ -22,15 +22,15 @@ public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService
     public static final String POISON_ARROW_PARAM = "poisonArrow";
 
     @Autowired
-    HumanArcherEquipmentRepository repository;
+    HumanArcherSkillsRepository repository;
     @Autowired
     AccountService accountService;
     @Autowired
     UnitRepository unitRepository;
 
     @Override
-    public Class<HumanArcherEquipment> getTargetEquipClass() {
-        return HumanArcherEquipment.class;
+    public Class<HumanArcherSkills> getTargetEquipClass() {
+        return HumanArcherSkills.class;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService
     }
 
     @Override
-    public HumanArcherEquipment upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanArcherSkills upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
         final var eqState = repository.findById(eqId).orElseThrow();
         Valuable upgrade;
         if (MID_RANGE_PARAM.equals(paramNameToUpgrade)) {
@@ -83,7 +83,7 @@ public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService
         return eqState;
     }
 
-    private Unit upgradeUnitChars(HumanArcherEquipment eqState, String paramNameToUpgrade) {
+    private Unit upgradeUnitChars(HumanArcherSkills eqState, String paramNameToUpgrade) {
         final var u = unitRepository.findById(eqState.getUnitId());
         if (paramNameToUpgrade.equals(MID_RANGE_PARAM)) {
             switch (eqState.getMidRangePoints()) {
@@ -136,12 +136,12 @@ public class HumanArcherUnitEquipmentServiceImpl implements UnitEquipmentService
     }
 
     @Override
-    public HumanArcherEquipment saveOrUpdate(HumanArcherEquipment e) {
+    public HumanArcherSkills saveOrUpdate(HumanArcherSkills e) {
         return repository.save(e);
     }
 
     @Override
-    public HumanArcherEquipment getByUnitId(long id) {
+    public HumanArcherSkills getByUnitId(long id) {
         return repository.getByUnitId(id);
     }
 }

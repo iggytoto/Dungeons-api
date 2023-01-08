@@ -1,8 +1,8 @@
 package org.gassangaming.controller;
 
 import org.gassangaming.dto.*;
-import org.gassangaming.dto.equip.UnitEquipDto;
-import org.gassangaming.dto.equip.UpgradeUnitEquipmentRequestDto;
+import org.gassangaming.dto.equip.UnitSkillsDto;
+import org.gassangaming.dto.equip.UpgradeUnitSkillsRequestDto;
 import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.barrack.BarrackService;
@@ -19,7 +19,7 @@ public class BarrackController {
     public static final String TRAIN_UNIT_PATH = "/trainUnit";
     public static final String CHANGE_UNIT_NAME_PATH = "/changeUnitName";
     public static final String CHANGE_UNIT_BATTLE_BEHAVIOR_PATH = "/changeUnitBattleBehavior";
-    public static final String UPGRADE_UNIT_EQUIPMENT_PATH = "/upgradeUnitEquipment";
+    public static final String UPGRADE_UNIT_skillsMENT_PATH = "/upgradeUnitSkills";
 
     @Autowired
     BarrackService barrackService;
@@ -49,11 +49,11 @@ public class BarrackController {
         }
     }
 
-    @PostMapping(PATH + UPGRADE_UNIT_EQUIPMENT_PATH)
-    public DtoBase upgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitEquipmentRequestDto request) {
+    @PostMapping(PATH + UPGRADE_UNIT_skillsMENT_PATH)
+    public DtoBase upgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitSkillsRequestDto request) {
         try {
-            final var eq = barrackService.UpgradeUnitEquipment(request.getEquipmentId(), request.getUnitType(), request.getParamNameToUpgrade(), context);
-            return UnitEquipDto.of(eq);
+            final var eq = barrackService.UpgradeUnitEquipment(request.getSkillsId(), request.getUnitType(), request.getParamNameToUpgrade(), context);
+            return UnitSkillsDto.of(eq);
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }

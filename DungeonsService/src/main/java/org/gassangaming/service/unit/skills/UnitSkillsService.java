@@ -1,6 +1,6 @@
-package org.gassangaming.service.unit.equipment;
+package org.gassangaming.service.unit.skills;
 
-import org.gassangaming.model.euqipment.UnitEquip;
+import org.gassangaming.model.euqipment.UnitSkills;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Concrete equipment service specification.
+ * Concrete skills service specification.
  *
- * @param <T> - concrete type of unit equipment
+ * @param <T> - concrete type of unit skills
  */
 @Service
-public interface UnitEquipmentService<T extends UnitEquip> {
+public interface UnitSkillsService<T extends UnitSkills> {
 
     /**
      * @return concrete class that this service process
@@ -21,7 +21,7 @@ public interface UnitEquipmentService<T extends UnitEquip> {
     Class<T> getTargetEquipClass();
 
     /**
-     * @return concrete unit type to which unit equipment refer to
+     * @return concrete unit type to which unit skill refer to
      */
     UnitType getTargetUnitType();
 
@@ -32,9 +32,9 @@ public interface UnitEquipmentService<T extends UnitEquip> {
     T saveOrUpdate(T e);
 
     @Transactional
-    default T saveOrUpdateEquip(UnitEquip e) throws ServiceException {
+    default T saveOrUpdateEquip(UnitSkills e) throws ServiceException {
         if (!getTargetEquipClass().isInstance(e)) {
-            throw new ServiceException("given equipment is not supported by the service");
+            throw new ServiceException("given skills is not supported by the service");
         }
         return saveOrUpdate((T) e);
     }

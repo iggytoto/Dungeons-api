@@ -3,7 +3,7 @@ package org.gassangaming.dto.unit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.gassangaming.dto.DtoBase;
-import org.gassangaming.dto.equip.UnitEquipDto;
+import org.gassangaming.dto.equip.UnitSkillsDto;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;
@@ -37,7 +37,7 @@ public class UnitDto extends DtoBase {
     private BattleBehavior battleBehavior;
     private UnitType unitType;
 
-    private UnitEquipDto unitEquip;
+    private UnitSkillsDto unitEquip;
 
 
     public static UnitDto of(UnitForSale u) {
@@ -87,7 +87,7 @@ public class UnitDto extends DtoBase {
                 .battleBehavior(us.getUnit().getBattleBehavior())
                 .unitType(us.getUnit().getUnitType())
                 .ownerId(us.getUnit().getOwnerId())
-                .unitEquip(UnitEquipDto.of(us.getEquip()))
+                .unitEquip(UnitSkillsDto.of(us.getEquip()))
                 .build();
     }
 

@@ -10,9 +10,9 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public abstract class UnitEquip {
+public abstract class UnitSkills {
 
-    public static final String SEQUENCE_NAME = "s_unit_equip_id";
+    public static final String SEQUENCE_NAME = "s_unit_skills_id";
     public static final String UNIT_ID_COLUMN_NAME = Constants.UNIT_ID_FOREIGN_KEY_COLUMN_NAME;
 
     @Id

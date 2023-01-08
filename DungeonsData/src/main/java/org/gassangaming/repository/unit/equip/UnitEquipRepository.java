@@ -1,6 +1,6 @@
 package org.gassangaming.repository.unit.equip;
 
-import org.gassangaming.model.euqipment.UnitEquip;
+import org.gassangaming.model.euqipment.UnitSkills;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import static org.gassangaming.repository.Constants.PARAM_1;
 
 @NoRepositoryBean
-public interface UnitEquipRepository<T extends UnitEquip> extends JpaRepository<T, Long> {
+public interface UnitEquipRepository<T extends UnitSkills> extends JpaRepository<T, Long> {
 
     T getByUnitId(@Param(PARAM_1) long unitId);
 }

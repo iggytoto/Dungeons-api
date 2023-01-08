@@ -1,7 +1,7 @@
 package org.gassangaming.dto.equip;
 
 import lombok.*;
-import org.gassangaming.model.euqipment.human.HumanClericEquipment;
+import org.gassangaming.model.euqipment.human.HumanClericSkills;
 
 @Builder
 @Data
@@ -10,14 +10,14 @@ import org.gassangaming.model.euqipment.human.HumanClericEquipment;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class HumanClericEquipmentDto extends UnitEquipDto {
+public class HumanClericEquipmentDto extends UnitSkillsDto {
 
     int disciplinePoints;
     boolean shatter;
     boolean divine;
     boolean purge;
 
-    public static HumanClericEquipmentDto ofDomain(HumanClericEquipment t) {
+    public static HumanClericEquipmentDto ofDomain(HumanClericSkills t) {
         final var result = HumanClericEquipmentDto
                 .builder()
                 .disciplinePoints(t.getDisciplinePoints())
@@ -30,8 +30,8 @@ public class HumanClericEquipmentDto extends UnitEquipDto {
         return result;
     }
 
-    public HumanClericEquipment toDomain() {
-        final var result = new HumanClericEquipment();
+    public HumanClericSkills toDomain() {
+        final var result = new HumanClericSkills();
         result.setId(id);
         result.setUnitId(unitId);
         result.setPurge(purge);

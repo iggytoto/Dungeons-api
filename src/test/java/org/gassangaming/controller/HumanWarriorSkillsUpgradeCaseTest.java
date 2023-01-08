@@ -1,13 +1,13 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.equip.UpgradeUnitEquipmentRequestDto;
-import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
+import org.gassangaming.dto.equip.UpgradeUnitSkillsRequestDto;
+import org.gassangaming.model.euqipment.human.HumanWarriorSkills;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.model.unit.human.HumanWarrior;
-import org.gassangaming.repository.unit.equip.HumanWarriorEquipmentRepository;
+import org.gassangaming.repository.unit.equip.HumanWarriorSkillsRepository;
 import org.gassangaming.service.exception.ServiceException;
 import org.gassangaming.service.tavern.TavernService;
-import org.gassangaming.service.unit.equipment.HumanWarriorUnitEquipmentServiceImpl;
+import org.gassangaming.service.unit.skills.HumanWarriorUnitSkillsServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,10 +27,10 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HumanWarriorEquipmentUpgradeCaseTest extends UseCaseTestBase {
+public class HumanWarriorSkillsUpgradeCaseTest extends UseCaseTestBase {
 
     @Autowired
-    HumanWarriorEquipmentRepository equipmentRepository;
+    HumanWarriorSkillsRepository equipmentRepository;
 
     @Autowired
     BarrackController barrackController;
@@ -49,30 +49,30 @@ public class HumanWarriorEquipmentUpgradeCaseTest extends UseCaseTestBase {
     @Test
     public void testCase() {
         final var eqId = equipmentRepository.getByUnitId(unit.getId()).getId();
-        final var upgradeRequestDto = new UpgradeUnitEquipmentRequestDto();
-        upgradeRequestDto.setEquipmentId(eqId);
+        final var upgradeRequestDto = new UpgradeUnitSkillsRequestDto();
+        upgradeRequestDto.setSkillsId(eqId);
         upgradeRequestDto.setUnitType(UnitType.HumanWarrior);
-        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitEquipmentServiceImpl.DefenceParamName);
+        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitSkillsServiceImpl.DefenceParamName);
         barrackController.upgradeUnitEquipment(context, upgradeRequestDto);
         assertEquipmentOnState(equipmentRepository.getByUnitId(unit.getId()), 1, 0);
-        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitEquipmentServiceImpl.OffenceParamName);
+        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitSkillsServiceImpl.OffenceParamName);
         barrackController.upgradeUnitEquipment(context, upgradeRequestDto);
         assertEquipmentOnState(equipmentRepository.getByUnitId(unit.getId()), 1, 1);
-        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitEquipmentServiceImpl.OffenceParamName);
+        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitSkillsServiceImpl.OffenceParamName);
         barrackController.upgradeUnitEquipment(context, upgradeRequestDto);
         assertEquipmentOnState(equipmentRepository.getByUnitId(unit.getId()), 1, 2);
-        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitEquipmentServiceImpl.DefenceParamName);
+        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitSkillsServiceImpl.DefenceParamName);
         barrackController.upgradeUnitEquipment(context, upgradeRequestDto);
         assertEquipmentOnState(equipmentRepository.getByUnitId(unit.getId()), 2, 2);
-        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitEquipmentServiceImpl.DefenceParamName);
+        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitSkillsServiceImpl.DefenceParamName);
         barrackController.upgradeUnitEquipment(context, upgradeRequestDto);
         assertEquipmentOnState(equipmentRepository.getByUnitId(unit.getId()), 3, 2);
-        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitEquipmentServiceImpl.DefenceParamName);
+        upgradeRequestDto.setParamNameToUpgrade(HumanWarriorUnitSkillsServiceImpl.DefenceParamName);
         barrackController.upgradeUnitEquipment(context, upgradeRequestDto);
         assertEquipmentOnState(equipmentRepository.getByUnitId(unit.getId()), 4, 2);
     }
 
-    private void assertEquipmentOnState(HumanWarriorEquipment eq, int expectedDefence, int expectedOffence) {
+    private void assertEquipmentOnState(HumanWarriorSkills eq, int expectedDefence, int expectedOffence) {
         Assert.assertEquals(expectedDefence, eq.getDefencePoints());
         Assert.assertEquals(expectedOffence, eq.getOffencePoints());
     }

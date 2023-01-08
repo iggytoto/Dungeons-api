@@ -1,9 +1,9 @@
 package org.gassangaming.model.euqipment;
 
-import org.gassangaming.model.euqipment.human.HumanArcherEquipment;
-import org.gassangaming.model.euqipment.human.HumanClericEquipment;
-import org.gassangaming.model.euqipment.human.HumanSpearmanEquipment;
-import org.gassangaming.model.euqipment.human.HumanWarriorEquipment;
+import org.gassangaming.model.euqipment.human.HumanArcherSkills;
+import org.gassangaming.model.euqipment.human.HumanClericSkills;
+import org.gassangaming.model.euqipment.human.HumanSpearmanSkills;
+import org.gassangaming.model.euqipment.human.HumanWarriorSkills;
 import org.gassangaming.model.unit.UnitType;
 
 import java.lang.reflect.InvocationTargetException;
@@ -11,16 +11,16 @@ import java.util.HashMap;
 
 public class UnitEquipHelper {
 
-    private final static HashMap<UnitType, Class<? extends UnitEquip>> unitsToEquipMap = new HashMap<>();
+    private final static HashMap<UnitType, Class<? extends UnitSkills>> unitsToEquipMap = new HashMap<>();
 
     static {
-        unitsToEquipMap.put(UnitType.HumanWarrior, HumanWarriorEquipment.class);
-        unitsToEquipMap.put(UnitType.HumanArcher, HumanArcherEquipment.class);
-        unitsToEquipMap.put(UnitType.HumanSpearman, HumanSpearmanEquipment.class);
-        unitsToEquipMap.put(UnitType.HumanCleric, HumanClericEquipment.class);
+        unitsToEquipMap.put(UnitType.HumanWarrior, HumanWarriorSkills.class);
+        unitsToEquipMap.put(UnitType.HumanArcher, HumanArcherSkills.class);
+        unitsToEquipMap.put(UnitType.HumanSpearman, HumanSpearmanSkills.class);
+        unitsToEquipMap.put(UnitType.HumanCleric, HumanClericSkills.class);
     }
 
-    public static UnitEquip getDefaultInstanceFor(UnitType type) {
+    public static UnitSkills getDefaultInstanceFor(UnitType type) {
         if (unitsToEquipMap.containsKey(type)) {
             final var c = unitsToEquipMap.get(type);
             try {

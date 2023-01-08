@@ -1,12 +1,12 @@
 package org.gassangaming.service.barrack;
 
-import org.gassangaming.model.euqipment.UnitEquip;
+import org.gassangaming.model.euqipment.UnitSkills;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.gassangaming.service.unit.UnitService;
-import org.gassangaming.service.unit.equipment.CommonUnitEquipmentService;
+import org.gassangaming.service.unit.skills.CommonUnitSkillsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.Collection;
 public class BarrackServiceImpl implements BarrackService {
 
     @Autowired
-    CommonUnitEquipmentService unitEquipmentService;
+    CommonUnitSkillsService unitEquipmentService;
     @Autowired
     UnitService unitService;
 
@@ -36,7 +36,7 @@ public class BarrackServiceImpl implements BarrackService {
     }
 
     @Override
-    public UnitEquip UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException {
-        return unitEquipmentService.UpgradeUnitEquipment(equipmentId, unitType, paramNameToUpgrade, context);
+    public UnitSkills UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException {
+        return unitEquipmentService.UpgradeUnitSkills(equipmentId, unitType, paramNameToUpgrade, context);
     }
 }

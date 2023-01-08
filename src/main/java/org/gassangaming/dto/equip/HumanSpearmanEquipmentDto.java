@@ -1,7 +1,7 @@
 package org.gassangaming.dto.equip;
 
 import lombok.*;
-import org.gassangaming.model.euqipment.human.HumanSpearmanEquipment;
+import org.gassangaming.model.euqipment.human.HumanSpearmanSkills;
 
 @Builder
 @Data
@@ -10,19 +10,19 @@ import org.gassangaming.model.euqipment.human.HumanSpearmanEquipment;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class HumanSpearmanEquipmentDto extends UnitEquipDto {
+public class HumanSpearmanEquipmentDto extends UnitSkillsDto {
     private int doubleEdgePoints;
     private int midRangePoints;
 
-    public static HumanSpearmanEquipmentDto ofDomain(HumanSpearmanEquipment t) {
+    public static HumanSpearmanEquipmentDto ofDomain(HumanSpearmanSkills t) {
         final var result = HumanSpearmanEquipmentDto.builder().doubleEdgePoints(t.getDoubleEdgePoints()).midRangePoints(t.getMidRangePoints()).build();
         result.setId(t.getId());
         result.setUnitId(t.getUnitId());
         return result;
     }
 
-    public HumanSpearmanEquipment toDomain() {
-        final var result = new HumanSpearmanEquipment();
+    public HumanSpearmanSkills toDomain() {
+        final var result = new HumanSpearmanSkills();
         result.setId(id);
         result.setUnitId(unitId);
         result.setMidRangePoints(doubleEdgePoints);

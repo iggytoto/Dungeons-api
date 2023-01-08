@@ -1,11 +1,11 @@
-package org.gassangaming.service.unit.equipment;
+package org.gassangaming.service.unit.skills;
 
 import org.gassangaming.model.Valuable;
-import org.gassangaming.model.euqipment.human.HumanClericEquipment;
+import org.gassangaming.model.euqipment.human.HumanClericSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.repository.unit.UnitRepository;
-import org.gassangaming.repository.unit.equip.HumanClericEquipmentRepository;
+import org.gassangaming.repository.unit.equip.HumanClericSkillsRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.exception.ServiceException;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HumanClericUnitEquipmentServiceImpl implements UnitEquipmentService<HumanClericEquipment> {
+public class HumanClericUnitSkillsServiceImpl implements UnitSkillsService<HumanClericSkills> {
 
     public static final String DISCIPLINE_PARAM_NAME = "discipline";
     public static final String SHATTER_PARAM_NAME = "shatter";
@@ -21,7 +21,7 @@ public class HumanClericUnitEquipmentServiceImpl implements UnitEquipmentService
     public static final String PURGE_PARAM_NAME = "purge";
 
     @Autowired
-    HumanClericEquipmentRepository repository;
+    HumanClericSkillsRepository repository;
     @Autowired
     AccountService accountService;
     @Autowired
@@ -29,8 +29,8 @@ public class HumanClericUnitEquipmentServiceImpl implements UnitEquipmentService
 
 
     @Override
-    public Class<HumanClericEquipment> getTargetEquipClass() {
-        return HumanClericEquipment.class;
+    public Class<HumanClericSkills> getTargetEquipClass() {
+        return HumanClericSkills.class;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class HumanClericUnitEquipmentServiceImpl implements UnitEquipmentService
     }
 
     @Override
-    public HumanClericEquipment upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanClericSkills upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
         final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (DISCIPLINE_PARAM_NAME.equals(paramNameToUpgrade)) {
@@ -80,7 +80,7 @@ public class HumanClericUnitEquipmentServiceImpl implements UnitEquipmentService
         return eqState;
     }
 
-    private Unit upgradeUnitChars(HumanClericEquipment eqState, String paramNameToUpgrade) throws ServiceException {
+    private Unit upgradeUnitChars(HumanClericSkills eqState, String paramNameToUpgrade) throws ServiceException {
         final var u = unitRepository.findById(eqState.getUnitId());
         if (paramNameToUpgrade.equals(SHATTER_PARAM_NAME) && eqState.isShatter()) {
             u.setMaxMana(u.getMaxMana() - 10);
@@ -98,12 +98,12 @@ public class HumanClericUnitEquipmentServiceImpl implements UnitEquipmentService
     }
 
     @Override
-    public HumanClericEquipment saveOrUpdate(HumanClericEquipment e) {
+    public HumanClericSkills saveOrUpdate(HumanClericSkills e) {
         return repository.save(e);
     }
 
     @Override
-    public HumanClericEquipment getByUnitId(long id) {
+    public HumanClericSkills getByUnitId(long id) {
         return repository.getByUnitId(id);
     }
 }

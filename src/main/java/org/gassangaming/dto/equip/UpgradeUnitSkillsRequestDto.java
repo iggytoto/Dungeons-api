@@ -7,8 +7,8 @@ import org.gassangaming.model.unit.UnitType;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UpgradeUnitEquipmentRequestDto extends DtoBase {
-    public long equipmentId;
+public class UpgradeUnitSkillsRequestDto extends DtoBase {
+    public long skillsId;
     public UnitType unitType;
     public String paramNameToUpgrade;
 }

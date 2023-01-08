@@ -3,21 +3,21 @@ package org.gassangaming.model.euqipment.human;
 import lombok.Getter;
 import lombok.Setter;
 import org.gassangaming.model.Valuable;
-import org.gassangaming.model.euqipment.UnitEquip;
+import org.gassangaming.model.euqipment.UnitSkills;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import static org.gassangaming.model.euqipment.human.HumanClericEquipment.TABLE_NAME;
+import static org.gassangaming.model.euqipment.human.HumanClericSkills.TABLE_NAME;
 
 @Entity
 @Table(name = TABLE_NAME)
 @Getter
 @Setter
-public class HumanClericEquipment extends UnitEquip {
+public class HumanClericSkills extends UnitSkills {
 
-    public static final String TABLE_NAME = "human_cleric_equip";
+    public static final String TABLE_NAME = "human_cleric_skills";
     public static final String DISCIPLINE_POINTS_COLUMN_NAME = "discipline_points";
     public static final String SHATTER_COLUMN_NAME = "shatter";
     public static final String DIVINE_COLUMN_NAME = "divine";

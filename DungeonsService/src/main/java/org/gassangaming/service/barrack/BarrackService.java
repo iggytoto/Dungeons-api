@@ -1,6 +1,6 @@
 package org.gassangaming.service.barrack;
 
-import org.gassangaming.model.euqipment.UnitEquip;
+import org.gassangaming.model.euqipment.UnitSkills;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
@@ -41,5 +41,5 @@ public interface BarrackService {
      * @throws ServiceException when it cant be upgraded anymore or equipment id belongs to unit that is not owned by player
      */
     @Transactional
-    UnitEquip UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException;
+    UnitSkills UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException;
 }

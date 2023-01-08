@@ -1,12 +1,12 @@
-package org.gassangaming.service.unit.equipment;
+package org.gassangaming.service.unit.skills;
 
 import org.gassangaming.model.Valuable;
-import org.gassangaming.model.euqipment.human.HumanSpearmanEquipment;
+import org.gassangaming.model.euqipment.human.HumanSpearmanSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.model.unit.human.HumanSpearman;
 import org.gassangaming.repository.unit.UnitRepository;
-import org.gassangaming.repository.unit.equip.HumanSpearmanEquipmentRepository;
+import org.gassangaming.repository.unit.equip.HumanSpearmanSkillsRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.exception.ServiceException;
@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HumanSpearmanUnitEquipmentServiceImpl implements UnitEquipmentService<HumanSpearmanEquipment> {
+public class HumanSpearmanUnitSkillsServiceImpl implements UnitSkillsService<HumanSpearmanSkills> {
 
     public static final String DOUBLE_EDGE_PARAM_NAME = "doubleEdge";
     public static final String MID_RANGE_PARAM_NAME = "midRange";
 
     @Autowired
-    HumanSpearmanEquipmentRepository repository;
+    HumanSpearmanSkillsRepository repository;
     @Autowired
     AccountService accountService;
     @Autowired
@@ -28,8 +28,8 @@ public class HumanSpearmanUnitEquipmentServiceImpl implements UnitEquipmentServi
 
 
     @Override
-    public Class<HumanSpearmanEquipment> getTargetEquipClass() {
-        return HumanSpearmanEquipment.class;
+    public Class<HumanSpearmanSkills> getTargetEquipClass() {
+        return HumanSpearmanSkills.class;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class HumanSpearmanUnitEquipmentServiceImpl implements UnitEquipmentServi
     }
 
     @Override
-    public HumanSpearmanEquipment upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanSpearmanSkills upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
         final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (DOUBLE_EDGE_PARAM_NAME.equals(paramNameToUpgrade)) {
@@ -60,7 +60,7 @@ public class HumanSpearmanUnitEquipmentServiceImpl implements UnitEquipmentServi
         return eqState;
     }
 
-    private Unit upgradeUnitChars(HumanSpearmanEquipment eqState, String paramNameToUpgrade) {
+    private Unit upgradeUnitChars(HumanSpearmanSkills eqState, String paramNameToUpgrade) {
         final var u = unitRepository.findById(eqState.getUnitId());
         if (paramNameToUpgrade.equals(MID_RANGE_PARAM_NAME)) {
             switch (eqState.getMidRangePoints()) {
@@ -77,12 +77,12 @@ public class HumanSpearmanUnitEquipmentServiceImpl implements UnitEquipmentServi
     }
 
     @Override
-    public HumanSpearmanEquipment saveOrUpdate(HumanSpearmanEquipment e) {
+    public HumanSpearmanSkills saveOrUpdate(HumanSpearmanSkills e) {
         return repository.save(e);
     }
 
     @Override
-    public HumanSpearmanEquipment getByUnitId(long id) {
+    public HumanSpearmanSkills getByUnitId(long id) {
         return repository.getByUnitId(id);
     }
 }

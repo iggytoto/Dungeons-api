@@ -12,7 +12,7 @@
         <createSequence sequenceName="s_unit_activity_log_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_matches_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_match_results_id" dataType="int" startValue="1" incrementBy="1"/>
-        <createSequence sequenceName="s_unit_equip_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_unit_skills_id" dataType="int" startValue="1" incrementBy="1"/>
     </changeSet>
     <changeSet id="initial-table-users" author="gassan">
         <createTable tableName="users">
@@ -68,7 +68,7 @@
             <column name="battle_behavior" type="varchar" defaultValue="StraightAttack"/>
             <column name="movement_speed" type="real" defaultValue="4"/>
             <column name="unit_type" type="varchar" defaultValue="Dummy"/>
-            <column name="unit_equip_id" type="int"/>
+            <column name="unit_skills_id" type="int"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="units"
                                  baseColumnNames="owner_id"
@@ -77,90 +77,90 @@
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="unit-equip-human-warrior" author="gassan">
-        <createTable tableName="human_warrior_equip">
-            <column name="id" type="int" defaultValueSequenceNext="s_unit_equip_id">
+        <createTable tableName="human_warrior_skills">
+            <column name="id" type="int" defaultValueSequenceNext="s_unit_skills_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="unit_id" type="int"/>
             <column name="defence_points" type="int">
-                <constraints notNullConstraintName="c_human_warrior_equip_nn_defence_points"/>
+                <constraints notNullConstraintName="c_human_warrior_skills_nn_defence_points"/>
             </column>
             <column name="offence_points" type="int">
-                <constraints notNullConstraintName="c_human_warrior_equip_nn_offence_points"/>
+                <constraints notNullConstraintName="c_human_warrior_skills_nn_offence_points"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="human_warrior_equip"
+        <addForeignKeyConstraint baseTableName="human_warrior_skills"
                                  baseColumnNames="unit_id"
-                                 constraintName="human_warrior_equip_fk_unit_id"
+                                 constraintName="human_warrior_skills_fk_unit_id"
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="unit-equip-human-archer" author="gassan">
-        <createTable tableName="human_archer_equip">
-            <column name="id" type="int" defaultValueSequenceNext="s_unit_equip_id">
+        <createTable tableName="human_archer_skills">
+            <column name="id" type="int" defaultValueSequenceNext="s_unit_skills_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="unit_id" type="int"/>
             <column name="mid_range_points" type="int">
-                <constraints notNullConstraintName="c_human_archer_equip_nn_mid_points"/>
+                <constraints notNullConstraintName="c_human_archer_skills_nn_mid_points"/>
             </column>
             <column name="long_range_points" type="int">
-                <constraints notNullConstraintName="c_human_archer_equip_nn_long_points"/>
+                <constraints notNullConstraintName="c_human_archer_skills_nn_long_points"/>
             </column>
             <column name="fire_arrows" type="boolean">
-                <constraints notNullConstraintName="c_human_archer_equip_nn_fire"/>
+                <constraints notNullConstraintName="c_human_archer_skills_nn_fire"/>
             </column>
             <column name="poison_arrows" type="boolean">
-                <constraints notNullConstraintName="c_human_archer_equip_nn_poison"/>
+                <constraints notNullConstraintName="c_human_archer_skills_nn_poison"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="human_archer_equip"
+        <addForeignKeyConstraint baseTableName="human_archer_skills"
                                  baseColumnNames="unit_id"
-                                 constraintName="human_archer_equip_fk_unit_id"
+                                 constraintName="human_archer_skills_fk_unit_id"
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="unit-equip-human-archer" author="gassan">
-        <createTable tableName="human_cleric_equip">
-            <column name="id" type="int" defaultValueSequenceNext="s_unit_equip_id">
+        <createTable tableName="human_cleric_skills">
+            <column name="id" type="int" defaultValueSequenceNext="s_unit_skills_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="unit_id" type="int"/>
             <column name="discipline_points" type="int">
-                <constraints notNullConstraintName="c_human_cleric_equip_nn_discipline_points"/>
+                <constraints notNullConstraintName="c_human_cleric_skills_nn_discipline_points"/>
             </column>
             <column name="shatter" type="boolean">
-                <constraints notNullConstraintName="c_human_cleric_equip_nn_shatter"/>
+                <constraints notNullConstraintName="c_human_cleric_skills_nn_shatter"/>
             </column>
             <column name="divine" type="boolean">
-                <constraints notNullConstraintName="c_human_cleric_equip_nn_divine"/>
+                <constraints notNullConstraintName="c_human_cleric_skills_nn_divine"/>
             </column>
             <column name="purge" type="boolean">
-                <constraints notNullConstraintName="c_human_cleric_equip_nn_purge"/>
+                <constraints notNullConstraintName="c_human_cleric_skills_nn_purge"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="human_cleric_equip"
+        <addForeignKeyConstraint baseTableName="human_cleric_skills"
                                  baseColumnNames="unit_id"
-                                 constraintName="human_cleric_equip_fk_unit_id"
+                                 constraintName="human_cleric_skills_fk_unit_id"
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="unit-equip-human-spearman" author="gassan">
-        <createTable tableName="human_spearman_equip">
-            <column name="id" type="int" defaultValueSequenceNext="s_unit_equip_id">
+        <createTable tableName="human_spearman_skills">
+            <column name="id" type="int" defaultValueSequenceNext="s_unit_skills_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="unit_id" type="int"/>
             <column name="double_edge_points" type="int">
-                <constraints notNullConstraintName="c_human_spearman_equip_nn_long_points"/>
+                <constraints notNullConstraintName="c_human_spearman_skills_nn_long_points"/>
             </column>
             <column name="mid_range_points" type="int">
-                <constraints notNullConstraintName="c_human_spearman_equip_nn_mid_points"/>
+                <constraints notNullConstraintName="c_human_spearman_skills_nn_mid_points"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="human_spearman_equip"
+        <addForeignKeyConstraint baseTableName="human_spearman_skills"
                                  baseColumnNames="unit_id"
-                                 constraintName="human_spearman_equip_fk_unit_id"
+                                 constraintName="human_spearman_skills_fk_unit_id"
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
     </changeSet>
