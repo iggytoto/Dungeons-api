@@ -1,6 +1,6 @@
 package org.gassangaming.repository.unit.equip;
 
-import org.gassangaming.model.euqipment.human.HumanSpearmanSkills;
+import org.gassangaming.model.skills.human.HumanSpearmanSkills;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

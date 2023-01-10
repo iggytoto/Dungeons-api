@@ -1,6 +1,6 @@
 package org.gassangaming.repository.unit.equip;
 
-import org.gassangaming.model.euqipment.human.HumanWarriorSkills;
+import org.gassangaming.model.skills.human.HumanWarriorSkills;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

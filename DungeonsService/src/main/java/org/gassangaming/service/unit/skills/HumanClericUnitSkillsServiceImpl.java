@@ -1,7 +1,7 @@
 package org.gassangaming.service.unit.skills;
 
 import org.gassangaming.model.Valuable;
-import org.gassangaming.model.euqipment.human.HumanClericSkills;
+import org.gassangaming.model.skills.human.HumanClericSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.repository.unit.UnitRepository;

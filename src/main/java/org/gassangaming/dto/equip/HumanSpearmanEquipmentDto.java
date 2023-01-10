@@ -1,7 +1,7 @@
 package org.gassangaming.dto.equip;
 
 import lombok.*;
-import org.gassangaming.model.euqipment.human.HumanSpearmanSkills;
+import org.gassangaming.model.skills.human.HumanSpearmanSkills;
 
 @Builder
 @Data

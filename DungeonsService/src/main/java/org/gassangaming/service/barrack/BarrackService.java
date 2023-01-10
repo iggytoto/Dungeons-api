@@ -1,6 +1,6 @@
 package org.gassangaming.service.barrack;
 
-import org.gassangaming.model.euqipment.UnitSkills;
+import org.gassangaming.model.skills.UnitSkills;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;

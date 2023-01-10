@@ -1,8 +1,13 @@
 package org.gassangaming.service.unit;
 
-import org.gassangaming.model.euqipment.UnitEquipHelper;
+import org.gassangaming.model.skills.UnitSkills;
+import org.gassangaming.model.skills.human.HumanArcherSkills;
+import org.gassangaming.model.skills.human.HumanClericSkills;
+import org.gassangaming.model.skills.human.HumanSpearmanSkills;
+import org.gassangaming.model.skills.human.HumanWarriorSkills;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;
+import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
@@ -12,11 +17,22 @@ import org.gassangaming.service.unit.skills.CommonUnitSkillsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 @Service
 public class UnitServiceImpl implements UnitService {
+
+    private final HashMap<UnitType, Class<? extends UnitSkills>> unitsToEquipMap = new HashMap<>();
+
+    {
+        unitsToEquipMap.put(UnitType.HumanWarrior, HumanWarriorSkills.class);
+        unitsToEquipMap.put(UnitType.HumanArcher, HumanArcherSkills.class);
+        unitsToEquipMap.put(UnitType.HumanSpearman, HumanSpearmanSkills.class);
+        unitsToEquipMap.put(UnitType.HumanCleric, HumanClericSkills.class);
+    }
 
     @Autowired
     UnitRepository unitRepository;
@@ -53,7 +69,7 @@ public class UnitServiceImpl implements UnitService {
         }
         unitToSave.setOwnerId(context.getToken().getUserId());
         final var savedUnit = unitRepository.save(unitToSave);
-        final var equip = UnitEquipHelper.getDefaultInstanceFor(savedUnit.getUnitType());
+        final var equip = getDefaultInstanceFor(savedUnit.getUnitType());
         if (equip != null) {
             equip.setUnitId(savedUnit.getId());
             unitEquipmentService.saveSkills(equip, context);
@@ -68,5 +84,18 @@ public class UnitServiceImpl implements UnitService {
         if (u.getOwnerId() == null || context.getToken().getUserId() != u.getOwnerId()) {
             throw new ServiceException("You dont have right to change not your units");
         }
+    }
+
+    private UnitSkills getDefaultInstanceFor(UnitType type) {
+        if (unitsToEquipMap.containsKey(type)) {
+            final var c = unitsToEquipMap.get(type);
+            try {
+                return c.getDeclaredConstructor().newInstance();
+            } catch (InstantiationException | InvocationTargetException | IllegalAccessException |
+                     NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return null;
     }
 }

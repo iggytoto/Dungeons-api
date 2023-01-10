@@ -1,4 +1,4 @@
-package org.gassangaming.model.euqipment;
+package org.gassangaming.model.skills;
 
 import lombok.Getter;
 import lombok.Setter;

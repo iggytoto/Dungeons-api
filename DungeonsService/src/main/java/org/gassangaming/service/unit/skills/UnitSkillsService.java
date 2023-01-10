@@ -1,6 +1,6 @@
 package org.gassangaming.service.unit.skills;
 
-import org.gassangaming.model.euqipment.UnitSkills;
+import org.gassangaming.model.skills.UnitSkills;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;

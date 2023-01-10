@@ -1,15 +1,15 @@
-package org.gassangaming.model.euqipment.human;
+package org.gassangaming.model.skills.human;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.gassangaming.model.Valuable;
-import org.gassangaming.model.euqipment.UnitSkills;
+import org.gassangaming.model.skills.UnitSkills;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import static org.gassangaming.model.euqipment.human.HumanClericSkills.TABLE_NAME;
+import static org.gassangaming.model.skills.human.HumanClericSkills.TABLE_NAME;
 
 @Entity
 @Table(name = TABLE_NAME)

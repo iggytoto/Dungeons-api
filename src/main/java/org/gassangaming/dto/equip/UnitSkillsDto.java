@@ -3,11 +3,11 @@ package org.gassangaming.dto.equip;
 import lombok.Getter;
 import lombok.Setter;
 import org.gassangaming.dto.DtoBase;
-import org.gassangaming.model.euqipment.UnitSkills;
-import org.gassangaming.model.euqipment.human.HumanArcherSkills;
-import org.gassangaming.model.euqipment.human.HumanClericSkills;
-import org.gassangaming.model.euqipment.human.HumanSpearmanSkills;
-import org.gassangaming.model.euqipment.human.HumanWarriorSkills;
+import org.gassangaming.model.skills.UnitSkills;
+import org.gassangaming.model.skills.human.HumanArcherSkills;
+import org.gassangaming.model.skills.human.HumanClericSkills;
+import org.gassangaming.model.skills.human.HumanSpearmanSkills;
+import org.gassangaming.model.skills.human.HumanWarriorSkills;
 
 
 @Getter
