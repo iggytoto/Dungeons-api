@@ -13,6 +13,7 @@ import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.barrack.UnitState;
 import org.gassangaming.service.exception.ServiceException;
+import org.gassangaming.service.item.UnitItemsService;
 import org.gassangaming.service.unit.skills.CommonUnitSkillsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,13 +38,15 @@ public class UnitServiceImpl implements UnitService {
     @Autowired
     UnitRepository unitRepository;
     @Autowired
-    CommonUnitSkillsService unitEquipmentService;
+    CommonUnitSkillsService unitSkillsService;
+    @Autowired
+    UnitItemsService unitItemsService;
     @Autowired
     AccountService accountService;
 
     @Override
     public Collection<UnitState> getByOwnerId(long ownerId) {
-        return unitRepository.findByOwnerId(ownerId).stream().map(unit -> new UnitState(unit, unitEquipmentService.getSkillsForUnit(unit))).collect(Collectors.toList());
+        return unitRepository.findByOwnerId(ownerId).stream().map(unit -> new UnitState(unit, unitSkillsService.getSkillsForUnit(unit), unitItemsService.getForUnit(unit.getId()))).collect(Collectors.toList());
     }
 
     @Override
@@ -72,7 +75,7 @@ public class UnitServiceImpl implements UnitService {
         final var equip = getDefaultInstanceFor(savedUnit.getUnitType());
         if (equip != null) {
             equip.setUnitId(savedUnit.getId());
-            unitEquipmentService.saveSkills(equip, context);
+            unitSkillsService.saveSkills(equip, context);
         }
         return savedUnit;
     }

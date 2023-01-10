@@ -15,6 +15,6 @@ public class ItemsServiceImpl implements ItemsService {
 
     @Override
     public Collection<Item> getAllUnequippedItemsForPlayer(long userId) {
-        return repository.findByOwnerId(userId);
+        return repository.getAllUnequippedItemsForPlayer(userId);
     }
 }

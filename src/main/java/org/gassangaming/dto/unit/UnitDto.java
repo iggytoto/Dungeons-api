@@ -87,7 +87,7 @@ public class UnitDto extends DtoBase {
                 .battleBehavior(us.getUnit().getBattleBehavior())
                 .unitType(us.getUnit().getUnitType())
                 .ownerId(us.getUnit().getOwnerId())
-                .unitEquip(UnitSkillsDto.of(us.getEquip()))
+                .unitEquip(UnitSkillsDto.of(us.getSkills()))
                 .build();
     }
 
