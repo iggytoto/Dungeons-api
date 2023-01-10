@@ -91,6 +91,27 @@
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="initial-table-equipped-items" author="gassan">
+        <createTable tableName="items_units">
+            <column name="unit_id" type="int" />
+            <column name="item_id" type="int" />
+        </createTable>
+        <addPrimaryKey
+                columnNames="unit_id, item_id"
+                constraintName="pk_items_units"
+                schemaName="public"
+                tableName="items_units"/>
+        <addForeignKeyConstraint baseTableName="items_units"
+                                 baseColumnNames="user_id"
+                                 constraintName="items_units_fk_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="items_units"
+                                 baseColumnNames="item_id"
+                                 constraintName="items_units_fk_item_id"
+                                 referencedTableName="items"
+                                 referencedColumnNames="id"/>
+    </changeSet>
     <changeSet id="unit-equip-human-warrior" author="gassan">
         <createTable tableName="human_warrior_skills">
             <column name="id" type="int" defaultValueSequenceNext="s_unit_skills_id">

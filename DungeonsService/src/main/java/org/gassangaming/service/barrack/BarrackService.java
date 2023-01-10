@@ -1,5 +1,6 @@
 package org.gassangaming.service.barrack;
 
+import org.gassangaming.model.item.Item;
 import org.gassangaming.model.skills.UnitSkills;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.UnitType;
@@ -22,6 +23,11 @@ public interface BarrackService {
      * @param context player context
      */
     Collection<UnitState> getBarrackUnits(UserContext context);
+
+    /**
+     * Gets available items for the given player
+     */
+    Collection<Item> getStoredItems(UserContext context);
 
     @Transactional
     void ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException;

@@ -1,10 +1,12 @@
 package org.gassangaming.service.barrack;
 
+import org.gassangaming.model.item.Item;
 import org.gassangaming.model.skills.UnitSkills;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
+import org.gassangaming.service.item.ItemsService;
 import org.gassangaming.service.unit.UnitService;
 import org.gassangaming.service.unit.skills.CommonUnitSkillsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,17 @@ public class BarrackServiceImpl implements BarrackService {
     CommonUnitSkillsService unitEquipmentService;
     @Autowired
     UnitService unitService;
+    @Autowired
+    ItemsService itemsService;
 
     @Override
     public Collection<UnitState> getBarrackUnits(UserContext context) {
         return unitService.getByOwnerId(context.getToken().getUserId());
+    }
+
+    @Override
+    public Collection<Item> getStoredItems(UserContext context) {
+        return itemsService.getAllUnequippedItemsForPlayer(context.getToken().getUserId());
     }
 
     @Override

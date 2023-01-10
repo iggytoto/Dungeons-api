@@ -12,7 +12,7 @@ import static org.gassangaming.model.item.Item.TABLE_NAME;
 @Getter
 @Setter
 @Table(name = TABLE_NAME)
-public abstract class Item {
+public class Item {
 
     public static final String SEQUENCE_NAME = "s_items_id";
     public static final String TABLE_NAME = "items";
