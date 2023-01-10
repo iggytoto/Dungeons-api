@@ -8,6 +8,7 @@
         <createSequence sequenceName="s_users_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_tokens_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_units_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_items_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_accounts_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_unit_activity_log_id" dataType="int" startValue="1" incrementBy="1"/>
         <createSequence sequenceName="s_matches_id" dataType="int" startValue="1" incrementBy="1"/>
@@ -73,6 +74,20 @@
         <addForeignKeyConstraint baseTableName="units"
                                  baseColumnNames="owner_id"
                                  constraintName="units_fk_owner_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="initial-table-items" author="gassan">
+        <createTable tableName="items">
+            <column name="id" type="int" defaultValueSequenceNext="s_items_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="int"/>
+            <column name="item_type" type="varchar"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="items"
+                                 baseColumnNames="user_id"
+                                 constraintName="items_fk_user_id"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
     </changeSet>
