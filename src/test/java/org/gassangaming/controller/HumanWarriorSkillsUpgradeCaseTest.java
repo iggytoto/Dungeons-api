@@ -1,6 +1,6 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.equip.UpgradeUnitSkillsRequestDto;
+import org.gassangaming.dto.skills.UpgradeUnitSkillsRequestDto;
 import org.gassangaming.model.skills.human.HumanWarriorSkills;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.model.unit.human.HumanWarrior;

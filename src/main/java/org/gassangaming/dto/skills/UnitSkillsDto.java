@@ -1,4 +1,4 @@
-package org.gassangaming.dto.equip;
+package org.gassangaming.dto.skills;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -2,7 +2,7 @@ package org.gassangaming.controller;
 
 import org.gassangaming.dto.ChangeUnitBattleBehaviorRequestDto;
 import org.gassangaming.dto.ChangeUnitNameRequestDto;
-import org.gassangaming.dto.UnitListResponseDto;
+import org.gassangaming.dto.ListResponseDto;
 import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.human.HumanWarrior;
@@ -56,7 +56,7 @@ public class BarrackUnitManipulationsCaseTest extends UseCaseTestBase {
 
     @Test
     public void testCase() {
-        final var units = ((UnitListResponseDto<UnitDto>) barrackController.getAvailableUnits(context)).getUnits();
+        final var units = ((ListResponseDto<UnitDto>) barrackController.getAvailableUnits(context)).getUnits();
         Assert.assertEquals(3, units.size());
         final var unitToChange = units.stream().findFirst().orElseThrow();
         //name change test

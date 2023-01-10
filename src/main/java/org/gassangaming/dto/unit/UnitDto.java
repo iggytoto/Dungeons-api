@@ -3,7 +3,7 @@ package org.gassangaming.dto.unit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.gassangaming.dto.DtoBase;
-import org.gassangaming.dto.equip.UnitSkillsDto;
+import org.gassangaming.dto.skills.UnitSkillsDto;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;

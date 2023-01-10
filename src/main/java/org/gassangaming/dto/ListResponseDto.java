@@ -10,10 +10,10 @@ import java.util.Collection;
 @Builder
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UnitListResponseDto<TUnit extends UnitDto> extends DtoBase {
+public class ListResponseDto<TUnit extends DtoBase> extends DtoBase {
     Collection<TUnit> units;
 
-    public static UnitListResponseDto<?> Of(Collection<? extends UnitDto> units){
-        return new UnitListResponseDto<>(units);
+    public static ListResponseDto<?> Of(Collection<? extends UnitDto> units){
+        return new ListResponseDto<>(units);
     }
 }

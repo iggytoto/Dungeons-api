@@ -26,7 +26,7 @@ public class TrainingController {
     @GetMapping(PATH + GET_ROSTER_FOR_USER_PATH)
     public DtoBase getRosterForUser(@RequestBody UserIdRequestDto request) {
         try {
-            return UnitListResponseDto.builder()
+            return ListResponseDto.builder()
                     .units(trainingService.getTrainingRosterForUser(request.getUserId()).stream().map(UnitDto::of).collect(Collectors.toList())).build();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());

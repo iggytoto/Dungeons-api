@@ -1,7 +1,7 @@
 package org.gassangaming.controller;
 
 import org.gassangaming.dto.SaveTrainingResultRequestDto;
-import org.gassangaming.dto.UnitListResponseDto;
+import org.gassangaming.dto.ListResponseDto;
 import org.gassangaming.dto.UserIdRequestDto;
 import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.model.MatchType;
@@ -57,7 +57,7 @@ public class TrainingControllerTest extends UseCaseTestBase {
     public void getRosterForUser() {
         final var requestDto = new UserIdRequestDto();
         requestDto.setUserId(userId);
-        final var result = ((UnitListResponseDto<UnitDto>) trainingController.getRosterForUser(requestDto)).getUnits();
+        final var result = ((ListResponseDto<UnitDto>) trainingController.getRosterForUser(requestDto)).getUnits();
         Assert.assertEquals(3, result.size());
         Assert.assertTrue(result.stream().anyMatch(u -> u.getId() == u1Id));
         Assert.assertTrue(result.stream().anyMatch(u -> u.getId() == u2Id));

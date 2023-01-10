@@ -1,7 +1,7 @@
 package org.gassangaming.controller;
 
 import org.gassangaming.dto.BuyUnitRequestDto;
-import org.gassangaming.dto.UnitListResponseDto;
+import org.gassangaming.dto.ListResponseDto;
 import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.repository.unit.UnitRepository;
@@ -41,7 +41,7 @@ public class TavernUnitManipulationTestCase extends UseCaseTestBase {
     public void testCase() {
 
         //get available units test
-        final var getAvailableUnitsResponseDto = ((UnitListResponseDto<UnitDto>) tavernController.getAvailableUnits()).getUnits();
+        final var getAvailableUnitsResponseDto = ((ListResponseDto<UnitDto>) tavernController.getAvailableUnits()).getUnits();
         Assert.isTrue(getAvailableUnitsResponseDto.size() > 0, "Should be available units");
         //buy unit test
         final var buyUnitRequestDto = new BuyUnitRequestDto();
