@@ -16,4 +16,6 @@ public interface UnitItemsRepository extends JpaRepository<EquippedItem, Equippe
 
     @Query(value = FIND_BY_UNIT_ID)
     Collection<Item> findByUnitId(@Param(PARAM_1) long id);
+
+    void deleteByItemId(long itemId);
 }

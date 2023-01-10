@@ -16,6 +16,8 @@ import static org.gassangaming.model.item.EquippedItem.TABLE_NAME;
 @Setter
 @Table(name = TABLE_NAME)
 @IdClass(EquippedItem.class)
+@AllArgsConstructor
+@NoArgsConstructor
 public class EquippedItem {
 
     public static final String TABLE_NAME = "items_units";

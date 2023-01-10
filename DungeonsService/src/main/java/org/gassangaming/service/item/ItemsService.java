@@ -1,6 +1,8 @@
 package org.gassangaming.service.item;
 
 import org.gassangaming.model.item.Item;
+import org.gassangaming.service.UserContext;
+import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,4 +20,13 @@ public interface ItemsService {
      */
     Collection<Item> getAllUnequippedItemsForPlayer(long userId);
 
+    /**
+     * Equips given item to given unit
+     */
+    void equipItem(long itemId, long unitId, UserContext context) throws ServiceException;
+
+    /**
+     * unequips item
+     */
+    void unEquipItem(long itemId, UserContext context) throws ServiceException;
 }
