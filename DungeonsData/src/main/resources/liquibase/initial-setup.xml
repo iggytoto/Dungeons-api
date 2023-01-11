@@ -84,6 +84,8 @@
             </column>
             <column name="user_id" type="int"/>
             <column name="item_type" type="varchar"/>
+            <column name="name" type="varchar"/>
+            <column name="rarity" type="varchar"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="items"
                                  baseColumnNames="user_id"
