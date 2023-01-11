@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="initial-events" author="gassan">
+        <preConditions>
+            <changeSetExecuted id="initial-table-users" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-table-tokens" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-table-units" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+        </preConditions>
+        <createSequence sequenceName="s_events_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_event_instance_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createTable tableName="events">
+            <column name="id" type="int" defaultValueSequenceNext="s_events_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="event_type" type="varchar">
+                <constraints notNullConstraintName="c_events_nn_event_type"/>
+            </column>
+            <column name="status" type="varchar">
+                <constraints notNullConstraintName="c_events_nn_status"/>
+            </column>
+        </createTable>
+        <createTable tableName="event_instances">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="event_id" type="int"/>
+            <column name="host" type="varchar"/>
+            <column name="port" type="varchar"/>
+            <column name="status" type="varchar">
+                <constraints notNullConstraintName="c_event_instances_nn_staus"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="event_instances"
+                                 baseColumnNames="event_id"
+                                 constraintName="event_instances_fk_event_id"
+                                 referencedTableName="events"
+                                 referencedColumnNames="id"/>
+        <createTable tableName="events_units">
+            <column name="event_id" type="int"/>
+            <column name="unit_id" type="int"/>
+            <column name="user_id" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="events_units" columnNames="event_id,unit_id,user_id"/>
+        <createTable tableName="user_event_instances">
+            <column name="user_id" type="int"/>
+            <column name="event_id" type="int"/>
+            <column name="event_instance_id" type="int"/>
+        </createTable>
+        <addPrimaryKey columnNames="user_id,event_id,event_instance_id" tableName="user_event_instances"/>
+        <addForeignKeyConstraint baseTableName="user_event_instances" baseColumnNames="event_instance_id"
+                                 constraintName="c_user_event_instances_fk_event_instance_id"
+                                 referencedTableName="event_instances"
+                                 referencedColumnNames="id"/>
+        <createTable tableName="events_users">
+            <column name="user_id" type="int"/>
+            <column name="event_id" type="int"/>
+        </createTable>
+        <addPrimaryKey columnNames="user_id,event_id" tableName="events_users"/>
+        <addForeignKeyConstraint baseTableName="events_users" baseColumnNames="event_id"
+                                 constraintName="c_events_users_fk_event_id"
+                                 referencedTableName="events"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="events_users" baseColumnNames="user_id"
+                                 constraintName="c_events_users_fk_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
