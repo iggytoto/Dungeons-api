@@ -44,7 +44,7 @@ public class PlayerEventRegistrationCaseTest extends UseCaseTestBase {
         userId = registerUser(LOGIN, PASSWORD);
         context = login(LOGIN, PASSWORD);
         unitId = addUnit(new HumanWarrior(), userId).getId();
-        eventId = addEvent(new Event(EventType.PhoenixRaid, EventStatus.Planned)).getId();
+        eventId = addEvent(new Event(EventType.Test, EventStatus.Planned)).getId();
     }
 
 
@@ -52,7 +52,7 @@ public class PlayerEventRegistrationCaseTest extends UseCaseTestBase {
     public void testCase() {
         // registration
         final var registerDto = new EventRegisterRequestDto();
-        registerDto.setEventType(EventType.PhoenixRaid);
+        registerDto.setEventType(EventType.Test);
         registerDto.setUnitsIds(List.of(unitId));
         eventsController.register(registerDto, context);
         final var registration = userEventRegistrationRepository.findByUserId(userId);
@@ -64,7 +64,7 @@ public class PlayerEventRegistrationCaseTest extends UseCaseTestBase {
         Assert.assertNotNull(statusDto);
         Assert.assertEquals(1, statusDto.getEvents().size());
         final var eventInfo = statusDto.getEvents().stream().findFirst().orElseThrow();
-        Assert.assertEquals(EventType.PhoenixRaid, eventInfo.getEventType());
+        Assert.assertEquals(EventType.Test, eventInfo.getEventType());
         Assert.assertEquals(eventId, eventInfo.getId());
         Assert.assertEquals(EventStatus.Planned, eventInfo.getStatus());
     }
