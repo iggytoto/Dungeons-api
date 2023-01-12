@@ -11,8 +11,7 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ListResponseDto<TUnit extends DtoBase> extends DtoBase {
-    Collection<TUnit> units;
-
+    Collection<TUnit> items;
     public static ListResponseDto<?> Of(Collection<? extends UnitDto> units){
         return new ListResponseDto<>(units);
     }

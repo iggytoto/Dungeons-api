@@ -20,6 +20,9 @@ public class Event {
     public static final String TABLE_NAME = "events";
 
     @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
+    @SequenceGenerator(name = SEQUENCE_NAME, allocationSize = 1)
     private long id;
 
     @Column(name = EVENT_TYPE_COLUMN_NAME)
@@ -33,11 +36,9 @@ public class Event {
     protected Event() {
     }
 
-    public static Event of(EventType type, EventStatus status) {
-        final var e = new Event();
-        e.setEventType(type);
-        e.setStatus(status);
-        return e;
+    public Event (EventType type, EventStatus status) {
+        this.eventType = type;
+        this.status = status;
     }
 
 }

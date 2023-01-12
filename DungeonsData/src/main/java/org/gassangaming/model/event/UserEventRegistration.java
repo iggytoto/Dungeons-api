@@ -24,17 +24,17 @@ public class UserEventRegistration implements Serializable{
 
     @Id
     @Column(name = USER_ID_COLUMN_NAME)
-    protected Long userId;
+    protected long userId;
     @Id
     @Column(name = EVENT_ID_COLUMN_NAME)
-    protected Long eventId;
+    protected long eventId;
 
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
     @Setter
     public static class UserEventRegistrationId implements Serializable {
-        protected Long userId;
-        protected Long eventId;
+        protected long userId;
+        protected long eventId;
     }
 }

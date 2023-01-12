@@ -25,6 +25,8 @@ public class EventInstance {
 
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
+    @SequenceGenerator(name = SEQUENCE_NAME, allocationSize = 1)
     private long id;
 
     @Column(name = EVENT_ID_COLUMN_NAME)

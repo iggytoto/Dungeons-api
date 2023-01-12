@@ -1,8 +1,8 @@
 package org.gassangaming.service.tavern;
 
-import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
+import org.gassangaming.service.barrack.UnitState;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -23,5 +23,5 @@ public interface TavernService {
      * @throws ServiceException if player does not have money for purchase.
      */
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    Unit buyUnit(UnitType type, UserContext context) throws ServiceException;
+    UnitState buyUnit(UnitType type, UserContext context) throws ServiceException;
 }

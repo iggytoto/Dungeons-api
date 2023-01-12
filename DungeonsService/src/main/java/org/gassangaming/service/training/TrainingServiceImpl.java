@@ -1,12 +1,13 @@
 package org.gassangaming.service.training;
 
-import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.MatchResult;
+import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.TrainingUnit;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.MatchResultRepository;
 import org.gassangaming.repository.TrainingUnitRepository;
 import org.gassangaming.repository.unit.UnitRepository;
+import org.gassangaming.service.barrack.UnitState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,8 @@ public class TrainingServiceImpl implements TrainingService {
     UnitRepository unitRepository;
 
     @Override
-    public Collection<Unit> getTrainingRosterForUser(long userId) {
-        return unitRepository.findAllById(trainingUnitRepository.getUnitsForUser(userId).stream().map(TrainingUnit::getUnitId).collect(Collectors.toList()));
+    public Collection<UnitState> getTrainingRosterForUser(long userId) {
+        return unitRepository.findAllById(trainingUnitRepository.getUnitsForUser(userId).stream().map(TrainingUnit::getUnitId).toList()).stream().map(UnitState::of).toList();
     }
 
     @Override

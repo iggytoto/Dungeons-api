@@ -26,7 +26,7 @@ public class EventsController {
     @PostMapping(PATH + REGISTER_PATH)
     public DtoBase register(@RequestBody EventRegisterRequestDto dto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            eventsService.register(dto.getUnitsIds(), dto.getEventType(), context.getToken().getId());
+            eventsService.register(dto.getUnitsIds(), dto.getEventType(), context.getToken().getUserId());
             return new OkResponseDto();
         } catch (ServiceException se) {
             return ErrorResponseDto.Of(se.getMessage());
@@ -35,7 +35,7 @@ public class EventsController {
 
     @GetMapping(PATH + STATUS_PATH)
     public DtoBase status(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        return EventsStatusResponseDto.builder().events(eventsService.status(context.getToken().getId()).stream().map(EventDto::of).collect(Collectors.toList())).build();
+        return EventsStatusResponseDto.builder().events(eventsService.status(context.getToken().getUserId()).stream().map(EventDto::of).collect(Collectors.toList())).build();
     }
 
     @PostMapping(PATH + APPPLY_SERVER_PATH)

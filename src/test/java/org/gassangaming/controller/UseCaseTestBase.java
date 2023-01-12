@@ -2,8 +2,10 @@ package org.gassangaming.controller;
 
 
 import org.gassangaming.model.Account;
+import org.gassangaming.model.event.Event;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.AccountRepository;
+import org.gassangaming.repository.event.EventRepository;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.repository.UserRepository;
 import org.gassangaming.service.Role;
@@ -29,6 +31,8 @@ public class UseCaseTestBase {
     UserRepository userRepository;
     @Autowired
     UnitRepository unitRepository;
+    @Autowired
+    EventRepository eventRepository;
 
 
     protected long registerServerUser(String login, String password) throws ServiceException {
@@ -68,5 +72,9 @@ public class UseCaseTestBase {
 
     protected void loginAsDefaultUser() throws ServiceException {
         context = login(LOGIN, PASSWORD);
+    }
+
+    protected Event addEvent(Event event) {
+        return eventRepository.save(event);
     }
 }

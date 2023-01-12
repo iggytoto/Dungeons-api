@@ -3,6 +3,7 @@ package org.gassangaming.dto.unit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.gassangaming.dto.DtoBase;
+import org.gassangaming.dto.items.ItemDto;
 import org.gassangaming.dto.skills.UnitSkillsDto;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
@@ -10,6 +11,8 @@ import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.barrack.UnitState;
 import org.gassangaming.service.tavern.UnitForSale;
+
+import java.util.List;
 
 @Builder
 @Data
@@ -38,6 +41,8 @@ public class UnitDto extends DtoBase {
     private UnitType unitType;
 
     private UnitSkillsDto unitEquip;
+
+    private List<ItemDto> items;
 
 
     public static UnitDto of(UnitForSale u) {
@@ -88,6 +93,7 @@ public class UnitDto extends DtoBase {
                 .unitType(us.getUnit().getUnitType())
                 .ownerId(us.getUnit().getOwnerId())
                 .unitEquip(UnitSkillsDto.of(us.getSkills()))
+                .items(us.getItems().stream().map(ItemDto::of).toList())
                 .build();
     }
 

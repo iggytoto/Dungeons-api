@@ -7,6 +7,7 @@ import org.gassangaming.repository.event.EventRepository;
 import org.gassangaming.repository.event.UnitEventRegistrationRepository;
 import org.gassangaming.repository.event.UserEventRegistrationRepository;
 import org.gassangaming.repository.unit.UnitRepository;
+import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,6 @@ public class EventsServiceImpl implements EventsService {
     @Override
     public void register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException {
         final var event = eventRepository.findLatestPlannedByType(eventType);
-
         if (event == null) {
             throw new ServiceException("Current event is not exists");
         } else if (!event.getStatus().equals(EventStatus.Planned)) {
@@ -54,8 +54,8 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public Collection<Event> status(long id) {
-        return eventRepository.findAllForUser(id);
+    public Collection<Event> status(long userId) {
+        return eventRepository.findAllForUser(userId);
     }
 
     @Override

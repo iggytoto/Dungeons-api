@@ -1,7 +1,6 @@
 package org.gassangaming.repository.item;
 
 import org.gassangaming.model.item.EquippedItem;
-import org.gassangaming.model.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +14,7 @@ public interface UnitItemsRepository extends JpaRepository<EquippedItem, Equippe
     String FIND_BY_UNIT_ID = "SELECT i FROM EquippedItem i WHERE i.unitId=:" + PARAM_1;
 
     @Query(value = FIND_BY_UNIT_ID)
-    Collection<Item> findByUnitId(@Param(PARAM_1) long id);
+    Collection<EquippedItem> findByUnitId(@Param(PARAM_1) long id);
 
     void deleteByItemId(long itemId);
 }

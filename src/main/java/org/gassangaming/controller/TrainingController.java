@@ -27,7 +27,7 @@ public class TrainingController {
     public DtoBase getRosterForUser(@RequestBody UserIdRequestDto request) {
         try {
             return ListResponseDto.builder()
-                    .units(trainingService.getTrainingRosterForUser(request.getUserId()).stream().map(UnitDto::of).collect(Collectors.toList())).build();
+                    .items(trainingService.getTrainingRosterForUser(request.getUserId()).stream().map(UnitDto::of).collect(Collectors.toList())).build();
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }

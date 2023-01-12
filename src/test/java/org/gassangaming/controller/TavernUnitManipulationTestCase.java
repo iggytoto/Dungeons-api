@@ -41,7 +41,7 @@ public class TavernUnitManipulationTestCase extends UseCaseTestBase {
     public void testCase() {
 
         //get available units test
-        final var getAvailableUnitsResponseDto = ((ListResponseDto<UnitDto>) tavernController.getAvailableUnits()).getUnits();
+        final var getAvailableUnitsResponseDto = ((ListResponseDto<UnitDto>) tavernController.getAvailableUnits()).getItems();
         Assert.isTrue(getAvailableUnitsResponseDto.size() > 0, "Should be available units");
         //buy unit test
         final var buyUnitRequestDto = new BuyUnitRequestDto();

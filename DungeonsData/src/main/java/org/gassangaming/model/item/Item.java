@@ -41,4 +41,14 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemRarity rarity;
 
+    public Item() {
+    }
+
+    public Item(long userId, ItemType itemType, String name, ItemRarity rarity) {
+        this.userId = userId;
+        this.itemType = itemType;
+        this.name = name;
+        this.rarity = rarity;
+    }
+
 }

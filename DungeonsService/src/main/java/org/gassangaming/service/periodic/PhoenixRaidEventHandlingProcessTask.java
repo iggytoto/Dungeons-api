@@ -35,14 +35,13 @@ public class PhoenixRaidEventHandlingProcessTask {
     @Scheduled(cron = CRON_EVERYDAY_AT_NOON)
     public void scheduledPhoenixEventHandler() {
         final var event = eventRepository.findLatestPlannedByType(EventType.PhoenixRaid);
-        eventRepository.save(Event.of(EventType.PhoenixRaid, EventStatus.Planned));
+        eventRepository.save(new Event(EventType.PhoenixRaid, EventStatus.Planned));
         if (event == null) {
             return;
         }
         final var eventId = event.getId();
         event.setStatus(EventStatus.InProgress);
-        eventRepository.save(event);
-        eventRepository.flush();
+        eventRepository.saveAndFlush(event);
 
         final var userIdToRosters = unitEventRegistrationRepository.findAllByEventId(eventId).stream().collect(Collectors.toMap(UnitEventRegistration::getUserId, value -> List.of(value.getUnitId()), (v1, v2) -> Stream.concat(v1.stream(), v2.stream()).toList()));
 
@@ -56,12 +55,13 @@ public class PhoenixRaidEventHandlingProcessTask {
                 createEventInstanceForUsers(usersPool, eventId);
                 usersPool.clear();
                 unitsPool.clear();
-            } else {
-                unitsPool.addAll(roster);
-                usersPool.add(userId);
             }
+            unitsPool.addAll(roster);
+            usersPool.add(userId);
         }
-
+        if (!usersPool.isEmpty()) {
+            createEventInstanceForUsers(usersPool, eventId);
+        }
     }
 
     private void createEventInstanceForUsers(ArrayList<Long> usersPool, long eventId) {

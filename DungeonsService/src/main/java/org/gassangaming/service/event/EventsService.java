@@ -25,7 +25,7 @@ public interface EventsService {
     /**
      * Gets status of all events on which player registered
      */
-    Collection<Event> status(long id);
+    Collection<Event> status(long userId);
 
 
     /**

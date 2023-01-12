@@ -1,7 +1,7 @@
 package org.gassangaming.service.item;
 
 import org.gassangaming.model.item.Item;
-import org.gassangaming.repository.item.UnitItemsRepository;
+import org.gassangaming.repository.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,11 @@ import java.util.Collection;
 public class UnitItemsServiceImpl implements UnitItemsService {
 
     @Autowired
-    UnitItemsRepository unitItemsRepository;
+    ItemRepository itemRepository;
+
 
     @Override
     public Collection<Item> getForUnit(long id) {
-        return unitItemsRepository.findByUnitId(id);
+        return itemRepository.getAllForUnit(id);
     }
 }
