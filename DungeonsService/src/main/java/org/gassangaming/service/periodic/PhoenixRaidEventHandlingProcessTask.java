@@ -65,7 +65,7 @@ public class PhoenixRaidEventHandlingProcessTask {
     }
 
     private void createEventInstanceForUsers(ArrayList<Long> usersPool, long eventId) {
-        final var instance = eventInstanceRepository.save(EventInstance.of(eventId, EventInstanceStatus.WaitingForServer));
+        final var instance = eventInstanceRepository.save(new EventInstance(eventId, EventType.PhoenixRaid, EventInstanceStatus.WaitingForServer));
         usersPool.stream().map(userId -> new UserEventInstance(userId, eventId, instance.getId())).forEach(uei -> userEventInstanceRepository.save(uei));
     }
 }

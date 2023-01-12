@@ -10,7 +10,7 @@ import static org.gassangaming.repository.Constants.PARAM_1;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    String GET_ALL_UNEQUIPPED_FOR_USER = "SELECT * FROM items i LEFT JOIN items_units iu ON i.id=iu.item_id WHERE iu.item_id is null and i.unitId=:" + PARAM_1;
+    String GET_ALL_UNEQUIPPED_FOR_USER = "SELECT i FROM Item i LEFT JOIN EquippedItem ei ON i.id=ei.itemId WHERE ei.itemId is null and i.userId=:" + PARAM_1;
 
     @Query(value = GET_ALL_UNEQUIPPED_FOR_USER)
     Collection<Item> getAllUnequippedItemsForPlayer(long userId);

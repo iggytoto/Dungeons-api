@@ -3,9 +3,7 @@ package org.gassangaming.controller;
 import org.gassangaming.dto.DtoBase;
 import org.gassangaming.dto.ErrorResponseDto;
 import org.gassangaming.dto.OkResponseDto;
-import org.gassangaming.dto.controllers.events.EventDto;
-import org.gassangaming.dto.controllers.events.EventRegisterRequestDto;
-import org.gassangaming.dto.controllers.events.EventsStatusResponseDto;
+import org.gassangaming.dto.controllers.events.*;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.event.EventsService;
 import org.gassangaming.service.exception.ServiceException;
@@ -20,6 +18,7 @@ public class EventsController {
     public static final String PATH = "/events";
     public static final String REGISTER_PATH = "/register";
     public static final String STATUS_PATH = "/status";
+    public static final String APPPLY_SERVER_PATH = "/applyAsServer";
 
     @Autowired
     EventsService eventsService;
@@ -39,5 +38,14 @@ public class EventsController {
         return EventsStatusResponseDto.builder().events(eventsService.status(context.getToken().getId()).stream().map(EventDto::of).collect(Collectors.toList())).build();
     }
 
+    @PostMapping(PATH + APPPLY_SERVER_PATH)
+    public DtoBase apply(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ServerApplicationRequestDto dto) {
+        try {
+            return EventInstanceDto.of(eventsService.applyServer(dto.getHost(), dto.getPort(), context.getToken().getUserId()));
+        } catch (ServiceException se) {
+            return ErrorResponseDto.Of(se.getMessage());
+        }
+
+    }
 
 }

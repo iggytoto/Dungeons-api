@@ -2,6 +2,7 @@ package org.gassangaming.service.event;
 
 import org.gassangaming.model.event.*;
 import org.gassangaming.model.unit.Activity;
+import org.gassangaming.repository.event.EventInstanceRepository;
 import org.gassangaming.repository.event.EventRepository;
 import org.gassangaming.repository.event.UnitEventRegistrationRepository;
 import org.gassangaming.repository.event.UserEventRegistrationRepository;
@@ -23,6 +24,8 @@ public class EventsServiceImpl implements EventsService {
     UserEventRegistrationRepository userEventRegistrationRepository;
     @Autowired
     UnitRepository unitRepository;
+    @Autowired
+    EventInstanceRepository eventInstanceRepository;
 
 
     @Override
@@ -53,5 +56,17 @@ public class EventsServiceImpl implements EventsService {
     @Override
     public Collection<Event> status(long id) {
         return eventRepository.findAllForUser(id);
+    }
+
+    @Override
+    public EventInstance applyServer(String host, String port, long userId) throws ServiceException {
+        final var ei = eventInstanceRepository.findFirstLatestWaitingForServer(EventInstanceStatus.WaitingForServer);
+        if (ei == null) {
+            return null;
+        }
+        ei.setHost(host);
+        ei.setPort(port);
+        eventInstanceRepository.save(ei);
+        return ei;
     }
 }

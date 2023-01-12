@@ -16,7 +16,7 @@ import java.io.Serializable;
 @IdClass(UserEventRegistration.UserEventRegistrationId.class)
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEventRegistration {
+public class UserEventRegistration implements Serializable{
 
     public static final String TABLE_NAME = "events_users";
     public static final String USER_ID_COLUMN_NAME = Constants.USER_ID_FOREIGN_KEY_COLUMN_NAME;

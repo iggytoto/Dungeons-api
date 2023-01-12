@@ -33,6 +33,7 @@
             <column name="status" type="varchar">
                 <constraints notNullConstraintName="c_event_instances_nn_staus"/>
             </column>
+            <column name="event_type" type="varchar"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="event_instances"
                                  baseColumnNames="event_id"

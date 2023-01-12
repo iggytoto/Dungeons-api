@@ -18,7 +18,7 @@ import static org.gassangaming.model.item.EquippedItem.TABLE_NAME;
 @IdClass(EquippedItem.class)
 @AllArgsConstructor
 @NoArgsConstructor
-public class EquippedItem {
+public class EquippedItem implements Serializable {
 
     public static final String TABLE_NAME = "items_units";
     public static final String UNIT_ID_COLUMN_NAME = Constants.UNIT_ID_FOREIGN_KEY_COLUMN_NAME;

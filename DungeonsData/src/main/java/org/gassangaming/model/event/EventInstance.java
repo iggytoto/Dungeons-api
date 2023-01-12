@@ -21,6 +21,7 @@ public class EventInstance {
     public static final String HOST_COLUMN_NAME = "host";
     public static final String PORT_COLUMN_NAME = "port";
     public static final String EVENT_INSTANCE_STATUS_COLUMN_NAME = "status";
+    public static final String EVENT_TYPE_COLUMN_NAME = "event_type";
 
     @Id
     @Column
@@ -36,15 +37,17 @@ public class EventInstance {
     @Column(name = EVENT_INSTANCE_STATUS_COLUMN_NAME)
     @Enumerated(STRING)
     private EventInstanceStatus status;
+    @Column(name = EVENT_TYPE_COLUMN_NAME)
+    @Enumerated(STRING)
+    private EventType eventType;
 
-    protected EventInstance() {
+    public EventInstance() {
     }
 
-    public static EventInstance of(long eventId, EventInstanceStatus status) {
-        final var result = new EventInstance();
-        result.setEventId(eventId);
-        result.setStatus(status);
-        return result;
+    public EventInstance(long eventId, EventType type, EventInstanceStatus status) {
+        this.eventId = eventId;
+        this.status = status;
+        this.eventType = type;
     }
 
 }

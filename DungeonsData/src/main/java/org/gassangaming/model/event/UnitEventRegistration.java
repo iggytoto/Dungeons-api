@@ -16,7 +16,7 @@ import java.io.Serializable;
 @IdClass(UnitEventRegistration.UnitEventRegistrationId.class)
 @AllArgsConstructor
 @NoArgsConstructor
-public class UnitEventRegistration {
+public class UnitEventRegistration implements Serializable{
 
     public static final String TABLE_NAME = "events_units";
     public static final String EVENT_ID_COLUMN_NAME = "event_id";
