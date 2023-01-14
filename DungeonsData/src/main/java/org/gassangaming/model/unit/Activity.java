@@ -3,5 +3,6 @@ package org.gassangaming.model.unit;
 public enum Activity {
     Idle,
     Training,
-    Event
+    Event,
+    Dead
 }

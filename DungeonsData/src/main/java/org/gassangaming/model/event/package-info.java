@@ -6,8 +6,7 @@
  * {@link org.gassangaming.model.event.EventStatus#Planned} , it means that registration on this event is open and players
  * can register to it. Sometime after event goes into {@link org.gassangaming.model.event.EventStatus#InProgress} that
  * means that processing of event already started and on this event nobody can longer register. After event is processed
- * it goes to the {@link org.gassangaming.model.event.EventStatus#Finished} state for application of post processing
- * activities and then goes to {@link org.gassangaming.model.event.EventStatus#Closed}.
+ * goes to {@link org.gassangaming.model.event.EventStatus#Closed}.
  * </p>
  * <h>{@link org.gassangaming.model.event.EventInstance}</h>
  * <p>
@@ -18,8 +17,7 @@
  * and this concrete instance can be picked up by server and processed. After server picks concrete instance for
  * processing instance goes to {@link org.gassangaming.model.event.EventInstanceStatus#WaitingForPlayers}. Means
  * that server already loaded and prepared for instance processing and awaits for some time for players to connect to
- * watch the event. After sometime server goes into {@link org.gassangaming.model.event.EventInstanceStatus#InProgress}
- * processes the instance saving the results and deletes the instance.
+ * watch the event. After processing the instance saving the results and deletes the instance.
  * </p>
  * <h>{@link org.gassangaming.model.event.UnitEventRegistration}</h>
  * <p>

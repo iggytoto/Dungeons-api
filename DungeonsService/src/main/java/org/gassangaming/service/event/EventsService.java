@@ -16,10 +16,11 @@ import java.util.Collection;
 @Service
 public interface EventsService {
 
-    @Transactional
+
     /**
      * Register player ream participation in event
      */
+    @Transactional
     void register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException;
 
     /**
@@ -33,4 +34,12 @@ public interface EventsService {
      */
     @Transactional(isolation = Isolation.SERIALIZABLE)
     EventInstance applyServer(String host, String port, long userId) throws ServiceException;
+
+    /**
+     * Saves the result of event
+     *
+     * @param userId processing server user id
+     */
+    @Transactional
+    void saveResult(EventInstanceResult result, long userId) throws ServiceException;
 }

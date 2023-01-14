@@ -2,12 +2,12 @@ package org.gassangaming.service.event;
 
 import org.gassangaming.model.event.*;
 import org.gassangaming.model.unit.Activity;
+import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.event.EventInstanceRepository;
 import org.gassangaming.repository.event.EventRepository;
 import org.gassangaming.repository.event.UnitEventRegistrationRepository;
 import org.gassangaming.repository.event.UserEventRegistrationRepository;
 import org.gassangaming.repository.unit.UnitRepository;
-import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,8 @@ public class EventsServiceImpl implements EventsService {
     UnitRepository unitRepository;
     @Autowired
     EventInstanceRepository eventInstanceRepository;
+    @Autowired
+    Collection<EventInstanceResultProcessStrategy> eventInstanceResultProcessStrategies;
 
 
     @Override
@@ -66,7 +68,27 @@ public class EventsServiceImpl implements EventsService {
         }
         ei.setHost(host);
         ei.setPort(port);
+        ei.setStatus(EventInstanceStatus.WaitingForPlayers);
         eventInstanceRepository.save(ei);
         return ei;
+    }
+
+    @Override
+    public void saveResult(EventInstanceResult result, long userId) throws ServiceException {
+        final var ei = eventInstanceRepository.findById(result.getEventInstanceId()).orElseThrow(() -> new ServiceException("Unknown event instance"));
+        eventInstanceRepository.deleteById(ei.getId());
+        userEventRegistrationRepository.deleteByEventId(ei.getEventId());
+        unitEventRegistrationRepository.deleteAllByUnitId(result.getUnitsHitPoints().keySet());
+        eventInstanceResultProcessStrategies.stream().filter(s -> s.getEventType().equals(result.getEventType())).findFirst().orElseThrow(() -> new ServiceException("Unknown event type")).process(result);
+        final var units = unitRepository.findAllById(result.getUnitsHitPoints().keySet());
+        for (Unit u : units) {
+            final var hp = result.getUnitsHitPoints().get(u.getId());
+            u.setActivity(hp <= 0 ? Activity.Dead : Activity.Idle);
+            u.setHitPoints(hp);
+        }
+        unitRepository.saveAll(units);
+        if (eventInstanceRepository.countByEventId(ei.getEventId()) == 0) {
+            eventRepository.setClosedById(ei.getEventId());
+        }
     }
 }
