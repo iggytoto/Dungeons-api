@@ -44,6 +44,11 @@ public class PhoenixRaidEventHandlingProcessTask {
         eventRepository.saveAndFlush(event);
 
         final var userIdToRosters = unitEventRegistrationRepository.findAllByEventId(eventId).stream().collect(Collectors.toMap(UnitEventRegistration::getUserId, value -> List.of(value.getUnitId()), (v1, v2) -> Stream.concat(v1.stream(), v2.stream()).toList()));
+        if (userIdToRosters.isEmpty()) {
+            event.setStatus(EventStatus.Closed);
+            eventRepository.save(event);
+            return;
+        }
 
         final var unitsPool = new ArrayList<Long>();
         final var usersPool = new ArrayList<Long>();
@@ -59,9 +64,7 @@ public class PhoenixRaidEventHandlingProcessTask {
             unitsPool.addAll(roster);
             usersPool.add(userId);
         }
-        if (!usersPool.isEmpty()) {
-            createEventInstanceForUsers(usersPool, eventId);
-        }
+        createEventInstanceForUsers(usersPool, eventId);
     }
 
     private void createEventInstanceForUsers(ArrayList<Long> usersPool, long eventId) {
