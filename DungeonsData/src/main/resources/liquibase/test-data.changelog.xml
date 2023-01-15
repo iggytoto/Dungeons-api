@@ -11,6 +11,7 @@
             <changeSetExecuted id="initial-table-tokens" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
             <changeSetExecuted id="initial-table-units" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
             <changeSetExecuted id="initial-table-accounts" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-events" author="gassan" changeLogFile="liquibase/initial-setup-events.xml"/>
         </preConditions>
         <insert tableName="users">
             <column name="id" value="1"/>
@@ -246,6 +247,11 @@
             <column name="name" value="Woody's boot"/>
             <column name="rarity" value="Legendary"/>
             <column name="item_type" value="Boots"/>
+        </insert>
+        <insert tableName="events">
+            <column name="id" value="1"/>
+            <column name="event_type" value="PhoenixRaid"/>
+            <column name="status" value="Planned"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
