@@ -40,7 +40,7 @@ public class MatchMakingController {
 
     @GetMapping(PATH + STATUS_PATH)
     public DtoBase getStatus(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        return MatchMakingGetStatusResponseDto.builder().match(matchMakingService.getStatus(context)).build();
+        return MatchDto.ofDomain(matchMakingService.getStatus(context));
     }
 
     @PostMapping(PATH + APPLY_SERVER_PATH)

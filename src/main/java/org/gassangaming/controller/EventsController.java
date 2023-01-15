@@ -2,6 +2,7 @@ package org.gassangaming.controller;
 
 import org.gassangaming.dto.DtoBase;
 import org.gassangaming.dto.ErrorResponseDto;
+import org.gassangaming.dto.ListResponseDto;
 import org.gassangaming.dto.OkResponseDto;
 import org.gassangaming.dto.controllers.events.*;
 import org.gassangaming.dto.controllers.events.eventinstanceresult.EventInstanceResultDto;
@@ -37,7 +38,7 @@ public class EventsController {
 
     @GetMapping(PATH + STATUS_PATH)
     public DtoBase status(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        return EventsStatusResponseDto.builder().events(eventsService.status(context.getToken().getUserId()).stream().map(EventDto::of).collect(Collectors.toList())).build();
+        return ListResponseDto.of(eventsService.status(context.getToken().getUserId()).stream().map(EventDto::of).collect(Collectors.toList()));
     }
 
     @PostMapping(PATH + APPLY_SERVER_PATH)

@@ -3,16 +3,15 @@ package org.gassangaming.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.gassangaming.dto.unit.UnitDto;
 
 import java.util.Collection;
 
 @Builder
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ListResponseDto<TUnit extends DtoBase> extends DtoBase {
-    Collection<TUnit> items;
-    public static ListResponseDto<?> Of(Collection<? extends UnitDto> units){
+public class ListResponseDto<T extends DtoBase> extends DtoBase {
+    Collection<T> items;
+    public static ListResponseDto<?> of(Collection<? extends DtoBase> units){
         return new ListResponseDto<>(units);
     }
 }

@@ -23,7 +23,7 @@ public class TavernController {
 
     @GetMapping(PATH + GET_AVAILABLE_UNITS_PATH)
     public DtoBase getAvailableUnits() {
-        return ListResponseDto.Of(UnitForSale.All().stream().map(UnitDto::of).collect(Collectors.toList()));
+        return ListResponseDto.of(UnitForSale.All().stream().map(UnitDto::of).collect(Collectors.toList()));
     }
 
     @PostMapping(PATH + BUY_UNIT_PATH)

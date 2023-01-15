@@ -1,7 +1,6 @@
 package org.gassangaming.controller;
 
 import org.gassangaming.dto.MatchDto;
-import org.gassangaming.dto.MatchMakingGetStatusResponseDto;
 import org.gassangaming.dto.MatchMakingRegisterRequestDto;
 import org.gassangaming.dto.MatchMakingServerApplyRequestDto;
 import org.gassangaming.model.MatchStatus;
@@ -80,20 +79,20 @@ public class MatchMakingUseCaseTest extends UseCaseTestBase {
         final var user2Req = ((MatchDto) matchMakingController.register(user2matchMakingRegisterRequestDto, user2Context));
         Assert.notNull(user2Req, "Should be match presented");
         //status check
-        final var user2Status = ((MatchMakingGetStatusResponseDto) matchMakingController.getStatus(user2Context)).getMatch();
+        final var user2Status = ((MatchDto) matchMakingController.getStatus(user2Context));
         Assert.notNull(user2Status, "Should be match presented");
         org.junit.Assert.assertEquals(MatchStatus.Searching, user2Status.getStatus());
         //user 1 registration
         matchMakingController.register(user1matchMakingRegisterRequestDto, user1Context);
         //status check
-        final var user1Status = ((MatchMakingGetStatusResponseDto) matchMakingController.getStatus(user1Context)).getMatch();
+        final var user1Status = ((MatchDto) matchMakingController.getStatus(user1Context));
         Assert.notNull(user1Status, "Should be match presented");
         org.junit.Assert.assertEquals(MatchStatus.PlayersFound, user1Status.getStatus());
         //server registration
         final var serverRequest = new MatchMakingServerApplyRequestDto();
         matchMakingController.applyServer(serverRequest, serverContext);
         //status check
-        final var user2Status2 = ((MatchMakingGetStatusResponseDto) matchMakingController.getStatus(user2Context)).getMatch();
+        final var user2Status2 = ((MatchDto) matchMakingController.getStatus(user2Context));
         Assert.notNull(user1Status, "Should be match presented");
         org.junit.Assert.assertEquals(MatchStatus.ServerFound, user2Status2.getStatus());
 
