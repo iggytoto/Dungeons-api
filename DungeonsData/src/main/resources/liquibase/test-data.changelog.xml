@@ -42,5 +42,210 @@
             <column name="valid_to" value="3000-01-01 00:00:00.00"/>
             <column name="value" value="permanent"/>
         </insert>
+        <insert tableName="units">
+            <column name="id" value="1"/>
+            <column name="owner_id" value="3"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="name" value="Niel"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_mana" value="100"/>
+            <column name="mana" value="0"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="movement_speed" value="1"/>
+            <column name="attack_range" value="4"/>
+            <column name="battle_behavior" value="StraightAttack"/>
+            <column name="unit_type" value="HumanWarrior"/>
+        </insert>
+        <insert tableName="human_warrior_skills">
+            <column name="id" value="1"/>
+            <column name="unit_id" value="1"/>
+            <column name="defence_points" value="1"/>
+            <column name="offence_points" value="1"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="2"/>
+            <column name="owner_id" value="3"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="name" value="Dan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_mana" value="100"/>
+            <column name="mana" value="0"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="movement_speed" value="1"/>
+            <column name="attack_range" value="4"/>
+            <column name="battle_behavior" value="StraightAttack"/>
+            <column name="unit_type" value="HumanWarrior"/>
+        </insert>
+        <insert tableName="human_warrior_skills">
+            <column name="id" value="2"/>
+            <column name="unit_id" value="2"/>
+            <column name="defence_points" value="1"/>
+            <column name="offence_points" value="1"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="3"/>
+            <column name="owner_id" value="3"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="name" value="Tom"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_mana" value="100"/>
+            <column name="mana" value="0"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="movement_speed" value="1"/>
+            <column name="attack_range" value="4"/>
+            <column name="battle_behavior" value="StraightAttack"/>
+            <column name="unit_type" value="HumanWarrior"/>
+        </insert>
+        <insert tableName="human_warrior_skills">
+            <column name="id" value="3"/>
+            <column name="unit_id" value="3"/>
+            <column name="defence_points" value="1"/>
+            <column name="offence_points" value="1"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="4"/>
+            <column name="owner_id" value="3"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="name" value="Jean-Paul"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_mana" value="100"/>
+            <column name="mana" value="0"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="movement_speed" value="1"/>
+            <column name="attack_range" value="4"/>
+            <column name="battle_behavior" value="StraightAttack"/>
+            <column name="unit_type" value="HumanWarrior"/>
+        </insert>
+        <insert tableName="human_warrior_skills">
+            <column name="id" value="4"/>
+            <column name="unit_id" value="4"/>
+            <column name="defence_points" value="1"/>
+            <column name="offence_points" value="1"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="5"/>
+            <column name="owner_id" value="4"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="name" value="Tufan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_mana" value="100"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="movement_speed" value="1"/>
+            <column name="attack_range" value="4"/>
+            <column name="battle_behavior" value="StraightAttack"/>
+            <column name="unit_type" value="HumanWarrior"/>
+        </insert>
+        <insert tableName="human_warrior_skills">
+            <column name="id" value="5"/>
+            <column name="unit_id" value="5"/>
+            <column name="defence_points" value="1"/>
+            <column name="offence_points" value="1"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="6"/>
+            <column name="owner_id" value="4"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="name" value="Gassan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_mana" value="100"/>
+            <column name="mana" value="0"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="movement_speed" value="1"/>
+            <column name="attack_range" value="4"/>
+            <column name="battle_behavior" value="StraightAttack"/>
+            <column name="unit_type" value="HumanWarrior"/>
+        </insert>
+        <insert tableName="human_warrior_skills">
+            <column name="id" value="6"/>
+            <column name="unit_id" value="6"/>
+            <column name="defence_points" value="1"/>
+            <column name="offence_points" value="1"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="7"/>
+            <column name="owner_id" value="4"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="name" value="Frostan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_mana" value="100"/>
+            <column name="mana" value="0"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="movement_speed" value="1"/>
+            <column name="attack_range" value="4"/>
+            <column name="battle_behavior" value="StraightAttack"/>
+            <column name="unit_type" value="HumanWarrior"/>
+        </insert>
+        <insert tableName="human_warrior_skills">
+            <column name="id" value="7"/>
+            <column name="unit_id" value="7"/>
+            <column name="defence_points" value="1"/>
+            <column name="offence_points" value="1"/>
+        </insert>
+        <insert tableName="units">
+            <column name="id" value="8"/>
+            <column name="owner_id" value="4"/>
+            <column name="hp" value="100"/>
+            <column name="max_hp" value="100"/>
+            <column name="name" value="Sobadan"/>
+            <column name="armor" value="100"/>
+            <column name="dmg" value="100"/>
+            <column name="hp" value="100"/>
+            <column name="max_mana" value="100"/>
+            <column name="mana" value="0"/>
+            <column name="mr" value="100"/>
+            <column name="atk_spd" value="1"/>
+            <column name="movement_speed" value="1"/>
+            <column name="attack_range" value="4"/>
+            <column name="battle_behavior" value="StraightAttack"/>
+            <column name="unit_type" value="HumanWarrior"/>
+        </insert>
+        <insert tableName="human_warrior_skills">
+            <column name="id" value="8"/>
+            <column name="unit_id" value="8"/>
+            <column name="defence_points" value="1"/>
+            <column name="offence_points" value="1"/>
+        </insert>
+        <insert tableName="items">
+            <column name="id" value="1"/>
+            <column name="user_id" value="3"/>
+            <column name="name" value="Woody's boot"/>
+            <column name="rarity" value="Legendary"/>
+            <column name="item_type" value="Boots"/>
+        </insert>
+        <insert tableName="items">
+            <column name="id" value="2"/>
+            <column name="user_id" value="4"/>
+            <column name="name" value="Woody's boot"/>
+            <column name="rarity" value="Legendary"/>
+            <column name="item_type" value="Boots"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

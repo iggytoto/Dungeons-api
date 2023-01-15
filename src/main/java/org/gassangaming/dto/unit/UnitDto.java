@@ -40,7 +40,7 @@ public class UnitDto extends DtoBase {
     private BattleBehavior battleBehavior;
     private UnitType unitType;
 
-    private UnitSkillsDto unitEquip;
+    private UnitSkillsDto skills;
 
     private List<ItemDto> items;
 
@@ -92,7 +92,7 @@ public class UnitDto extends DtoBase {
                 .battleBehavior(us.getUnit().getBattleBehavior())
                 .unitType(us.getUnit().getUnitType())
                 .ownerId(us.getUnit().getOwnerId())
-                .unitEquip(UnitSkillsDto.of(us.getSkills()))
+                .skills(UnitSkillsDto.of(us.getSkills()))
                 .items(us.getItems().stream().map(ItemDto::of).toList())
                 .build();
     }
