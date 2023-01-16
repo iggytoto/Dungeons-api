@@ -3,10 +3,7 @@ package org.gassangaming.service.event;
 import org.gassangaming.model.event.*;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.Unit;
-import org.gassangaming.repository.event.EventInstanceRepository;
-import org.gassangaming.repository.event.EventRepository;
-import org.gassangaming.repository.event.UnitEventRegistrationRepository;
-import org.gassangaming.repository.event.UserEventRegistrationRepository;
+import org.gassangaming.repository.event.*;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,8 @@ public class EventsServiceImpl implements EventsService {
     EventInstanceRepository eventInstanceRepository;
     @Autowired
     Collection<EventInstanceResultProcessStrategy> eventInstanceResultProcessStrategies;
+    @Autowired
+    private UserEventInstanceRepository userEventInstanceRepository;
 
     @Override
     public void register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException {
@@ -93,6 +92,6 @@ public class EventsServiceImpl implements EventsService {
 
     @Override
     public Collection<Unit> getEventInstanceData(long eventInstanceId) {
-        return null;
+        return eventInstanceRepository.findAllUnitsById(eventInstanceId);
     }
 }

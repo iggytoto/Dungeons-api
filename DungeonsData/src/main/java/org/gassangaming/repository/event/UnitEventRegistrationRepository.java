@@ -21,5 +21,4 @@ public interface UnitEventRegistrationRepository extends JpaRepository<UnitEvent
     @Query(value = DELETE_ALL_BY_UNIT_ID)
     @Modifying
     void deleteAllByUnitId(@Param(PARAM_1) Collection<Long> unitIds);
-
 }

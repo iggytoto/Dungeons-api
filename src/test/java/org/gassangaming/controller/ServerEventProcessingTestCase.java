@@ -1,12 +1,16 @@
 package org.gassangaming.controller;
 
+import org.gassangaming.dto.ListResponseDto;
+import org.gassangaming.dto.controllers.events.EventInstanceDataRequestDto;
 import org.gassangaming.dto.controllers.events.EventInstanceDto;
 import org.gassangaming.dto.controllers.events.ServerApplicationRequestDto;
 import org.gassangaming.dto.controllers.events.eventinstanceresult.EventInstanceResultDto;
+import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.model.event.*;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.human.HumanWarrior;
 import org.gassangaming.repository.event.UnitEventRegistrationRepository;
+import org.gassangaming.repository.event.UserEventInstanceRepository;
 import org.gassangaming.repository.event.UserEventRegistrationRepository;
 import org.gassangaming.service.event.EventInstanceResult;
 import org.gassangaming.service.exception.ServiceException;
@@ -23,6 +27,7 @@ import java.util.Map;
 
 /**
  * - server applies to process
+ * - server gets event data
  * - server saves event result
  */
 @RunWith(SpringRunner.class)
@@ -41,6 +46,8 @@ public class ServerEventProcessingTestCase extends UseCaseTestBase {
     UserEventRegistrationRepository userEventRegistrationRepository;
     @Autowired
     UnitEventRegistrationRepository unitEventRegistrationRepository;
+    @Autowired
+    UserEventInstanceRepository userEventInstanceRepository;
     private long eventInstanceId;
     private long eventId;
     private long unitSurvivedId;
@@ -54,6 +61,7 @@ public class ServerEventProcessingTestCase extends UseCaseTestBase {
         eventInstanceId = addEventInstance(new EventInstance(eventId, EventType.Test, EventInstanceStatus.WaitingForServer)).getId();
         unitSurvivedId = addUnit(HumanWarrior.of(Activity.Event), userId).getId();
         unitDeadId = addUnit(HumanWarrior.of(Activity.Event), userId).getId();
+        userEventInstanceRepository.save(new UserEventInstance(userId, eventId, eventInstanceId));
         userEventRegistrationRepository.save(new UserEventRegistration(userId, eventId));
         unitEventRegistrationRepository.save(new UnitEventRegistration(eventId, unitSurvivedId, userId));
         unitEventRegistrationRepository.save(new UnitEventRegistration(eventId, unitDeadId, userId));
@@ -74,6 +82,12 @@ public class ServerEventProcessingTestCase extends UseCaseTestBase {
         Assert.assertEquals(PORT, response.getPort());
         Assert.assertEquals(EventInstanceStatus.WaitingForPlayers, response.getStatus());
         Assert.assertEquals(EventType.Test, response.getEventType());
+        // get event data
+        final var eventInstanceDataRequestDto = new EventInstanceDataRequestDto();
+        eventInstanceDataRequestDto.setEventInstanceId(eventInstanceId);
+        final var dataResponse = (ListResponseDto<UnitDto>) eventsController.getData(eventInstanceDataRequestDto);
+        Assert.assertNotNull(dataResponse);
+        Assert.assertEquals(2, dataResponse.getItems().size());
         //save result
         final var saveResultDto = new TestResultDto();
         eventsController.save(context, saveResultDto);
