@@ -58,7 +58,9 @@
             <column name="owner_id" type="int"/>
             <column name="hp" type="int"/>
             <column name="max_hp" type="int"/>
-            <column name="mana" type="int"/>
+            <column name="mana" type="int" >
+                <constraints notNullConstraintName="c_nn_units_mana"/>
+            </column>
             <column name="max_mana" type="int"/>
             <column name="armor" type="int"/>
             <column name="mr" type="int"/>

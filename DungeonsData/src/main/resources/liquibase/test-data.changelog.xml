@@ -149,6 +149,7 @@
             <column name="dmg" value="100"/>
             <column name="hp" value="100"/>
             <column name="max_mana" value="100"/>
+            <column name="mana" value="100"/>
             <column name="mr" value="100"/>
             <column name="atk_spd" value="1"/>
             <column name="movement_speed" value="1"/>
