@@ -30,7 +30,6 @@ public class EventsServiceImpl implements EventsService {
     @Autowired
     Collection<EventInstanceResultProcessStrategy> eventInstanceResultProcessStrategies;
 
-
     @Override
     public void register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException {
         final var event = eventRepository.findLatestPlannedByType(eventType);
@@ -90,5 +89,10 @@ public class EventsServiceImpl implements EventsService {
         if (eventInstanceRepository.countByEventId(ei.getEventId()) == 0) {
             eventRepository.setClosedById(ei.getEventId());
         }
+    }
+
+    @Override
+    public Collection<Unit> getEventInstanceData(long eventInstanceId) {
+        return null;
     }
 }

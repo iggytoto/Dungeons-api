@@ -26,7 +26,7 @@ public class TrainingUnit implements Serializable {
     protected long userId;
 
     @Id
-    @Column(name = UNIT_ID_COLUMN_NAME)
+    @Column(name = UNIT_ID_COLUMN_NAME, insertable = false, updatable = false)
     protected long unitId;
 
     protected TrainingUnit() {

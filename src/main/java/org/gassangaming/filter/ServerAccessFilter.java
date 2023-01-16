@@ -39,6 +39,7 @@ public class ServerAccessFilter extends OncePerRequestFilter {
         return !request.getRequestURI().contains(TrainingController.PATH) &&
                 !request.getRequestURI().contains(MatchMakingController.PATH + MatchMakingController.APPLY_SERVER_PATH) &&
                 !request.getRequestURI().contains(EventsController.PATH + EventsController.APPLY_SERVER_PATH) &&
-                !request.getRequestURI().contains(EventsController.PATH + EventsController.SAVE_EVENT_INSTANCE_RESULT);
+                !request.getRequestURI().contains(EventsController.PATH + EventsController.SAVE_EVENT_INSTANCE_RESULT) &&
+                !request.getRequestURI().contains(EventsController.PATH + EventsController.GET_DATA_PATH);
     }
 }

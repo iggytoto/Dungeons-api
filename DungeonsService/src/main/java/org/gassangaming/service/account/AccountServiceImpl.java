@@ -3,7 +3,6 @@ package org.gassangaming.service.account;
 import org.gassangaming.model.Account;
 import org.gassangaming.model.Valuable;
 import org.gassangaming.repository.AccountRepository;
-import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,8 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public void buyItem(Valuable v, UserContext userContext) throws ServiceException {
-        var a = accountRepository.findByUserId(userContext.getToken().getUserId());
+    public void buyItem(Valuable v, long userId) throws ServiceException {
+        var a = accountRepository.findByUserId(userId);
         if (isAccountEnoughFor(a, v)) {
             a.setGoldAmount(a.getGoldAmount() - v.getGoldCost());
             accountRepository.save(a);

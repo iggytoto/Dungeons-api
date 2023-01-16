@@ -5,9 +5,8 @@ import org.gassangaming.model.skills.human.HumanWarriorSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.model.unit.human.HumanWarrior;
-import org.gassangaming.repository.unit.equip.HumanWarriorSkillsRepository;
 import org.gassangaming.repository.unit.UnitRepository;
-import org.gassangaming.service.UserContext;
+import org.gassangaming.repository.unit.equip.HumanWarriorSkillsRepository;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class HumanWarriorUnitSkillsServiceImpl implements UnitSkillsService<Huma
     }
 
     @Override
-    public HumanWarriorSkills upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanWarriorSkills upgrade(long eqId, String paramNameToUpgrade, long userId) throws ServiceException {
         final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (OffenceParamName.equals(paramNameToUpgrade)) {
@@ -54,7 +53,7 @@ public class HumanWarriorUnitSkillsServiceImpl implements UnitSkillsService<Huma
         } else {
             throw new ServiceException("Unknow parameter name to upgrade");
         }
-        accountService.buyItem(upgrade, context);
+        accountService.buyItem(upgrade, userId);
         repository.save(eqState);
         unitRepository.save(upgradeUnitChars(eqState, paramNameToUpgrade));
         return eqState;

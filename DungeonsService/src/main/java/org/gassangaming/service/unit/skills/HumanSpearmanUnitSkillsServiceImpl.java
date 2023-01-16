@@ -7,7 +7,6 @@ import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.model.unit.human.HumanSpearman;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.repository.unit.equip.HumanSpearmanSkillsRepository;
-import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class HumanSpearmanUnitSkillsServiceImpl implements UnitSkillsService<Hum
     }
 
     @Override
-    public HumanSpearmanSkills upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanSpearmanSkills upgrade(long eqId, String paramNameToUpgrade, long userId) throws ServiceException {
         final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (DOUBLE_EDGE_PARAM_NAME.equals(paramNameToUpgrade)) {
@@ -52,9 +51,9 @@ public class HumanSpearmanUnitSkillsServiceImpl implements UnitSkillsService<Hum
                 eqState.setMidRangePoints(eqState.getMidRangePoints() + 1);
             }
         } else {
-            throw new ServiceException("Unknow parameter name to upgrade");
+            throw new ServiceException("Unknown parameter name to upgrade");
         }
-        accountService.buyItem(upgrade, context);
+        accountService.buyItem(upgrade, userId);
         repository.save(eqState);
         unitRepository.save(upgradeUnitChars(eqState, paramNameToUpgrade));
         return eqState;

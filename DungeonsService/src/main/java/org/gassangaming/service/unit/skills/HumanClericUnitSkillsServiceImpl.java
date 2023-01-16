@@ -6,7 +6,6 @@ import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.repository.unit.equip.HumanClericSkillsRepository;
-import org.gassangaming.service.UserContext;
 import org.gassangaming.service.account.AccountService;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class HumanClericUnitSkillsServiceImpl implements UnitSkillsService<Human
     }
 
     @Override
-    public HumanClericSkills upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException {
+    public HumanClericSkills upgrade(long eqId, String paramNameToUpgrade, long userId) throws ServiceException {
         final var eqState = repository.getReferenceById(eqId);
         Valuable upgrade;
         if (DISCIPLINE_PARAM_NAME.equals(paramNameToUpgrade)) {
@@ -74,7 +73,7 @@ public class HumanClericUnitSkillsServiceImpl implements UnitSkillsService<Human
         } else {
             throw new ServiceException("Unknown parameter name to upgrade");
         }
-        accountService.buyItem(upgrade, context);
+        accountService.buyItem(upgrade, userId);
         repository.save(eqState);
         unitRepository.save(upgradeUnitChars(eqState, paramNameToUpgrade));
         return eqState;

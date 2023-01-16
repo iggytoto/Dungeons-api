@@ -3,8 +3,13 @@ package org.gassangaming.model.unit;
 import lombok.Getter;
 import lombok.Setter;
 import org.gassangaming.model.Valuable;
+import org.gassangaming.model.item.EquippedItem;
+import org.gassangaming.model.item.Item;
+import org.gassangaming.model.skills.UnitSkills;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static org.gassangaming.model.unit.Unit.TABLE_NAME;
 import static org.gassangaming.model.unit.Unit.UNIT_TYPE_COLUMN_NAME;
@@ -40,7 +45,7 @@ public class Unit {
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(name = SEQUENCE_NAME, allocationSize = 1)
-    protected Long id;
+    protected long id;
 
     @Column(name = NAME_COLUMN_NAME)
     protected String name;
@@ -76,12 +81,29 @@ public class Unit {
     @Enumerated(EnumType.STRING)
     protected UnitType unitType;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = EquippedItem.TABLE_NAME, joinColumns = @JoinColumn(name = EquippedItem.UNIT_ID_COLUMN_NAME), inverseJoinColumns = @JoinColumn(name = EquippedItem.ITEM_ID_COLUMN_NAME))
+    private Collection<Item> items = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "unit")
+    private UnitSkills skills;
+
     public boolean isDamaged() {
         return maxHitPoints >= hitPoints;
     }
 
     public Valuable getTrainingCost() {
         return () -> 100;
+    }
+
+    public void setSkills(UnitSkills s) {
+        s.setUnitId(id);
+        s.setUnit(this);
+        skills = s;
+    }
+
+    public <T extends UnitSkills> T getSkills() {
+        return (T) skills;
     }
 
 }

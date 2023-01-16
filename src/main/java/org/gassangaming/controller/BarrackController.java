@@ -29,7 +29,7 @@ public class BarrackController {
 
     @GetMapping(PATH + GET_AVAILABLE_UNITS_PATH)
     public DtoBase getAvailableUnits(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        return ListResponseDto.builder().items(barrackService.getBarrackUnits(context).stream().map(UnitDto::of).collect(Collectors.toList())).build();
+        return ListResponseDto.builder().items(barrackService.getBarrackUnits(context.getToken().getUserId()).stream().map(UnitDto::of).collect(Collectors.toList())).build();
     }
 
     @GetMapping(PATH + GET_AVAILABLE_ITEMS_PATH)

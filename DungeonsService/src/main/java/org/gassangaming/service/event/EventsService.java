@@ -3,6 +3,7 @@ package org.gassangaming.service.event;
 import org.gassangaming.model.event.Event;
 import org.gassangaming.model.event.EventInstance;
 import org.gassangaming.model.event.EventType;
+import org.gassangaming.model.unit.Unit;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -42,4 +43,11 @@ public interface EventsService {
      */
     @Transactional
     void saveResult(EventInstanceResult result, long userId) throws ServiceException;
+
+    /**
+     * Gets event instance data to start process the event
+     *
+     * @return
+     */
+    Collection<Unit> getEventInstanceData(long eventInstanceId);
 }

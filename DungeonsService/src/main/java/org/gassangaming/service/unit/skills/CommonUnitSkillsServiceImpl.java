@@ -18,11 +18,11 @@ public class CommonUnitSkillsServiceImpl implements CommonUnitSkillsService {
 
     @Override
     public UnitSkills UpgradeUnitSkills(long skillsId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException {
-        return getServiceByUnitType(unitType).upgrade(skillsId, paramNameToUpgrade, context);
+        return getServiceByUnitType(unitType).upgrade(skillsId, paramNameToUpgrade, context.getToken().getUserId());
     }
 
     @Override
-    public void saveSkills(UnitSkills e, UserContext context) throws ServiceException {
+    public void saveSkills(UnitSkills e) throws ServiceException {
         getService(e.getClass()).saveOrUpdateEquip(e);
     }
 

@@ -7,7 +7,6 @@ import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.MatchResultRepository;
 import org.gassangaming.repository.TrainingUnitRepository;
 import org.gassangaming.repository.unit.UnitRepository;
-import org.gassangaming.service.barrack.UnitState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +24,8 @@ public class TrainingServiceImpl implements TrainingService {
     UnitRepository unitRepository;
 
     @Override
-    public Collection<UnitState> getTrainingRosterForUser(long userId) {
-        return unitRepository.findAllById(trainingUnitRepository.getUnitsForUser(userId).stream().map(TrainingUnit::getUnitId).toList()).stream().map(UnitState::of).toList();
+    public Collection<Unit> getTrainingRosterForUser(long userId) {
+        return unitRepository.findAllById(trainingUnitRepository.getUnitsForUser(userId).stream().map(TrainingUnit::getUnitId).toList());
     }
 
     @Override
@@ -44,7 +43,7 @@ public class TrainingServiceImpl implements TrainingService {
      * - activity should be set to Idle
      */
     private Unit mergeUnit(Unit unit) {
-        final var u = unitRepository.findById(unit.getId()).orElseThrow();
+        final var u = unitRepository.findById(unit.getId());
         u.setHitPoints(unit.getHitPoints());
         u.setActivity(Activity.Idle);
         return u;

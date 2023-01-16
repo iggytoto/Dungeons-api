@@ -26,18 +26,18 @@ public class EquippedItem implements Serializable {
 
     @Id
     @Column(name = ITEM_ID_COLUMN_NAME)
-    protected Long itemId;
+    protected long itemId;
     @Id
     @Column(name = UNIT_ID_COLUMN_NAME)
-    protected Long unitId;
+    protected long unitId;
 
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
     @Setter
     public static class EquippedItemId implements Serializable {
-        protected Long itemId;
-        protected Long unitId;
+        protected long itemId;
+        protected long unitId;
 
     }
 }

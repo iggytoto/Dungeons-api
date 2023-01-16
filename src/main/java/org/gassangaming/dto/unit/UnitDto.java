@@ -9,7 +9,6 @@ import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
-import org.gassangaming.service.barrack.UnitState;
 import org.gassangaming.service.tavern.UnitForSale;
 
 import java.util.List;
@@ -70,30 +69,8 @@ public class UnitDto extends DtoBase {
                 .battleBehavior(u.getBattleBehavior())
                 .unitType(u.getUnitType())
                 .ownerId(u.getOwnerId())
-                .build();
-    }
-
-    public static UnitDto of(UnitState us) {
-        return UnitDto
-                .builder()
-                .id(us.getUnit().getId())
-                .name(us.getUnit().getName())
-                .hitPoints(us.getUnit().getHitPoints())
-                .maxHitPoints(us.getUnit().getMaxHitPoints())
-                .mana(us.getUnit().getMana())
-                .maxMana(us.getUnit().getMaxMana())
-                .armor(us.getUnit().getArmor())
-                .magicResistance(us.getUnit().getMagicResistance())
-                .damage(us.getUnit().getDamage())
-                .attackSpeed(us.getUnit().getAttackSpeed())
-                .attackRange(us.getUnit().getAttackRange())
-                .movementSpeed(us.getUnit().getMovementSpeed())
-                .activity(us.getUnit().getActivity())
-                .battleBehavior(us.getUnit().getBattleBehavior())
-                .unitType(us.getUnit().getUnitType())
-                .ownerId(us.getUnit().getOwnerId())
-                .skills(UnitSkillsDto.of(us.getSkills()))
-                .items(us.getItems().stream().map(ItemDto::of).toList())
+                .items(u.getItems().stream().map(ItemDto::of).toList())
+                .skills(UnitSkillsDto.of(u.getSkills()))
                 .build();
     }
 

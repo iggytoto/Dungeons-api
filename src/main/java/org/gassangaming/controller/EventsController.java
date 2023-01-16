@@ -6,6 +6,7 @@ import org.gassangaming.dto.ListResponseDto;
 import org.gassangaming.dto.OkResponseDto;
 import org.gassangaming.dto.controllers.events.*;
 import org.gassangaming.dto.controllers.events.eventinstanceresult.EventInstanceResultDto;
+import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.event.EventsService;
 import org.gassangaming.service.exception.ServiceException;
@@ -22,6 +23,7 @@ public class EventsController {
     public static final String STATUS_PATH = "/status";
     public static final String APPLY_SERVER_PATH = "/applyAsServer";
     public static final String SAVE_EVENT_INSTANCE_RESULT = "/saveEventInstanceResult";
+    public static final String GET_DATA_PATH = "/getData";
 
     @Autowired
     EventsService eventsService;
@@ -48,6 +50,11 @@ public class EventsController {
         } catch (ServiceException se) {
             return ErrorResponseDto.Of(se.getMessage());
         }
+    }
+
+    @GetMapping(PATH + GET_DATA_PATH)
+    public DtoBase getData( @RequestBody EventInstanceDataRequestDto dto) {
+        return ListResponseDto.of(eventsService.getEventInstanceData(dto.getEventInstanceId()).stream().map(UnitDto::of).collect(Collectors.toList()));
     }
 
     @PostMapping(PATH + SAVE_EVENT_INSTANCE_RESULT)

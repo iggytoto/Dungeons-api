@@ -2,6 +2,7 @@ package org.gassangaming.model.unit.human;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.gassangaming.model.skills.human.HumanClericSkills;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;
@@ -37,6 +38,7 @@ public class HumanCleric extends Unit {
         damage = DAMAGE_BASE;
         maxMana = MANA_BASE;
         unitType = UnitType.HumanCleric;
+        setSkills(new HumanClericSkills());
     }
 
 

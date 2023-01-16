@@ -2,6 +2,7 @@ package org.gassangaming.model.unit.human;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.gassangaming.model.skills.human.HumanWarriorSkills;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.BattleBehavior;
 import org.gassangaming.model.unit.Unit;
@@ -38,6 +39,7 @@ public class HumanWarrior extends Unit {
         damage = DAMAGE_BASE;
         maxMana = MANA_BASE;
         unitType = UnitType.HumanWarrior;
+        setSkills(new HumanWarriorSkills());
     }
 
     public static HumanWarrior ofName(String name){

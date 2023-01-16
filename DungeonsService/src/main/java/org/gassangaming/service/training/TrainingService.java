@@ -2,7 +2,6 @@ package org.gassangaming.service.training;
 
 import org.gassangaming.model.MatchResult;
 import org.gassangaming.model.unit.Unit;
-import org.gassangaming.service.barrack.UnitState;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +22,7 @@ public interface TrainingService {
      * @return set of units that user is registered for the training yard match
      * @throws ServiceException i do not remember why it is here, get operations should not return exceptions
      */
-    Collection<UnitState> getTrainingRosterForUser(long userId) throws ServiceException;
+    Collection<Unit> getTrainingRosterForUser(long userId) throws ServiceException;
 
     /**
      * Server saves match result after match ended with this call.

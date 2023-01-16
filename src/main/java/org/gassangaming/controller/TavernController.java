@@ -29,7 +29,7 @@ public class TavernController {
     @PostMapping(PATH + BUY_UNIT_PATH)
     public DtoBase buyUnit(@RequestBody BuyUnitRequestDto buyUnitRequestDto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            return UnitDto.of(tavernService.buyUnit(buyUnitRequestDto.getType(), context));
+            return UnitDto.of(tavernService.buyUnit(buyUnitRequestDto.getType(), context.getToken().getUserId()));
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }

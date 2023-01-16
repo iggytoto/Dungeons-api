@@ -29,7 +29,7 @@ public interface CommonUnitSkillsService {
     UnitSkills UpgradeUnitSkills(long skillsId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException;
 
     @Transactional
-    void saveSkills(UnitSkills e, UserContext context) throws ServiceException;
+    void saveSkills(UnitSkills e) throws ServiceException;
 
     UnitSkills getSkillsForUnit(Unit u);
 }

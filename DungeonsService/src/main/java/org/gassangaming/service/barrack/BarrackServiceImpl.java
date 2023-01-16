@@ -3,6 +3,7 @@ package org.gassangaming.service.barrack;
 import org.gassangaming.model.item.Item;
 import org.gassangaming.model.skills.UnitSkills;
 import org.gassangaming.model.unit.BattleBehavior;
+import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
 import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
@@ -25,8 +26,8 @@ public class BarrackServiceImpl implements BarrackService {
     ItemsService itemsService;
 
     @Override
-    public Collection<UnitState> getBarrackUnits(UserContext context) {
-        return unitService.getByOwnerId(context.getToken().getUserId());
+    public Collection<Unit> getBarrackUnits(long userId) {
+        return unitService.getByOwnerId(userId);
     }
 
     @Override

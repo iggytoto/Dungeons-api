@@ -43,7 +43,7 @@ public class HumanWarriorSkillsUpgradeCaseTest extends UseCaseTestBase {
     public void setup() throws ServiceException {
         registerDefaultUser();
         loginAsDefaultUser();
-        unit = (HumanWarrior) tavernService.buyUnit(UnitType.HumanWarrior, context).getUnit();
+        unit = (HumanWarrior) tavernService.buyUnit(UnitType.HumanWarrior, context.getToken().getUserId());
     }
 
     @Test

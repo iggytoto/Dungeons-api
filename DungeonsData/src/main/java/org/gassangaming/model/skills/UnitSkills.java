@@ -3,6 +3,7 @@ package org.gassangaming.model.skills;
 import lombok.Getter;
 import lombok.Setter;
 import org.gassangaming.model.Constants;
+import org.gassangaming.model.unit.Unit;
 
 import javax.persistence.*;
 
@@ -19,9 +20,13 @@ public abstract class UnitSkills {
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(name = SEQUENCE_NAME, allocationSize = 1)
-    protected Long id;
+    private long id;
 
-    @Column(name = UNIT_ID_COLUMN_NAME)
+    @Column(name = UNIT_ID_COLUMN_NAME, insertable = false, updatable = false)
     private long unitId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = UNIT_ID_COLUMN_NAME)
+    private Unit unit;
 
 }

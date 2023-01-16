@@ -2,7 +2,6 @@ package org.gassangaming.service.unit.skills;
 
 import org.gassangaming.model.skills.UnitSkills;
 import org.gassangaming.model.unit.UnitType;
-import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +25,7 @@ public interface UnitSkillsService<T extends UnitSkills> {
     UnitType getTargetUnitType();
 
     @Transactional
-    T upgrade(long eqId, String paramNameToUpgrade, UserContext context) throws ServiceException;
+    T upgrade(long eqId, String paramNameToUpgrade, long userId) throws ServiceException;
 
     @Transactional
     T saveOrUpdate(T e);
