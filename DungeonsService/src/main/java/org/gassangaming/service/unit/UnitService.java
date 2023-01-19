@@ -16,8 +16,8 @@ public interface UnitService {
 
     Collection<Unit> getByOwnerId(long ownerId);
 
-    void changeName(long unitId, String newName, UserContext userContext) throws ServiceException;
+    Unit changeName(long unitId, String newName, UserContext userContext) throws ServiceException;
 
-    void changeBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext userContext) throws ServiceException;
+    Unit changeBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext userContext) throws ServiceException;
 
 }

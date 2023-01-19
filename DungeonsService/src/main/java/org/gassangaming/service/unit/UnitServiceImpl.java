@@ -22,19 +22,19 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public void changeName(long unitId, String newName, UserContext userContext) throws ServiceException {
+    public Unit changeName(long unitId, String newName, UserContext userContext) throws ServiceException {
         final var unit = unitRepository.findById(unitId);
         checkRights(unit, userContext);
         unit.setName(newName);
-        unitRepository.save(unit);
+        return unitRepository.save(unit);
     }
 
     @Override
-    public void changeBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext userContext) throws ServiceException {
+    public Unit changeBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext userContext) throws ServiceException {
         final var unit = unitRepository.findById(unitId);
         checkRights(unit, userContext);
         unit.setBattleBehavior(newBattleBehavior);
-        unitRepository.save(unit);
+        return unitRepository.save(unit);
     }
 
     private void checkRights(Unit u, UserContext context) throws ServiceException {

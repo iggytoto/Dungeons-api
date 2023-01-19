@@ -29,16 +29,16 @@ public interface BarrackService {
     Collection<Item> getStoredItems(UserContext context);
 
     @Transactional
-    void equipItem(long itemId, long unitId, UserContext context) throws ServiceException;
+    Item equipItem(long itemId, long unitId, UserContext context) throws ServiceException;
 
     @Transactional
-    void unEquipItem(long itemId, UserContext context) throws ServiceException;
+    Item unEquipItem(long itemId, UserContext context) throws ServiceException;
 
     @Transactional
-    void ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException;
+    Unit ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException;
 
     @Transactional
-    void ChangeUnitBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext context) throws ServiceException;
+    Unit ChangeUnitBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext context) throws ServiceException;
 
     /**
      * Upgrades unit equipment. As unit equipment permanently affects unit characteristics changes unit characteristics

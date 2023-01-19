@@ -36,23 +36,23 @@ public class BarrackServiceImpl implements BarrackService {
     }
 
     @Override
-    public void equipItem(long itemId, long unitId, UserContext context) throws ServiceException {
-        itemsService.equipItem(itemId, unitId, context);
+    public Item equipItem(long itemId, long unitId, UserContext context) throws ServiceException {
+        return itemsService.equipItem(itemId, unitId, context);
     }
 
     @Override
-    public void unEquipItem(long itemId, UserContext context) throws ServiceException {
-        itemsService.unEquipItem(itemId, context);
+    public Item unEquipItem(long itemId, UserContext context) throws ServiceException {
+        return itemsService.unEquipItem(itemId, context);
     }
 
     @Override
-    public void ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException {
-        unitService.changeName(unitId, newName, context);
+    public Unit ChangeUnitName(long unitId, String newName, UserContext context) throws ServiceException {
+        return unitService.changeName(unitId, newName, context);
     }
 
     @Override
-    public void ChangeUnitBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext context) throws ServiceException {
-        unitService.changeBattleBehavior(unitId, newBattleBehavior, context);
+    public Unit ChangeUnitBattleBehavior(long unitId, BattleBehavior newBattleBehavior, UserContext context) throws ServiceException {
+        return unitService.changeBattleBehavior(unitId, newBattleBehavior, context);
     }
 
     @Override

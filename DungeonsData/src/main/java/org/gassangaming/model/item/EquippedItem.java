@@ -16,7 +16,6 @@ import static org.gassangaming.model.item.EquippedItem.TABLE_NAME;
 @Setter
 @Table(name = TABLE_NAME)
 @IdClass(EquippedItem.class)
-@AllArgsConstructor
 @NoArgsConstructor
 public class EquippedItem implements Serializable {
 
@@ -25,11 +24,19 @@ public class EquippedItem implements Serializable {
     public static final String ITEM_ID_COLUMN_NAME = Constants.ITEM_ID_FOREIGN_KEY_COLUMN_NAME;
 
     @Id
-    @Column(name = ITEM_ID_COLUMN_NAME)
+    @Column(name = ITEM_ID_COLUMN_NAME, insertable = false, updatable = false)
     protected long itemId;
     @Id
     @Column(name = UNIT_ID_COLUMN_NAME)
     protected long unitId;
+
+//    @OneToOne
+//    protected Item item;
+
+    public EquippedItem(long itemId, long unitId) {
+        this.itemId = itemId;
+        this.unitId = unitId;
+    }
 
     @NoArgsConstructor
     @AllArgsConstructor

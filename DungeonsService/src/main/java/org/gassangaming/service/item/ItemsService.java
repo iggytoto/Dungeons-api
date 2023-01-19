@@ -23,10 +23,10 @@ public interface ItemsService {
     /**
      * Equips given item to given unit
      */
-    void equipItem(long itemId, long unitId, UserContext context) throws ServiceException;
+    Item equipItem(long itemId, long unitId, UserContext context) throws ServiceException;
 
     /**
      * unequips item
      */
-    void unEquipItem(long itemId, UserContext context) throws ServiceException;
+    Item unEquipItem(long itemId, UserContext context) throws ServiceException;
 }

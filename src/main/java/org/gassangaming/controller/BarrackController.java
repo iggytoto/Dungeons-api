@@ -40,8 +40,7 @@ public class BarrackController {
     @PostMapping(PATH + EQUIP_ITEM_PATH)
     public DtoBase equipItem(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody EquipItemRequestDto dto) {
         try {
-            barrackService.equipItem(dto.getItemId(), dto.getUnitId(), context);
-            return new OkResponseDto();
+            return ItemDto.of(barrackService.equipItem(dto.getItemId(), dto.getUnitId(), context));
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
@@ -50,8 +49,7 @@ public class BarrackController {
     @PostMapping(PATH + UNEQUIP_ITEM_PATH)
     public DtoBase unEquipItem(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UnEquipItemRequestDto dto) {
         try {
-            barrackService.unEquipItem(dto.getItemId(), context);
-            return new OkResponseDto();
+            return ItemDto.of(barrackService.unEquipItem(dto.getItemId(), context));
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
@@ -60,8 +58,7 @@ public class BarrackController {
     @PostMapping(PATH + CHANGE_UNIT_NAME_PATH)
     public DtoBase changeUnitName(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitNameRequestDto request) {
         try {
-            barrackService.ChangeUnitName(request.getUnitId(), request.getNewName(), context);
-            return new OkResponseDto();
+            return UnitDto.of(barrackService.ChangeUnitName(request.getUnitId(), request.getNewName(), context));
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
@@ -70,8 +67,7 @@ public class BarrackController {
     @PostMapping(PATH + CHANGE_UNIT_BATTLE_BEHAVIOR_PATH)
     public DtoBase changeUnitBehavior(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitBattleBehaviorRequestDto request) {
         try {
-            barrackService.ChangeUnitBattleBehavior(request.getUnitId(), request.getNewBattleBehavior(), context);
-            return new OkResponseDto();
+            return UnitDto.of(barrackService.ChangeUnitBattleBehavior(request.getUnitId(), request.getNewBattleBehavior(), context));
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }
@@ -80,8 +76,7 @@ public class BarrackController {
     @PostMapping(PATH + UPGRADE_UNIT_skillsMENT_PATH)
     public DtoBase upgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitSkillsRequestDto request) {
         try {
-            final var eq = barrackService.UpgradeUnitEquipment(request.getSkillsId(), request.getUnitType(), request.getParamNameToUpgrade(), context);
-            return UnitSkillsDto.of(eq);
+            return UnitSkillsDto.of(barrackService.UpgradeUnitEquipment(request.getSkillsId(), request.getUnitType(), request.getParamNameToUpgrade(), context));
         } catch (ServiceException e) {
             return ErrorResponseDto.Of(e.getMessage());
         }

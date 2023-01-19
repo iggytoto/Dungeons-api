@@ -28,19 +28,21 @@ public class ItemsServiceImpl implements ItemsService {
     }
 
     @Override
-    public void equipItem(long itemId, long unitId, UserContext context) throws ServiceException {
+    public Item equipItem(long itemId, long unitId, UserContext context) throws ServiceException {
         checkItemRights(itemId, context.getToken().getUserId());
         final var unit = unitRepository.getReferenceById(unitId);
         if (unit.getOwnerId() != context.getToken().getUserId()) {
             throw new ServiceException("You cannot control not your units");
         }
         unitItemsRepository.save(new EquippedItem(itemId, unitId));
+        return repository.findById(itemId).orElseThrow(() -> new ServiceException("Failed to find item"));
     }
 
     @Override
-    public void unEquipItem(long itemId, UserContext context) throws ServiceException {
+    public Item unEquipItem(long itemId, UserContext context) throws ServiceException {
         checkItemRights(itemId, context.getToken().getUserId());
         unitItemsRepository.deleteByItemId(itemId);
+        return repository.findById(itemId).orElseThrow(() -> new ServiceException("Failed to find item"));
     }
 
     private void checkItemRights(long itemId, long userId) throws ServiceException {
