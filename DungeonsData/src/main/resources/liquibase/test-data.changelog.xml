@@ -164,8 +164,8 @@
             <column name="offence_points" value="1"/>
         </insert>
         <insert tableName="units">
-            <column name="id" value="6"/>
-            <column name="owner_id" value="4"/>
+            <column name="id" value="6000"/>
+            <column name="owner_id" value="4000"/>
             <column name="hp" value="100"/>
             <column name="max_hp" value="100"/>
             <column name="name" value="Gassan"/>
