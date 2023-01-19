@@ -14,38 +14,38 @@
             <changeSetExecuted id="initial-events" author="gassan" changeLogFile="liquibase/initial-setup-events.xml"/>
         </preConditions>
         <insert tableName="users">
-            <column name="id" value="1"/>
+            <column name="id" value="1000"/>
             <column name="name" value="gassan"/>
             <column name="password_sha" value=""/>
             <column name="role" value="Player"/>
         </insert>
         <insert tableName="users">
-            <column name="id" value="2"/>
+            <column name="id" value="2000"/>
             <column name="name" value="server"/>
             <column name="password_sha" value="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"/>
             <column name="role" value="Server"/>
         </insert>
         <insert tableName="users">
-            <column name="id" value="3"/>
+            <column name="id" value="3000"/>
             <column name="name" value="test1"/>
             <column name="password_sha" value="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"/>
             <column name="role" value="Player"/>
         </insert>
         <insert tableName="users">
-            <column name="id" value="4"/>
+            <column name="id" value="4000"/>
             <column name="name" value="test2"/>
             <column name="password_sha" value="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"/>
             <column name="role" value="Player"/>
         </insert>
         <insert tableName="tokens">
-            <column name="user_id" value="1"/>
+            <column name="user_id" value="1000"/>
             <column name="permanent" value="true"/>
             <column name="valid_to" value="3000-01-01 00:00:00.00"/>
             <column name="value" value="permanent"/>
         </insert>
         <insert tableName="units">
-            <column name="id" value="1"/>
-            <column name="owner_id" value="3"/>
+            <column name="id" value="1000"/>
+            <column name="owner_id" value="3000"/>
             <column name="hp" value="100"/>
             <column name="max_hp" value="100"/>
             <column name="name" value="Niel"/>
@@ -62,14 +62,14 @@
             <column name="unit_type" value="HumanWarrior"/>
         </insert>
         <insert tableName="human_warrior_skills">
-            <column name="id" value="1"/>
-            <column name="unit_id" value="1"/>
+            <column name="id" value="1000"/>
+            <column name="unit_id" value="1000"/>
             <column name="defence_points" value="1"/>
             <column name="offence_points" value="1"/>
         </insert>
         <insert tableName="units">
-            <column name="id" value="2"/>
-            <column name="owner_id" value="3"/>
+            <column name="id" value="2000"/>
+            <column name="owner_id" value="3000"/>
             <column name="hp" value="100"/>
             <column name="max_hp" value="100"/>
             <column name="name" value="Dan"/>
@@ -86,14 +86,14 @@
             <column name="unit_type" value="HumanWarrior"/>
         </insert>
         <insert tableName="human_warrior_skills">
-            <column name="id" value="2"/>
-            <column name="unit_id" value="2"/>
+            <column name="id" value="2000"/>
+            <column name="unit_id" value="2000"/>
             <column name="defence_points" value="1"/>
             <column name="offence_points" value="1"/>
         </insert>
         <insert tableName="units">
-            <column name="id" value="3"/>
-            <column name="owner_id" value="3"/>
+            <column name="id" value="3000"/>
+            <column name="owner_id" value="3000"/>
             <column name="hp" value="100"/>
             <column name="max_hp" value="100"/>
             <column name="name" value="Tom"/>
@@ -110,14 +110,14 @@
             <column name="unit_type" value="HumanWarrior"/>
         </insert>
         <insert tableName="human_warrior_skills">
-            <column name="id" value="3"/>
-            <column name="unit_id" value="3"/>
+            <column name="id" value="3000"/>
+            <column name="unit_id" value="3000"/>
             <column name="defence_points" value="1"/>
             <column name="offence_points" value="1"/>
         </insert>
         <insert tableName="units">
-            <column name="id" value="4"/>
-            <column name="owner_id" value="3"/>
+            <column name="id" value="4000"/>
+            <column name="owner_id" value="3000"/>
             <column name="hp" value="100"/>
             <column name="max_hp" value="100"/>
             <column name="name" value="Jean-Paul"/>
@@ -134,14 +134,14 @@
             <column name="unit_type" value="HumanWarrior"/>
         </insert>
         <insert tableName="human_warrior_skills">
-            <column name="id" value="4"/>
-            <column name="unit_id" value="4"/>
+            <column name="id" value="4000"/>
+            <column name="unit_id" value="4000"/>
             <column name="defence_points" value="1"/>
             <column name="offence_points" value="1"/>
         </insert>
         <insert tableName="units">
-            <column name="id" value="5"/>
-            <column name="owner_id" value="4"/>
+            <column name="id" value="5000"/>
+            <column name="owner_id" value="4000"/>
             <column name="hp" value="100"/>
             <column name="max_hp" value="100"/>
             <column name="name" value="Tufan"/>
@@ -158,8 +158,8 @@
             <column name="unit_type" value="HumanWarrior"/>
         </insert>
         <insert tableName="human_warrior_skills">
-            <column name="id" value="5"/>
-            <column name="unit_id" value="5"/>
+            <column name="id" value="5000"/>
+            <column name="unit_id" value="5000"/>
             <column name="defence_points" value="1"/>
             <column name="offence_points" value="1"/>
         </insert>
@@ -182,14 +182,14 @@
             <column name="unit_type" value="HumanWarrior"/>
         </insert>
         <insert tableName="human_warrior_skills">
-            <column name="id" value="6"/>
-            <column name="unit_id" value="6"/>
+            <column name="id" value="6000"/>
+            <column name="unit_id" value="6000"/>
             <column name="defence_points" value="1"/>
             <column name="offence_points" value="1"/>
         </insert>
         <insert tableName="units">
-            <column name="id" value="7"/>
-            <column name="owner_id" value="4"/>
+            <column name="id" value="7000"/>
+            <column name="owner_id" value="4000"/>
             <column name="hp" value="100"/>
             <column name="max_hp" value="100"/>
             <column name="name" value="Frostan"/>
@@ -206,14 +206,14 @@
             <column name="unit_type" value="HumanWarrior"/>
         </insert>
         <insert tableName="human_warrior_skills">
-            <column name="id" value="7"/>
-            <column name="unit_id" value="7"/>
+            <column name="id" value="7000"/>
+            <column name="unit_id" value="7000"/>
             <column name="defence_points" value="1"/>
             <column name="offence_points" value="1"/>
         </insert>
         <insert tableName="units">
-            <column name="id" value="8"/>
-            <column name="owner_id" value="4"/>
+            <column name="id" value="8000"/>
+            <column name="owner_id" value="4000"/>
             <column name="hp" value="100"/>
             <column name="max_hp" value="100"/>
             <column name="name" value="Sobadan"/>
@@ -230,27 +230,27 @@
             <column name="unit_type" value="HumanWarrior"/>
         </insert>
         <insert tableName="human_warrior_skills">
-            <column name="id" value="8"/>
-            <column name="unit_id" value="8"/>
+            <column name="id" value="8000"/>
+            <column name="unit_id" value="8000"/>
             <column name="defence_points" value="1"/>
             <column name="offence_points" value="1"/>
         </insert>
         <insert tableName="items">
-            <column name="id" value="1"/>
-            <column name="user_id" value="3"/>
+            <column name="id" value="1000"/>
+            <column name="user_id" value="3000"/>
             <column name="name" value="Woody's boot"/>
             <column name="rarity" value="Legendary"/>
             <column name="item_type" value="Boots"/>
         </insert>
         <insert tableName="items">
-            <column name="id" value="2"/>
-            <column name="user_id" value="4"/>
+            <column name="id" value="2000"/>
+            <column name="user_id" value="4000"/>
             <column name="name" value="Woody's boot"/>
             <column name="rarity" value="Legendary"/>
             <column name="item_type" value="Boots"/>
         </insert>
         <insert tableName="events">
-            <column name="id" value="1"/>
+            <column name="id" valueSequenceNext="s_events_id"/>
             <column name="event_type" value="PhoenixRaid"/>
             <column name="status" value="Planned"/>
         </insert>
