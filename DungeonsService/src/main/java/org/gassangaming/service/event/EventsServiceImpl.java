@@ -54,8 +54,8 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public Collection<Event> status(long userId) {
-        return eventRepository.findAllForUser(userId);
+    public Collection<EventInstance> status(long userId) {
+        return eventInstanceRepository.findAllByUserId(userId);
     }
 
     @Override

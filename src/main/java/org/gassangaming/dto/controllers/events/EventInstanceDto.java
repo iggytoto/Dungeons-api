@@ -21,6 +21,9 @@ public class EventInstanceDto extends DtoBase {
     private EventType eventType;
 
     public static EventInstanceDto of(EventInstance e) {
+        if (e == null) {
+            return null;
+        }
         return builder()
                 .id(e.getId())
                 .eventId(e.getEventId())

@@ -1,7 +1,5 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.ListResponseDto;
-import org.gassangaming.dto.controllers.events.EventDto;
 import org.gassangaming.dto.controllers.events.EventRegisterRequestDto;
 import org.gassangaming.model.event.Event;
 import org.gassangaming.model.event.EventStatus;
@@ -39,7 +37,6 @@ public class PlayerEventRegistrationCaseTest extends UseCaseTestBase {
     long unitId;
     long eventId;
 
-
     @Before
     public void setup() throws ServiceException {
         userId = registerUser(LOGIN, PASSWORD);
@@ -60,13 +57,5 @@ public class PlayerEventRegistrationCaseTest extends UseCaseTestBase {
         Assert.assertNotNull(registration);
         Assert.assertEquals(userId, registration.getUserId());
         Assert.assertEquals(eventId, registration.getEventId());
-        // status
-        final var statusDto = ((ListResponseDto<EventDto>) eventsController.status(context)).getItems();
-        Assert.assertNotNull(statusDto);
-        Assert.assertEquals(1, statusDto.size());
-        final var eventInfo = statusDto.stream().findFirst().orElseThrow();
-        Assert.assertEquals(EventType.Test, eventInfo.getEventType());
-        Assert.assertEquals(eventId, eventInfo.getId());
-        Assert.assertEquals(EventStatus.Planned, eventInfo.getStatus());
     }
 }

@@ -40,7 +40,7 @@ public class EventsController {
 
     @GetMapping(PATH + STATUS_PATH)
     public DtoBase status(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
-        return ListResponseDto.of(eventsService.status(context.getToken().getUserId()).stream().map(EventDto::of).collect(Collectors.toList()));
+        return ListResponseDto.of(eventsService.status(context.getToken().getUserId()).stream().map(EventInstanceDto::of).collect(Collectors.toList()));
     }
 
     @PostMapping(PATH + APPLY_SERVER_PATH)

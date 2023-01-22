@@ -1,6 +1,5 @@
 package org.gassangaming.service.event;
 
-import org.gassangaming.model.event.Event;
 import org.gassangaming.model.event.EventInstance;
 import org.gassangaming.model.event.EventType;
 import org.gassangaming.model.unit.Unit;
@@ -27,7 +26,7 @@ public interface EventsService {
     /**
      * Gets status of all events on which player registered
      */
-    Collection<Event> status(long userId);
+    Collection<EventInstance> status(long userId);
 
 
     /**
