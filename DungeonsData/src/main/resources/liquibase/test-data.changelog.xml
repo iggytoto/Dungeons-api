@@ -254,5 +254,10 @@
             <column name="event_type" value="PhoenixRaid"/>
             <column name="status" value="Planned"/>
         </insert>
+        <insert tableName="events">
+            <column name="id" valueSequenceNext="s_events_id"/>
+            <column name="event_type" value="TrainingMatch3x3"/>
+            <column name="status" value="Planned"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

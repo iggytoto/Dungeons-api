@@ -14,20 +14,24 @@ import java.io.Serializable;
 @Setter
 @Table(name = UserEventRegistration.TABLE_NAME)
 @IdClass(UserEventRegistration.UserEventRegistrationId.class)
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserEventRegistration implements Serializable{
+public class UserEventRegistration implements Serializable {
 
     public static final String TABLE_NAME = "events_users";
     public static final String USER_ID_COLUMN_NAME = Constants.USER_ID_FOREIGN_KEY_COLUMN_NAME;
     public static final String EVENT_ID_COLUMN_NAME = "event_id";
 
     @Id
-    @Column(name = USER_ID_COLUMN_NAME)
-    protected long userId;
+    @Column(name = USER_ID_COLUMN_NAME, insertable = false, updatable = false)
+    private long userId;
     @Id
     @Column(name = EVENT_ID_COLUMN_NAME)
-    protected long eventId;
+    private long eventId;
+
+    public UserEventRegistration(long userId, long eventId) {
+        this.userId = userId;
+        this.eventId = eventId;
+    }
 
     @NoArgsConstructor
     @AllArgsConstructor

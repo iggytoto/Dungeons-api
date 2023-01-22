@@ -1,4 +1,4 @@
-package org.gassangaming.service.event;
+package org.gassangaming.service.event.result;
 
 import lombok.Data;
 import org.gassangaming.model.event.EventType;

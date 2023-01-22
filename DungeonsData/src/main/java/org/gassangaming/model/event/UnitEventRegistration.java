@@ -16,7 +16,7 @@ import java.io.Serializable;
 @IdClass(UnitEventRegistration.UnitEventRegistrationId.class)
 @AllArgsConstructor
 @NoArgsConstructor
-public class UnitEventRegistration implements Serializable{
+public class UnitEventRegistration implements Serializable {
 
     public static final String TABLE_NAME = "events_units";
     public static final String EVENT_ID_COLUMN_NAME = "event_id";
@@ -27,7 +27,7 @@ public class UnitEventRegistration implements Serializable{
     @Column(name = EVENT_ID_COLUMN_NAME)
     protected long eventId;
     @Id
-    @Column(name = UNIT_ID_COLUMN_NAME)
+    @Column(name = UNIT_ID_COLUMN_NAME, insertable = false, updatable = false)
     protected long unitId;
     @Id
     @Column(name = USER_ID_COLUMN_NAME)

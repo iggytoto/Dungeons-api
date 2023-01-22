@@ -1,4 +1,4 @@
-package org.gassangaming.service.periodic;
+package org.gassangaming.service.periodic.events;
 
 import org.gassangaming.model.event.*;
 import org.gassangaming.repository.event.EventInstanceRepository;
@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Periodic task that processes the Phoenix raid events.
+ */
 @Component
 public class PhoenixRaidEventHandlingProcessTask {
 

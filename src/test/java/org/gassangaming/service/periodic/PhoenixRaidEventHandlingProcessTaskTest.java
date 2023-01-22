@@ -10,6 +10,7 @@ import org.gassangaming.repository.event.EventInstanceRepository;
 import org.gassangaming.repository.event.EventRepository;
 import org.gassangaming.service.event.EventsService;
 import org.gassangaming.service.exception.ServiceException;
+import org.gassangaming.service.periodic.events.PhoenixRaidEventHandlingProcessTask;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

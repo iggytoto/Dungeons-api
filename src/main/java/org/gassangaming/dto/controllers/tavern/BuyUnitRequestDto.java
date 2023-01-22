@@ -1,7 +1,8 @@
-package org.gassangaming.dto;
+package org.gassangaming.dto.controllers.tavern;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.gassangaming.dto.DtoBase;
 import org.gassangaming.model.unit.UnitType;
 
 @EqualsAndHashCode(callSuper = true)

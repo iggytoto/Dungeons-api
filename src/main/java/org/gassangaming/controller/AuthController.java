@@ -2,10 +2,10 @@ package org.gassangaming.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.io.BaseEncoding;
-import org.gassangaming.dto.LoginRequestDto;
-import org.gassangaming.dto.LoginResponseDto;
-import org.gassangaming.dto.RegisterRequestDto;
-import org.gassangaming.dto.RegisterResponseDto;
+import org.gassangaming.dto.controllers.login.LoginRequestDto;
+import org.gassangaming.dto.controllers.login.LoginResponseDto;
+import org.gassangaming.dto.controllers.login.RegisterRequestDto;
+import org.gassangaming.dto.controllers.login.RegisterResponseDto;
 import org.gassangaming.dto.DtoBase;
 import org.gassangaming.dto.ErrorResponseDto;
 import org.gassangaming.service.auth.AuthService;

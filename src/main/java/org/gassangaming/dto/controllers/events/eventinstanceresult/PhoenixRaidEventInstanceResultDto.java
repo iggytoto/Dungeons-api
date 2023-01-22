@@ -3,7 +3,7 @@ package org.gassangaming.dto.controllers.events.eventinstanceresult;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.gassangaming.service.event.PhoenixRaidEventInstanceResult;
+import org.gassangaming.service.event.result.PhoenixRaidEventInstanceResult;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

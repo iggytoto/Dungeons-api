@@ -1,12 +1,9 @@
-package org.gassangaming.service.barrack;
+package org.gassangaming.service.event.resultprocess;
 
 import org.gassangaming.model.event.EventType;
-import org.gassangaming.model.unit.Activity;
-import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.unit.UnitRepository;
-import org.gassangaming.service.event.EventInstanceResult;
-import org.gassangaming.service.event.EventInstanceResultProcessStrategy;
-import org.gassangaming.service.event.PhoenixRaidEventInstanceResult;
+import org.gassangaming.service.event.result.EventInstanceResult;
+import org.gassangaming.service.event.result.PhoenixRaidEventInstanceResult;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

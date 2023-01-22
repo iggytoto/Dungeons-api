@@ -1,4 +1,4 @@
-package org.gassangaming.dto;
+package org.gassangaming.dto.controllers.events;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -6,7 +6,6 @@ import org.gassangaming.dto.DtoBase;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class RegisterRequestDto extends DtoBase {
-    String login;
-    String password;
+public class EventCancelRequestDto extends DtoBase {
+    long eventId;
 }

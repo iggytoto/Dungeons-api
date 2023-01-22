@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.gassangaming.dto.DtoBase;
 import org.gassangaming.model.event.EventType;
-import org.gassangaming.service.event.EventInstanceResult;
+import org.gassangaming.service.event.result.EventInstanceResult;
 
 import java.util.HashMap;
 

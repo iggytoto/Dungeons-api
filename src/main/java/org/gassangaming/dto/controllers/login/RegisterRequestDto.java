@@ -1,13 +1,12 @@
-package org.gassangaming.dto;
+package org.gassangaming.dto.controllers.login;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.gassangaming.dto.DtoBase;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
-public class RegisterResponseDto extends DtoBase {
-    long userId;
+public class RegisterRequestDto extends DtoBase {
+    String login;
+    String password;
 }

@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
+/**
+ * Periodic task that heals units while they idle
+ */
 @Component
 public class IdleUnitHealingProcessTask {
 

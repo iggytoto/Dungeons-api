@@ -12,7 +12,7 @@ import org.gassangaming.model.unit.human.HumanWarrior;
 import org.gassangaming.repository.event.UnitEventRegistrationRepository;
 import org.gassangaming.repository.event.UserEventInstanceRepository;
 import org.gassangaming.repository.event.UserEventRegistrationRepository;
-import org.gassangaming.service.event.EventInstanceResult;
+import org.gassangaming.service.event.result.EventInstanceResult;
 import org.gassangaming.service.exception.ServiceException;
 import org.junit.Assert;
 import org.junit.Before;

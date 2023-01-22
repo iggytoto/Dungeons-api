@@ -1,6 +1,5 @@
 package org.gassangaming.model.event;
 
 public enum EventType {
-    Test,
-    PhoenixRaid
+    Test, PhoenixRaid, TrainingMatch3x3
 }

@@ -1,6 +1,6 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.BuyUnitRequestDto;
+import org.gassangaming.dto.controllers.tavern.BuyUnitRequestDto;
 import org.gassangaming.dto.ListResponseDto;
 import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.model.unit.UnitType;

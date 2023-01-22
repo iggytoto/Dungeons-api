@@ -1,6 +1,10 @@
 package org.gassangaming.controller;
 
 import org.gassangaming.dto.*;
+import org.gassangaming.dto.controllers.barracks.ChangeUnitBattleBehaviorRequestDto;
+import org.gassangaming.dto.controllers.barracks.ChangeUnitNameRequestDto;
+import org.gassangaming.dto.controllers.barracks.EquipItemRequestDto;
+import org.gassangaming.dto.controllers.barracks.UnEquipItemRequestDto;
 import org.gassangaming.dto.items.ItemDto;
 import org.gassangaming.dto.skills.UnitSkillsDto;
 import org.gassangaming.dto.skills.UpgradeUnitSkillsRequestDto;

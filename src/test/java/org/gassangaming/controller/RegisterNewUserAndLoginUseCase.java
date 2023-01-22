@@ -1,9 +1,9 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.LoginRequestDto;
-import org.gassangaming.dto.LoginResponseDto;
-import org.gassangaming.dto.RegisterRequestDto;
-import org.gassangaming.dto.RegisterResponseDto;
+import org.gassangaming.dto.controllers.login.LoginRequestDto;
+import org.gassangaming.dto.controllers.login.LoginResponseDto;
+import org.gassangaming.dto.controllers.login.RegisterRequestDto;
+import org.gassangaming.dto.controllers.login.RegisterResponseDto;
 import org.gassangaming.repository.TokenRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
