@@ -15,9 +15,9 @@ import java.util.HashMap;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "eventType", visible = true)
 @JsonSubTypes({@JsonSubTypes.Type(PhoenixRaidEventInstanceResultDto.class)})
 public abstract class EventInstanceResultDto extends DtoBase {
-    private long eventInstanceId;
-    private EventType eventType;
-    private HashMap<Long, Integer> unitsHitPoints;
+    protected long eventInstanceId;
+    protected EventType eventType;
+    protected HashMap<Long, Integer> unitsHitPoints;
 
     public abstract EventInstanceResult toDomain();
 }
