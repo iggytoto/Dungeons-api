@@ -352,10 +352,5 @@
                                  constraintName="match_results_fk_user_two_id"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="match_results"
-                                 baseColumnNames="winner_user_id"
-                                 constraintName="match_results_fk_winner_user_id"
-                                 referencedTableName="users"
-                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
