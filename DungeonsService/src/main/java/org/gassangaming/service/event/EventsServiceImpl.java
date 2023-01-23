@@ -33,7 +33,7 @@ public class EventsServiceImpl implements EventsService {
     Collection<EventInstanceResultProcessStrategy> eventInstanceResultProcessStrategies;
 
     @Override
-    public void register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException {
+    public Event register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException {
         final var event = eventRepository.findLatestPlannedByType(eventType);
         if (event == null) {
             throw new ServiceException("Current event is not exists");
@@ -54,6 +54,7 @@ public class EventsServiceImpl implements EventsService {
             unitEventRegistrationRepository.save(new UnitEventRegistration(eventId, u.getId(), userId));
             unitRepository.updateActivityByUnitId(u.getId(), Activity.Event);
         });
+        return event;
     }
 
     @Override

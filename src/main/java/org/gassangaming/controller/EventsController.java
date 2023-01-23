@@ -32,8 +32,7 @@ public class EventsController {
     @PostMapping(PATH + REGISTER_PATH)
     public DtoBase register(@RequestBody EventRegisterRequestDto dto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
-            eventsService.register(dto.getUnitsIds(), dto.getEventType(), context.getToken().getUserId());
-            return new OkResponseDto();
+            return EventDto.of(eventsService.register(dto.getUnitsIds(), dto.getEventType(), context.getToken().getUserId()));
         } catch (ServiceException se) {
             return ErrorResponseDto.Of(se.getMessage());
         }

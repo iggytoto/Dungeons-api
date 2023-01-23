@@ -1,5 +1,6 @@
 package org.gassangaming.service.event;
 
+import org.gassangaming.model.event.Event;
 import org.gassangaming.model.event.EventInstance;
 import org.gassangaming.model.event.EventType;
 import org.gassangaming.model.unit.Unit;
@@ -22,7 +23,7 @@ public interface EventsService {
      * Register player ream participation in event
      */
     @Transactional
-    void register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException;
+    Event register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException;
 
     /**
      * Gets status of all events on which player registered
