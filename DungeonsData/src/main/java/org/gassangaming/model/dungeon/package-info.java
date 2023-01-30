@@ -7,6 +7,5 @@
  * that enters the dungeon and moves by pathes between rooms.
  * While in the dungeon expedition may or may not trigger {@link org.gassangaming.model.dungeon.DungeonEvent} found
  * loot or encounter etc.
- *
  */
 package org.gassangaming.model.dungeon;

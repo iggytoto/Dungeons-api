@@ -120,5 +120,37 @@
                                  constraintName="fk_dungeon_expedition_units_unit_id"
                                  referencedTableName="units"
                                  referencedColumnNames="id"/>
+        <!--        dungeon expedition items-->
+        <createTable tableName="dungeon_expedition_items">
+            <column name="item_id" type="int"/>
+            <column name="expedition_id" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="dungeon_expedition_items" columnNames="expedition_id,item_id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_expedition_items" baseColumnNames="expedition_id"
+                                 constraintName="fk_dungeon_expedition_units_expedition_id"
+                                 referencedTableName="dungeon_expeditions"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_expedition_items" baseColumnNames="item_id"
+                                 constraintName="fk_dungeon_expedition_units_item_id"
+                                 referencedTableName="items"
+                                 referencedColumnNames="id"/>
+        <!--        dungeon instance expedition locations-->
+        <createTable tableName="dungeon_instance_expedition_location">
+            <column name="expedition_id" type="int"/>
+            <column name="dungeon_instance_id" type="int"/>
+            <column name="location_id" type="int"/>
+            <column name="is_room" type="boolean"/>
+        </createTable>
+        <addPrimaryKey tableName="dungeon_instance_expedition_location"
+                       columnNames="dungeon_instance_id,expedition_id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_instance_expedition_location"
+                                 baseColumnNames="dungeon_instance_id"
+                                 constraintName="fk_dungeon_instance_expedition_location_instance_id"
+                                 referencedTableName="dungeon_instances"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_instance_expedition_location" baseColumnNames="expedition_id"
+                                 constraintName="fk_dungeon_instance_expedition_location_expedition_id"
+                                 referencedTableName="dungeon_expeditions"
+                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
