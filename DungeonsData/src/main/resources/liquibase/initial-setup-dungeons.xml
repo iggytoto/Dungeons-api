@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="initial-dungeons" author="gassan">
+        <preConditions>
+            <changeSetExecuted id="initial-table-users" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-table-units" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-table-items" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+        </preConditions>
+        <!--        sequences-->
+        <createSequence sequenceName="s_dungeon_event_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_dungeon_expedition_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_dungeon_instances_id" dataType="int" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="s_dungeon_rooms_id" dataType="int" startValue="1" incrementBy="1"/>
+        <!--        dungeon instances-->
+        <createTable tableName="dungeon_instances">
+            <column name="id" type="int" defaultValueSequenceNext="s_dungeon_instances_id">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+        <!--        dungeon rooms-->
+        <createTable tableName="dungeon_rooms">
+            <column name="id" type="int" defaultValueSequenceNext="s_dungeon_rooms_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="is_entrance" type="boolean" defaultValue="false"/>
+            <column name="dungeon_instance_id" type="int">
+                <constraints notNullConstraintName="c_nn_dungeon_rooms_dungeon_instance_id"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="dungeon_rooms" baseColumnNames="dungeon_instance_id"
+                                 constraintName="fk_dungeon_rooms_dungeon_instance_id"
+                                 referencedTableName="dungeon_instances"
+                                 referencedColumnNames="id"/>
+        <!--        dungeon paths-->
+        <createTable tableName="dungeon_paths">
+            <column name="dungeon_instance_id" type="int"/>
+            <column name="room_one_id" type="int"/>
+            <column name="room_two_id" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="dungeon_paths" columnNames="room_two_id,room_one_id,dungeon_instance_id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_paths" baseColumnNames="dungeon_instance_id"
+                                 constraintName="fk_dungeon_paths_dungeon_instance_id"
+                                 referencedTableName="dungeon_instances"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_paths" baseColumnNames="room_one_id"
+                                 constraintName="fk_dungeon_paths_dungeons_room_one_id"
+                                 referencedTableName="dungeon_rooms"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_paths" baseColumnNames="room_two_id"
+                                 constraintName="fk_dungeon_paths_dungeons_room_two_id"
+                                 referencedTableName="dungeon_rooms"
+                                 referencedColumnNames="id"/>
+        <!--        dungeon events-->
+        <createTable tableName="dungeon_event">
+            <column name="id" type="int" defaultValueSequenceNext="s_dungeon_event_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="event_type" type="varchar"/>
+            <column name="probability" type="float"/>
+        </createTable>
+        <!--        dungeon room items-->
+        <createTable tableName="dungeon_room_items">
+            <column name="item_id" type="int"/>
+            <column name="room_id" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="dungeon_room_items" columnNames="room_id,item_id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_room_items" baseColumnNames="item_id"
+                                 constraintName="fk_dungeon_room_items_item_id"
+                                 referencedTableName="items"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_room_items" baseColumnNames="room_id"
+                                 constraintName="fk_dungeon_room_items_room_id"
+                                 referencedTableName="dungeon_rooms"
+                                 referencedColumnNames="id"/>
+        <!--        dungeon room events-->
+        <createTable tableName="dungeon_rooms_events">
+            <column name="room_id" type="int"/>
+            <column name="dungeon_event_id" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="dungeon_rooms_events" columnNames="dungeon_event_id,room_id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_rooms_events" baseColumnNames="room_id"
+                                 constraintName="fk_dungeon_room_events_room_id"
+                                 referencedTableName="dungeon_rooms"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_rooms_events" baseColumnNames="dungeon_event_id"
+                                 constraintName="fk_dungeon_rooms_events_event_id"
+                                 referencedTableName="dungeon_event"
+                                 referencedColumnNames="id"/>
+        <!--        dungeon expeditions-->
+        <createTable tableName="dungeon_expeditions">
+            <column name="id" type="int" defaultValueSequenceNext="s_dungeon_expedition_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="dungeon_instance_id" type="int"/>
+            <column name="user_id" type="int"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="dungeon_expeditions" baseColumnNames="user_id"
+                                 constraintName="fk_dungeon_expeditions_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_expeditions" baseColumnNames="dungeon_instance_id"
+                                 constraintName="fk_dungeon_expeditions_dungeon_instance_id"
+                                 referencedTableName="dungeon_instances"
+                                 referencedColumnNames="id"/>
+        <!--        dungeon expedition units-->
+        <createTable tableName="dungeon_expedition_units">
+            <column name="unit_id" type="int"/>
+            <column name="expedition_id" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="dungeon_expedition_units" columnNames="expedition_id,unit_id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_expedition_units" baseColumnNames="expedition_id"
+                                 constraintName="fk_dungeon_expedition_units_expedition_id"
+                                 referencedTableName="dungeon_expeditions"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_expedition_units" baseColumnNames="unit_id"
+                                 constraintName="fk_dungeon_expedition_units_unit_id"
+                                 referencedTableName="units"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
