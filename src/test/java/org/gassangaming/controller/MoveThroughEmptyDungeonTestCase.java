@@ -65,7 +65,7 @@ public class MoveThroughEmptyDungeonTestCase extends UseCaseTestBase {
         dungeonRoomRepository.save(startRoom);
         final var endRoom = new DungeonRoom(true, di);
         dungeonRoomRepository.save(endRoom);
-        final var path = new DungeonPath(startRoom.getId(), endRoom.getId(), di);
+        final var path = new DungeonPath(startRoom.getId(), endRoom.getId(), di, 1);
         dungeonPathRepository.save(path);
         pathId = path.getId();
     }

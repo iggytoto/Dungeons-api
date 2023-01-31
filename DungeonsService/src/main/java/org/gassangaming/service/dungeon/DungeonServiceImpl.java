@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 public class DungeonServiceImpl implements DungeonService {
@@ -94,6 +95,7 @@ public class DungeonServiceImpl implements DungeonService {
         }
         location.setRoom(false);
         location.setLocationId(path.getId());
+        location.setLocationEnteredTimestamp(new Date());
         dungeonInstanceExpeditionLocationRepository.save(location);
     }
 

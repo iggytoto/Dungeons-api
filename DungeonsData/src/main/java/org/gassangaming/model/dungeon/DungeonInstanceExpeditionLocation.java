@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 import static org.gassangaming.model.dungeon.DungeonInstanceExpeditionLocation.TABLE_NAME;
 
@@ -19,6 +20,7 @@ public class DungeonInstanceExpeditionLocation {
     public static final String DUNGEON_INSTANCE_ID_COLUMN_NAME = "dungeon_instance_id";
     public static final String LOCATION_ID_COLUMN_NAME = "location_id";
     public static final String IS_ROOM_COLUMN_NAME = "is_room";
+    public static final String LOCATION_ENTERED_TIMESTAMP_COLUMN_NAME = "location_entered_timestamp";
 
     protected DungeonInstanceExpeditionLocation() {
     }
@@ -30,6 +32,7 @@ public class DungeonInstanceExpeditionLocation {
         this.locationId = locationId;
         this.isRoom = isRoom;
         this.expedition = expedition;
+        this.locationEnteredTimestamp = new Date();
     }
 
     @Id
@@ -47,8 +50,10 @@ public class DungeonInstanceExpeditionLocation {
     @Column(name = IS_ROOM_COLUMN_NAME)
     private boolean isRoom;
 
+    @Column(name = LOCATION_ENTERED_TIMESTAMP_COLUMN_NAME)
+    private Date locationEnteredTimestamp;
+
     @OneToOne
     @JoinColumn(name = EXPEDITION_ID_COLUMN_NAME)
     private DungeonExpedition expedition;
-
 }

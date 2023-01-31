@@ -149,6 +149,7 @@
             <column name="dungeon_instance_id" type="int"/>
             <column name="location_id" type="int"/>
             <column name="is_room" type="boolean"/>
+            <column name="location_entered_timestamp" type="datetime"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="dungeon_instance_expedition_location"
                                  baseColumnNames="dungeon_instance_id"

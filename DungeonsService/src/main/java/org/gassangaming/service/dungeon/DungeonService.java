@@ -34,5 +34,5 @@ public interface DungeonService {
      * Order expedition to move to target room
      */
     @Transactional
-    void moveExpeditionToRoom(long targetRoomId, long expeditionId, long userId) throws ServiceException;
+    void moveExpeditionToRoom(long targetPathId, long expeditionId, long userId) throws ServiceException;
 }

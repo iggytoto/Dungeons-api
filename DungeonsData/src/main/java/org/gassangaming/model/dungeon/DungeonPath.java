@@ -26,11 +26,12 @@ public class DungeonPath {
     public DungeonPath() {
     }
 
-    public DungeonPath(long fromRoomId, long toRoomId, DungeonInstance dungeonInstance) {
+    public DungeonPath(long fromRoomId, long toRoomId, DungeonInstance dungeonInstance, float distance) {
         this.fromRoomId = fromRoomId;
         this.toRoomId = toRoomId;
         this.dungeonInstanceId = dungeonInstance.getId();
         this.dungeonInstance = dungeonInstance;
+        this.distance = distance;
     }
 
     @Id
