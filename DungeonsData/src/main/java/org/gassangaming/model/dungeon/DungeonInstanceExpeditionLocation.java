@@ -23,6 +23,16 @@ public class DungeonInstanceExpeditionLocation {
     public static final String LOCATION_ID_COLUMN_NAME = "location_id";
     public static final String IS_ROOM_COLUMN_NAME = "is_room";
 
+    protected DungeonInstanceExpeditionLocation() {
+    }
+
+    public DungeonInstanceExpeditionLocation(long expeditionId, long dungeonInstanceId, long locationId, boolean isRoom) {
+        this.expeditionId = expeditionId;
+        this.dungeonInstanceId = dungeonInstanceId;
+        this.locationId = locationId;
+        this.isRoom = isRoom;
+    }
+
     @Id
     @Column
     private long expeditionId;

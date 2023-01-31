@@ -37,11 +37,13 @@
                                  referencedColumnNames="id"/>
         <!--        dungeon paths-->
         <createTable tableName="dungeon_paths">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
             <column name="dungeon_instance_id" type="int"/>
             <column name="room_one_id" type="int"/>
             <column name="room_two_id" type="int"/>
         </createTable>
-        <addPrimaryKey tableName="dungeon_paths" columnNames="room_two_id,room_one_id,dungeon_instance_id"/>
         <addForeignKeyConstraint baseTableName="dungeon_paths" baseColumnNames="dungeon_instance_id"
                                  constraintName="fk_dungeon_paths_dungeon_instance_id"
                                  referencedTableName="dungeon_instances"

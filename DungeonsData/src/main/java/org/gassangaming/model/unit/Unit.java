@@ -92,6 +92,10 @@ public class Unit {
         return maxHitPoints >= hitPoints;
     }
 
+    public boolean isDead() {
+        return hitPoints <= 0;
+    }
+
     public Valuable getTrainingCost() {
         return () -> 100;
     }

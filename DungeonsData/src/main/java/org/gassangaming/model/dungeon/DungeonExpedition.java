@@ -21,6 +21,14 @@ public class DungeonExpedition {
     public static final String DUNGEON_INSTANCE_ID_COLUMN_NAME = "dungeon_instance_id";
     public static final String USER_ID_COLUMN_NAME = Constants.USER_ID_FOREIGN_KEY_COLUMN_NAME;
 
+
+    public DungeonExpedition(){}
+    public DungeonExpedition(long dungeonInstanceId, long userId) {
+        this.dungeonInstanceId = dungeonInstanceId;
+        this.userId = userId;
+    }
+
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
@@ -32,4 +40,5 @@ public class DungeonExpedition {
 
     @Column(name = USER_ID_COLUMN_NAME)
     private long userId;
+
 }

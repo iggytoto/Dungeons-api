@@ -9,14 +9,14 @@ import org.gassangaming.model.Constants;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import static org.gassangaming.model.dungeon.DungeonExpeditionItems.TABLE_NAME;
+import static org.gassangaming.model.dungeon.DungeonExpeditionItem.TABLE_NAME;
 
 @Entity
 @Getter
 @Setter
 @Table(name = TABLE_NAME)
-@IdClass(DungeonExpeditionItems.DungeonExpeditionItemsId.class)
-public class DungeonExpeditionItems {
+@IdClass(DungeonExpeditionItem.DungeonExpeditionItemId.class)
+public class DungeonExpeditionItem {
 
     public static final String TABLE_NAME = "dungeon_expedition_items";
     public static final String EXPEDITION_ID_COLUMN_NAME = "expedition_id";
@@ -28,13 +28,13 @@ public class DungeonExpeditionItems {
 
     @Id
     @Column(name = ITEM_ID_COLUMN_NAME)
-    private long item_id;
+    private long itemId;
 
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class DungeonExpeditionItemsId implements Serializable {
+    public static class DungeonExpeditionItemId implements Serializable {
         private long expeditionId;
         private long itemId;
     }
