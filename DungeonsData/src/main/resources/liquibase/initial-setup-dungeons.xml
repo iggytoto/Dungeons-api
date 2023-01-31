@@ -138,13 +138,14 @@
                                  referencedColumnNames="id"/>
         <!--        dungeon instance expedition locations-->
         <createTable tableName="dungeon_instance_expedition_location">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
             <column name="expedition_id" type="int"/>
             <column name="dungeon_instance_id" type="int"/>
             <column name="location_id" type="int"/>
             <column name="is_room" type="boolean"/>
         </createTable>
-        <addPrimaryKey tableName="dungeon_instance_expedition_location"
-                       columnNames="dungeon_instance_id,expedition_id"/>
         <addForeignKeyConstraint baseTableName="dungeon_instance_expedition_location"
                                  baseColumnNames="dungeon_instance_id"
                                  constraintName="fk_dungeon_instance_expedition_location_instance_id"

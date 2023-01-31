@@ -90,6 +90,7 @@ public class ServerEventProcessingTestCase extends UseCaseTestBase {
         Assert.assertEquals(2, dataResponse.getItems().size());
         //save result
         final var saveResultDto = new TestResultDto();
+        saveResultDto.setEventInstanceId(eventInstanceId);
         eventsController.save(context, saveResultDto);
         final var updatedEvent = eventRepository.findById(eventId).orElseThrow();
         Assert.assertEquals(EventStatus.Closed, updatedEvent.getStatus());

@@ -26,8 +26,6 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PhoenixRaidEventHandlingProcessTaskTest extends UseCaseTestBase {
-
-
     @Autowired
     PhoenixRaidEventHandlingProcessTask task;
     @Autowired
@@ -62,7 +60,7 @@ public class PhoenixRaidEventHandlingProcessTaskTest extends UseCaseTestBase {
     public void test() {
         final var oldEvent = eventRepository.findLatestPlannedByType(EventType.PhoenixRaid);
         task.scheduledPhoenixEventHandler();
-        final var instances = eventInstanceRepository.findAll();
+        final var instances = eventInstanceRepository.findAll().stream().filter(ei -> ei.getEventType() == EventType.PhoenixRaid).toList();
         Assert.assertEquals(2, instances.size());
         Assert.assertTrue(instances.stream().allMatch(i -> i.getStatus().equals(EventInstanceStatus.WaitingForServer)));
         final var newEvent = eventRepository.findLatestPlannedByType(EventType.PhoenixRaid);
