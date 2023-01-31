@@ -19,7 +19,7 @@ import java.util.Collection;
 public class BarrackServiceImpl implements BarrackService {
 
     @Autowired
-    CommonUnitSkillsService unitEquipmentService;
+    CommonUnitSkillsService unitSkillsService;
     @Autowired
     UnitService unitService;
     @Autowired
@@ -57,6 +57,6 @@ public class BarrackServiceImpl implements BarrackService {
 
     @Override
     public UnitSkills UpgradeUnitEquipment(long equipmentId, UnitType unitType, String paramNameToUpgrade, UserContext context) throws ServiceException {
-        return unitEquipmentService.UpgradeUnitSkills(equipmentId, unitType, paramNameToUpgrade, context);
+        return unitSkillsService.UpgradeUnitSkills(equipmentId, unitType, paramNameToUpgrade, context);
     }
 }

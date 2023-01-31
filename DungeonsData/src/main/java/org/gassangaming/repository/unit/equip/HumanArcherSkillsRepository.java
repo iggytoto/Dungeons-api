@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import static org.gassangaming.repository.Constants.PARAM_1;
 
-public interface HumanArcherSkillsRepository extends UnitEquipRepository<HumanArcherSkills> {
+public interface HumanArcherSkillsRepository extends UnitSkillsRepository<HumanArcherSkills> {
 
     String GET_BY_UNIT_ID_QUERY = "select e from HumanArcherSkills e where e.unitId=:" + PARAM_1;
 

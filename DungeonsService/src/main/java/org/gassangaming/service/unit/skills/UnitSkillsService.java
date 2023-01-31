@@ -17,7 +17,7 @@ public interface UnitSkillsService<T extends UnitSkills> {
     /**
      * @return concrete class that this service process
      */
-    Class<T> getTargetEquipClass();
+    Class<T> getTargetSkillsClass();
 
     /**
      * @return concrete unit type to which unit skill refer to
@@ -32,7 +32,7 @@ public interface UnitSkillsService<T extends UnitSkills> {
 
     @Transactional
     default T saveOrUpdateEquip(UnitSkills e) throws ServiceException {
-        if (!getTargetEquipClass().isInstance(e)) {
+        if (!getTargetSkillsClass().isInstance(e)) {
             throw new ServiceException("given skills is not supported by the service");
         }
         return saveOrUpdate((T) e);

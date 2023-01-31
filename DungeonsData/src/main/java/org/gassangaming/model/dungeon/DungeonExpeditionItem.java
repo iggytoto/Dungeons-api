@@ -22,6 +22,14 @@ public class DungeonExpeditionItem {
     public static final String EXPEDITION_ID_COLUMN_NAME = "expedition_id";
     public static final String ITEM_ID_COLUMN_NAME = Constants.ITEM_ID_FOREIGN_KEY_COLUMN_NAME;
 
+    public DungeonExpeditionItem() {
+    }
+
+    public DungeonExpeditionItem(long expeditionId, long itemId) {
+        this.expeditionId = expeditionId;
+        this.itemId = itemId;
+    }
+
     @Id
     @Column(name = EXPEDITION_ID_COLUMN_NAME)
     private long expeditionId;

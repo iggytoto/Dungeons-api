@@ -36,6 +36,6 @@ public class CommonUnitSkillsServiceImpl implements CommonUnitSkillsService {
     }
 
     private <T extends UnitSkills> UnitSkillsService<T> getService(Class<T> equip) {
-        return concreteUnitEquipServices.stream().filter(dao -> dao.getTargetEquipClass().equals(equip)).findFirst().orElse(null);
+        return concreteUnitEquipServices.stream().filter(dao -> dao.getTargetSkillsClass().equals(equip)).findFirst().orElse(null);
     }
 }

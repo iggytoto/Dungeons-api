@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class DungeonExpeditionPathMovementTask {
+public class DungeonExpeditionPathMovementProcessTask {
 
     @Autowired
     DungeonInstanceExpeditionLocationRepository dungeonInstanceExpeditionLocationRepository;

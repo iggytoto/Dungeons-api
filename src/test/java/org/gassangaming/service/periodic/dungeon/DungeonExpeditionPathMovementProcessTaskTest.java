@@ -28,13 +28,13 @@ import java.util.ArrayList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DungeonExpeditionPathMovementTaskTest extends UseCaseTestBase {
+public class DungeonExpeditionPathMovementProcessTaskTest extends UseCaseTestBase {
 
     private static final String LOGIN = "naoihegrnoia";
     private static final String PASSWORD = "naoihegrnoia";
 
     @Autowired
-    DungeonExpeditionPathMovementTask task;
+    DungeonExpeditionPathMovementProcessTask task;
     @Autowired
     DungeonInstanceRepository dungeonInstanceRepository;
     @Autowired

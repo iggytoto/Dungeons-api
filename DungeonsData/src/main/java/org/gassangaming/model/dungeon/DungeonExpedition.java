@@ -3,6 +3,7 @@ package org.gassangaming.model.dungeon;
 import lombok.Getter;
 import lombok.Setter;
 import org.gassangaming.model.Constants;
+import org.gassangaming.model.item.Item;
 import org.gassangaming.model.unit.Unit;
 
 import javax.persistence.*;
@@ -51,7 +52,7 @@ public class DungeonExpedition {
 
     @ManyToMany
     @JoinTable(name = DungeonExpeditionItem.TABLE_NAME, joinColumns = @JoinColumn(name = DungeonExpeditionItem.EXPEDITION_ID_COLUMN_NAME), inverseJoinColumns = @JoinColumn(name = DungeonExpeditionItem.ITEM_ID_COLUMN_NAME))
-    private List<Unit> loot = new ArrayList<>();
+    private List<Item> loot = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "expedition")
     private DungeonInstanceExpeditionLocation location;

@@ -4,7 +4,6 @@ import org.gassangaming.model.Valuable;
 import org.gassangaming.model.skills.human.HumanArcherSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
-import org.gassangaming.model.unit.human.HumanArcher;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.repository.unit.equip.HumanArcherSkillsRepository;
 import org.gassangaming.service.account.AccountService;
@@ -28,7 +27,7 @@ public class HumanArcherUnitSkillsServiceImpl implements UnitSkillsService<Human
     UnitRepository unitRepository;
 
     @Override
-    public Class<HumanArcherSkills> getTargetEquipClass() {
+    public Class<HumanArcherSkills> getTargetSkillsClass() {
         return HumanArcherSkills.class;
     }
 
@@ -87,20 +86,20 @@ public class HumanArcherUnitSkillsServiceImpl implements UnitSkillsService<Human
         if (paramNameToUpgrade.equals(MID_RANGE_PARAM)) {
             switch (eqState.getMidRangePoints()) {
                 case 1 -> {
-                    u.setAttackSpeed(HumanArcher.ATTACK_SPEED_BASE * 1.5f);
-                    u.setMovementSpeed(HumanArcher.MOVE_SPEED_BASE + .25f);
+                    u.setAttackSpeed(u.getAttackSpeed() * 1.5f);
+                    u.setMovementSpeed(u.getMovementSpeed() + .25f);
                 }
                 case 2 -> {
-                    u.setAttackSpeed(HumanArcher.ATTACK_SPEED_BASE * 1.75f);
-                    u.setMovementSpeed(HumanArcher.MOVE_SPEED_BASE + .5f);
+                    u.setAttackSpeed(u.getAttackSpeed() * 1.75f);
+                    u.setMovementSpeed(u.getMovementSpeed() + .5f);
                 }
                 case 3 -> {
-                    u.setAttackSpeed(HumanArcher.ATTACK_SPEED_BASE * 2f);
-                    u.setMovementSpeed(HumanArcher.MOVE_SPEED_BASE + .75f);
+                    u.setAttackSpeed(u.getAttackSpeed() * 2f);
+                    u.setMovementSpeed(u.getMovementSpeed() + .75f);
                 }
                 case 4 -> {
-                    u.setAttackSpeed(HumanArcher.ATTACK_SPEED_BASE * 2.15f);
-                    u.setMovementSpeed(HumanArcher.MOVE_SPEED_BASE + 1f);
+                    u.setAttackSpeed(u.getAttackSpeed() * 2.15f);
+                    u.setMovementSpeed(u.getMovementSpeed() + 1f);
                 }
                 default -> {
                 }
@@ -108,24 +107,24 @@ public class HumanArcherUnitSkillsServiceImpl implements UnitSkillsService<Human
         } else if (paramNameToUpgrade.equals(LONG_RANGE_PARAM)) {
             switch (eqState.getLongRangePoints()) {
                 case 1 -> {
-                    u.setAttackRange(HumanArcher.ATTACK_RANGE_BASE + 2.5f);
-                    u.setDamage(HumanArcher.DAMAGE_BASE + 10);
-                    u.setMovementSpeed(HumanArcher.MOVE_SPEED_BASE - .5f);
+                    u.setAttackRange(u.getAttackRange() + 2.5f);
+                    u.setDamage(u.getDamage() + 10);
+                    u.setMovementSpeed(u.getMovementSpeed() - .5f);
                 }
                 case 2 -> {
-                    u.setAttackRange(HumanArcher.ATTACK_RANGE_BASE + 5f);
-                    u.setDamage(HumanArcher.DAMAGE_BASE + 20);
-                    u.setMovementSpeed(HumanArcher.MOVE_SPEED_BASE - 15f);
+                    u.setAttackRange(u.getAttackRange() + 5f);
+                    u.setDamage(u.getDamage() + 20);
+                    u.setMovementSpeed(u.getMovementSpeed() - 15f);
                 }
                 case 3 -> {
-                    u.setAttackRange(HumanArcher.ATTACK_RANGE_BASE + 6.5f);
-                    u.setDamage(HumanArcher.DAMAGE_BASE + 30);
-                    u.setMovementSpeed(HumanArcher.MOVE_SPEED_BASE - 1.25f);
+                    u.setAttackRange(u.getAttackRange() + 6.5f);
+                    u.setDamage(u.getDamage() + 30);
+                    u.setMovementSpeed(u.getMovementSpeed() - 1.25f);
                 }
                 case 4 -> {
-                    u.setAttackRange(HumanArcher.ATTACK_RANGE_BASE + 7.5f);
-                    u.setDamage(HumanArcher.DAMAGE_BASE + 45);
-                    u.setMovementSpeed(HumanArcher.MOVE_SPEED_BASE - 1.5f);
+                    u.setAttackRange(u.getAttackRange() + 7.5f);
+                    u.setDamage(u.getDamage() + 45);
+                    u.setMovementSpeed(u.getMovementSpeed() - 1.5f);
                 }
                 default -> {
                 }

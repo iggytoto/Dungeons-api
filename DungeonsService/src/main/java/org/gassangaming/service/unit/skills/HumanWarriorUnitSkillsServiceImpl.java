@@ -4,7 +4,6 @@ import org.gassangaming.model.Valuable;
 import org.gassangaming.model.skills.human.HumanWarriorSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
-import org.gassangaming.model.unit.human.HumanWarrior;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.repository.unit.equip.HumanWarriorSkillsRepository;
 import org.gassangaming.service.account.AccountService;
@@ -27,7 +26,7 @@ public class HumanWarriorUnitSkillsServiceImpl implements UnitSkillsService<Huma
 
 
     @Override
-    public Class<HumanWarriorSkills> getTargetEquipClass() {
+    public Class<HumanWarriorSkills> getTargetSkillsClass() {
         return HumanWarriorSkills.class;
     }
 
@@ -64,29 +63,29 @@ public class HumanWarriorUnitSkillsServiceImpl implements UnitSkillsService<Huma
         if (paramNameToUpgrade.equals(OffenceParamName)) {
             switch (eqState.getOffencePoints()) {
                 case 1 -> {
-                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.5f);
-                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .1f);
-                    u.setDamage(HumanWarrior.DAMAGE_BASE + 10);
+                    u.setAttackSpeed(u.getAttackSpeed() * 1.5f);
+                    u.setAttackRange(u.getAttackRange() + .1f);
+                    u.setDamage(u.getDamage() + 10);
                 }
                 case 2 -> {
-                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.66f);
-                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .11f);
-                    u.setDamage(HumanWarrior.DAMAGE_BASE + 15);
+                    u.setAttackSpeed(u.getAttackSpeed() * 1.66f);
+                    u.setAttackRange(u.getAttackRange() + .11f);
+                    u.setDamage(u.getDamage() + 15);
                 }
                 case 3 -> {
-                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.75f);
-                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .12f);
-                    u.setDamage(HumanWarrior.DAMAGE_BASE + 20);
+                    u.setAttackSpeed(u.getAttackSpeed() * 1.75f);
+                    u.setAttackRange(u.getAttackRange() + .12f);
+                    u.setDamage(u.getDamage() + 20);
                 }
                 case 4 -> {
-                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.8f);
-                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .125f);
-                    u.setDamage(HumanWarrior.DAMAGE_BASE + 25);
+                    u.setAttackSpeed(u.getAttackSpeed() * 1.8f);
+                    u.setAttackRange(u.getAttackRange() + .125f);
+                    u.setDamage(u.getDamage() + 25);
                 }
                 case 5 -> {
-                    u.setAttackSpeed(HumanWarrior.ATTACK_SPEED_BASE * 1.85f);
-                    u.setAttackRange(HumanWarrior.ATTACK_RANGE_BASE + .125f);
-                    u.setDamage(HumanWarrior.DAMAGE_BASE + 30);
+                    u.setAttackSpeed(u.getAttackSpeed() * 1.85f);
+                    u.setAttackRange(u.getAttackRange() + .125f);
+                    u.setDamage(u.getDamage() + 30);
                 }
                 default -> {
                 }
@@ -94,30 +93,30 @@ public class HumanWarriorUnitSkillsServiceImpl implements UnitSkillsService<Huma
         } else {
             switch (eqState.getDefencePoints()) {
                 case 1 -> {
-                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 50);
-                    u.setArmor(HumanWarrior.ARMOR_BASE + 10);
-                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - .5f);
+                    u.setMaxHitPoints(u.getMaxHitPoints() + 50);
+                    u.setArmor(u.getArmor() + 10);
+                    u.setMovementSpeed(u.getMovementSpeed() - .5f);
                 }
                 case 2 -> {
-                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 75);
-                    u.setArmor(HumanWarrior.ARMOR_BASE + 20);
-                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - 1f);
+                    u.setMaxHitPoints(u.getMaxHitPoints() + 75);
+                    u.setArmor(u.getArmor() + 20);
+                    u.setMovementSpeed(u.getMovementSpeed() - 1f);
                 }
                 case 3 -> {
-                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 100);
-                    u.setArmor(HumanWarrior.ARMOR_BASE + 25);
-                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - 1.25f);
+                    u.setMaxHitPoints(u.getMaxHitPoints() + 100);
+                    u.setArmor(u.getArmor() + 25);
+                    u.setMovementSpeed(u.getMovementSpeed() - 1.25f);
                 }
                 case 4 -> {
-                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 125);
-                    u.setArmor(HumanWarrior.ARMOR_BASE + 30);
-                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - 1.5f);
+                    u.setMaxHitPoints(u.getMaxHitPoints() + 125);
+                    u.setArmor(u.getArmor() + 30);
+                    u.setMovementSpeed(u.getMovementSpeed() - 1.5f);
                 }
                 case 5 -> {
-                    u.setMaxHitPoints(HumanWarrior.HP_BASE + 135);
-                    u.setArmor(HumanWarrior.ARMOR_BASE + 30);
-                    u.setMovementSpeed(HumanWarrior.MOVE_SPEED_BASE - 1.5f);
-                    u.setMagicResistance(HumanWarrior.MR_BASE + 15);
+                    u.setMaxHitPoints(u.getMaxHitPoints() + 135);
+                    u.setArmor(u.getArmor() + 30);
+                    u.setMovementSpeed(u.getMovementSpeed() - 1.5f);
+                    u.setMagicResistance(u.getMagicResistance() + 15);
                 }
                 default -> {
                 }

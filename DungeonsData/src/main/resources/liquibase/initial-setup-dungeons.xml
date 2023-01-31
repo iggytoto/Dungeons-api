@@ -61,13 +61,29 @@
                                  referencedTableName="dungeon_rooms"
                                  referencedColumnNames="id"/>
         <!--        dungeon events-->
-        <createTable tableName="dungeon_event">
+        <createTable tableName="dungeon_event_encounters">
             <column name="id" type="int" defaultValueSequenceNext="s_dungeon_event_id">
                 <constraints primaryKey="true"/>
             </column>
             <column name="event_type" type="varchar"/>
             <column name="probability" type="float"/>
+            <column name="description" type="varchar"/>
+            <column name="is_recurrent" type="boolean"/>
         </createTable>
+        <createTable tableName="dungeon_event_treasure">
+            <column name="id" type="int" defaultValueSequenceNext="s_dungeon_event_id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="event_type" type="varchar"/>
+            <column name="probability" type="float"/>
+            <column name="description" type="varchar"/>
+            <column name="is_recurrent" type="boolean"/>
+            <column name="item_id" type="int"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="dungeon_event_treasure" baseColumnNames="item_id"
+                                 constraintName="fk_dungeon_event_treasure_item_id"
+                                 referencedTableName="items"
+                                 referencedColumnNames="id"/>
         <!--        dungeon room items-->
         <createTable tableName="dungeon_room_items">
             <column name="item_id" type="int"/>

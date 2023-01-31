@@ -4,7 +4,6 @@ import org.gassangaming.model.Valuable;
 import org.gassangaming.model.skills.human.HumanSpearmanSkills;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.model.unit.UnitType;
-import org.gassangaming.model.unit.human.HumanSpearman;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.repository.unit.equip.HumanSpearmanSkillsRepository;
 import org.gassangaming.service.account.AccountService;
@@ -27,7 +26,7 @@ public class HumanSpearmanUnitSkillsServiceImpl implements UnitSkillsService<Hum
 
 
     @Override
-    public Class<HumanSpearmanSkills> getTargetEquipClass() {
+    public Class<HumanSpearmanSkills> getTargetSkillsClass() {
         return HumanSpearmanSkills.class;
     }
 
@@ -63,11 +62,11 @@ public class HumanSpearmanUnitSkillsServiceImpl implements UnitSkillsService<Hum
         final var u = unitRepository.findById(eqState.getUnitId());
         if (paramNameToUpgrade.equals(MID_RANGE_PARAM_NAME)) {
             switch (eqState.getMidRangePoints()) {
-                case 1 -> u.setDamage(HumanSpearman.HP_BASE + 15);
-                case 2 -> u.setDamage(HumanSpearman.HP_BASE + 25);
-                case 3 -> u.setDamage(HumanSpearman.HP_BASE + 35);
-                case 4 -> u.setDamage(HumanSpearman.HP_BASE + 45);
-                case 5 -> u.setDamage(HumanSpearman.HP_BASE + 60);
+                case 1 -> u.setDamage(u.getMaxHitPoints() + 15);
+                case 2 -> u.setDamage(u.getMaxHitPoints() + 25);
+                case 3 -> u.setDamage(u.getMaxHitPoints() + 35);
+                case 4 -> u.setDamage(u.getMaxHitPoints() + 45);
+                case 5 -> u.setDamage(u.getMaxHitPoints() + 60);
                 default -> {
                 }
             }

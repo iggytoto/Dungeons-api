@@ -28,7 +28,7 @@ public class HumanClericUnitSkillsServiceImpl implements UnitSkillsService<Human
 
 
     @Override
-    public Class<HumanClericSkills> getTargetEquipClass() {
+    public Class<HumanClericSkills> getTargetSkillsClass() {
         return HumanClericSkills.class;
     }
 
