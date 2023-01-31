@@ -14,7 +14,7 @@ import org.springframework.util.Assert;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RegisterNewUserAndLoginUseCase {
+public class RegisterNewUserAndLoginTestCase {
 
 
     private static final String LOGIN = "testLogin";

@@ -22,6 +22,15 @@ public class DungeonRoom {
     public static final String ENTRANCE_FLAG_COLUMN_NAME = "is_entrance";
     public static final String DUNGEON_INSTANCE_ID_COLUMN_NAME = "dungeon_instance_id";
 
+    public DungeonRoom() {
+    }
+
+    public DungeonRoom(boolean isEntrance, DungeonInstance dungeonInstance) {
+        this.isEntrance = isEntrance;
+        this.dungeonInstanceId = dungeonInstance.getId();
+        this.dungeonInstance = dungeonInstance;
+    }
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
@@ -31,14 +40,14 @@ public class DungeonRoom {
     @Column(name = ENTRANCE_FLAG_COLUMN_NAME)
     private boolean isEntrance;
 
-    @Column(name = DUNGEON_INSTANCE_ID_COLUMN_NAME)
+    @Column(name = DUNGEON_INSTANCE_ID_COLUMN_NAME, insertable = false, updatable = false)
     private long dungeonInstanceId;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = DungeonRoomItem.TABLE_NAME, joinColumns = @JoinColumn(name = DungeonRoomItem.ROOM_ID_COLUMN_NAME), inverseJoinColumns = @JoinColumn(name = DungeonRoomItem.ITEM_ID_COLUMN_NAME))
     Collection<Item> items = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = DungeonRoomEvent.TABLE_NAME, joinColumns = @JoinColumn(name = DungeonRoomEvent.ROOM_ID_COLUMN_NAME), inverseJoinColumns = @JoinColumn(name = DungeonRoomEvent.EVENT_ID_COLUMN_NAME))
     Collection<DungeonEvent> events = new ArrayList<>();
 

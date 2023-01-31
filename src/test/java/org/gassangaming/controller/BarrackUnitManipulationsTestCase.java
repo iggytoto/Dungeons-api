@@ -35,7 +35,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BarrackUnitManipulationsCaseTest extends UseCaseTestBase {
+public class BarrackUnitManipulationsTestCase extends UseCaseTestBase {
 
     private final static String NEW_NAME = "NEW_NAME";
 

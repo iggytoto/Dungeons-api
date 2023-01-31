@@ -7,9 +7,11 @@ import org.gassangaming.repository.item.ItemRepository;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+@Service
 public class DungeonServiceImpl implements DungeonService {
 
     @Autowired
@@ -48,7 +50,7 @@ public class DungeonServiceImpl implements DungeonService {
         dungeonInstance.getRooms().stream().filter(r -> r.getId() == startingRoomId).findFirst().orElseThrow(() -> new ServiceException("Failed to find starting room"));
         final var expedition = dungeonExpeditionRepository.save(new DungeonExpedition(dungeonInstanceId, userId));
         units.forEach(u -> dungeonExpeditionUnitsRepository.save(new DungeonExpeditionUnit(expedition.getId(), u.getId())));
-        dungeonInstanceExpeditionLocationRepository.save(new DungeonInstanceExpeditionLocation(expedition.getId(), dungeonInstanceId, startingRoomId, true));
+        dungeonInstanceExpeditionLocationRepository.save(new DungeonInstanceExpeditionLocation(expedition, dungeonInstanceId, startingRoomId, true));
         return expedition;
     }
 
@@ -71,8 +73,6 @@ public class DungeonServiceImpl implements DungeonService {
                 for (var rosterUnit : expeditionRoster) {
                     unitRepository.updateActivityByUnitId(rosterUnit.getUnitId(), Activity.Idle);
                 }
-                dungeonExpeditionUnitsRepository.deleteAll(expeditionRoster);
-                dungeonInstanceExpeditionLocationRepository.delete(currentLocation);
                 dungeonExpeditionRepository.delete(expedition);
             } else {
                 throw new ServiceException("Cannot return expedition from not entrance room of dungeon");
@@ -89,7 +89,7 @@ public class DungeonServiceImpl implements DungeonService {
         }
         final var room = findRoomById(location.getLocationId());
         final var path = findPathById(targetPathId);
-        if (path.getRoomOneId() != room.getId() || path.getRoomTwoId() != room.getId()) {
+        if (path.getFromRoomId() != room.getId()) {
             throw new ServiceException("Path should start from current location room");
         }
         location.setRoom(false);
@@ -106,7 +106,7 @@ public class DungeonServiceImpl implements DungeonService {
     }
 
     private DungeonInstanceExpeditionLocation findLocationByExpeditionId(long expeditionId) throws ServiceException {
-        return dungeonInstanceExpeditionLocationRepository.findByExpeditionId(expeditionId).orElseThrow(() -> new ServiceException("Failed to find location"));
+        return dungeonInstanceExpeditionLocationRepository.findById(expeditionId).orElseThrow(() -> new ServiceException("Failed to find location"));
     }
 
     private DungeonExpedition findExpeditionById(long expeditionId) throws ServiceException {

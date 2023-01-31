@@ -4,14 +4,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.Collection;
+import java.util.List;
 
 @Builder
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ListResponseDto<T extends DtoBase> extends DtoBase {
-    Collection<T> items;
-    public static ListResponseDto<?> of(Collection<? extends DtoBase> units){
-        return new ListResponseDto<>(units);
+    List<T> items;
+    public static ListResponseDto<?> of(List<? extends DtoBase> items){
+        return new ListResponseDto<>(items);
     }
 }

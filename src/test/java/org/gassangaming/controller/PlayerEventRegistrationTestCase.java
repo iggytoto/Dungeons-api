@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PlayerEventRegistrationCaseTest extends UseCaseTestBase {
+public class PlayerEventRegistrationTestCase extends UseCaseTestBase {
 
     private static final String LOGIN = "painfedgi";
     private static final String PASSWORD = "painfedgi";

@@ -36,6 +36,5 @@ public class DungeonRoomItem {
     public static class DungeonRoomItemId implements Serializable {
         private long roomId;
         private long itemId;
-        private long dungeonInstanceId;
     }
 }

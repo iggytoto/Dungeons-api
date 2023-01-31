@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HumanWarriorSkillsUpgradeCaseTest extends UseCaseTestBase {
+public class HumanWarriorSkillsUpgradeTestCase extends UseCaseTestBase {
 
     @Autowired
     HumanWarriorSkillsRepository equipmentRepository;

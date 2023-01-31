@@ -1,12 +1,9 @@
 package org.gassangaming.model.dungeon;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 import static org.gassangaming.model.dungeon.DungeonInstanceExpeditionLocation.TABLE_NAME;
 
@@ -15,8 +12,8 @@ import static org.gassangaming.model.dungeon.DungeonInstanceExpeditionLocation.T
 @Getter
 @Setter
 @Table(name = TABLE_NAME)
-@IdClass(DungeonInstanceExpeditionLocation.DungeonInstanceExpeditionLocationId.class)
 public class DungeonInstanceExpeditionLocation {
+
     public static final String TABLE_NAME = "dungeon_instance_expedition_location";
     public static final String EXPEDITION_ID_COLUMN_NAME = "expedition_id";
     public static final String DUNGEON_INSTANCE_ID_COLUMN_NAME = "dungeon_instance_id";
@@ -26,33 +23,32 @@ public class DungeonInstanceExpeditionLocation {
     protected DungeonInstanceExpeditionLocation() {
     }
 
-    public DungeonInstanceExpeditionLocation(long expeditionId, long dungeonInstanceId, long locationId, boolean isRoom) {
-        this.expeditionId = expeditionId;
+    public DungeonInstanceExpeditionLocation(DungeonExpedition expedition, long dungeonInstanceId, long locationId, boolean isRoom) {
+        this.id = expedition.getId();
+        this.expeditionId = expedition.getId();
         this.dungeonInstanceId = dungeonInstanceId;
         this.locationId = locationId;
         this.isRoom = isRoom;
+        this.expedition = expedition;
     }
 
     @Id
-    @Column
+    private long id;
+
+    @Column(name = EXPEDITION_ID_COLUMN_NAME, insertable = false, updatable = false)
     private long expeditionId;
 
-    @Id
-    @Column
+    @Column(name = DUNGEON_INSTANCE_ID_COLUMN_NAME)
     private long dungeonInstanceId;
 
-    @Column
+    @Column(name = LOCATION_ID_COLUMN_NAME)
     private long locationId;
 
-    @Column
+    @Column(name = IS_ROOM_COLUMN_NAME)
     private boolean isRoom;
 
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Getter
-    @Setter
-    public static class DungeonInstanceExpeditionLocationId implements Serializable {
-        long expeditionId;
-        long dungeonInstanceId;
-    }
+    @OneToOne
+    @JoinColumn(name = EXPEDITION_ID_COLUMN_NAME)
+    private DungeonExpedition expedition;
+
 }

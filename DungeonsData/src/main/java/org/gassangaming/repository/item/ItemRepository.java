@@ -16,7 +16,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     String GET_ALL_UNEQUIPPED_FOR_USER = "SELECT i FROM Item i LEFT JOIN EquippedItem ei ON i.id=ei.itemId WHERE ei.itemId is null and i.userId=:" + PARAM_1;
     String GET_ALL_FOR_UNIT_ID = "SELECT i FROM Item i LEFT JOIN EquippedItem ei ON i.id=ei.itemId WHERE ei.unitId=:" + PARAM_1;
-    String SET_OWNER_BY_IDS = "UPDATE Item i SET ownerId =:" + PARAM_2 + " WHERE i.id IN :" + PARAM_1;
+    String SET_OWNER_BY_IDS = "UPDATE Item i SET userId =:" + PARAM_2 + " WHERE i.id IN :" + PARAM_1;
 
     @Query(value = GET_ALL_UNEQUIPPED_FOR_USER)
     Collection<Item> getAllUnequippedItemsForPlayer(@Param(PARAM_1) long userId);

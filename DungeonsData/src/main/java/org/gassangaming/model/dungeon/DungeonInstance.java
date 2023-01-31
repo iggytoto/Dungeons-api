@@ -29,5 +29,8 @@ public class DungeonInstance {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dungeonInstance")
     private Collection<DungeonRoom> rooms = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dungeonInstance")
+    private Collection<DungeonPath> paths = new ArrayList<>();
+
 
 }
