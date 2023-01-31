@@ -20,6 +20,8 @@ public class DungeonPath {
     public static final String ROOM_ONE_ID_COLUMN_NAME = "room_one_id";
     public static final String ROOM_TWO_ID_COLUMN_NAME = "room_two_id";
     public static final String DUNGEON_INSTANCE_ID_COLUMN_NAME = "dungeon_instance_id";
+    public static final String DISTANCE_COLUMN_NAME = "distance";
+    public static final String DESCRIPTION_COLUMN_NAME = "description";
 
     public DungeonPath() {
     }
@@ -40,12 +42,17 @@ public class DungeonPath {
     @Column(name = ROOM_ONE_ID_COLUMN_NAME)
     private long fromRoomId;
 
-
     @Column(name = ROOM_TWO_ID_COLUMN_NAME)
     private long toRoomId;
 
     @Column(name = DUNGEON_INSTANCE_ID_COLUMN_NAME, insertable = false, updatable = false)
     private long dungeonInstanceId;
+
+    @Column(name = DISTANCE_COLUMN_NAME)
+    private float distance;
+
+    @Column(name = DESCRIPTION_COLUMN_NAME)
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = DUNGEON_INSTANCE_ID_COLUMN_NAME)

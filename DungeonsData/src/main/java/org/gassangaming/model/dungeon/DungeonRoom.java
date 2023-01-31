@@ -21,6 +21,8 @@ public class DungeonRoom {
     public static final String TABLE_NAME = "dungeon_rooms";
     public static final String ENTRANCE_FLAG_COLUMN_NAME = "is_entrance";
     public static final String DUNGEON_INSTANCE_ID_COLUMN_NAME = "dungeon_instance_id";
+    public static final String DESCRIPTION_COLUMN_NAME = "description";
+
 
     public DungeonRoom() {
     }
@@ -42,6 +44,9 @@ public class DungeonRoom {
 
     @Column(name = DUNGEON_INSTANCE_ID_COLUMN_NAME, insertable = false, updatable = false)
     private long dungeonInstanceId;
+
+    @Column(name = DESCRIPTION_COLUMN_NAME)
+    private String description;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = DungeonRoomItem.TABLE_NAME, joinColumns = @JoinColumn(name = DungeonRoomItem.ROOM_ID_COLUMN_NAME), inverseJoinColumns = @JoinColumn(name = DungeonRoomItem.ITEM_ID_COLUMN_NAME))

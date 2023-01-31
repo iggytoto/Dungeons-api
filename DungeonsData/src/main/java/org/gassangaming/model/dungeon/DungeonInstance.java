@@ -20,11 +20,16 @@ public class DungeonInstance {
 
     public static final String TABLE_NAME = "dungeon_instances";
 
+    public static final String DESCRIPTION_COLUMN_NAME = "description";
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(name = SEQUENCE_NAME, allocationSize = 1)
     private long id;
+
+    @Column(name = DESCRIPTION_COLUMN_NAME)
+    private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dungeonInstance")
     private Collection<DungeonRoom> rooms = new ArrayList<>();

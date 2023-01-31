@@ -20,6 +20,7 @@
             <column name="id" type="int" defaultValueSequenceNext="s_dungeon_instances_id">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="description" type="varchar"/>
         </createTable>
         <!--        dungeon rooms-->
         <createTable tableName="dungeon_rooms">
@@ -30,6 +31,7 @@
             <column name="dungeon_instance_id" type="int">
                 <constraints notNullConstraintName="c_nn_dungeon_rooms_dungeon_instance_id"/>
             </column>
+            <column name="description" type="varchar"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="dungeon_rooms" baseColumnNames="dungeon_instance_id"
                                  constraintName="fk_dungeon_rooms_dungeon_instance_id"
@@ -43,6 +45,8 @@
             <column name="dungeon_instance_id" type="int"/>
             <column name="room_one_id" type="int"/>
             <column name="room_two_id" type="int"/>
+            <column name="distance" type="float"/>
+            <column name="description" type="varchar"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="dungeon_paths" baseColumnNames="dungeon_instance_id"
                                  constraintName="fk_dungeon_paths_dungeon_instance_id"
