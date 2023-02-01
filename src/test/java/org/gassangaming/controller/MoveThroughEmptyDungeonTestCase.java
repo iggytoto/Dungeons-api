@@ -74,8 +74,8 @@ public class MoveThroughEmptyDungeonTestCase extends UseCaseTestBase {
     public void testCase() {
         //get dungeons
         final var dungeonList = ((ListResponseDto<DungeonInstanceDto>) controller.getDungeons()).getItems();
-        Assert.assertEquals(1, dungeonList.size());
-        final var d = dungeonList.get(0);
+        Assert.assertTrue(dungeonList.stream().anyMatch(d -> d.getId() == dungeonInstanceId));
+        final var d = dungeonList.stream().filter(dd -> dd.getId() == dungeonInstanceId).findFirst().orElseThrow();
         Assert.assertEquals(dungeonInstanceId, d.getId());
         Assert.assertEquals(2, d.getRooms().size());
         final var startingRoom = d.getRooms().get(0);

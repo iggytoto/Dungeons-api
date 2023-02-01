@@ -9,6 +9,7 @@
             <changeSetExecuted id="initial-table-users" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
             <changeSetExecuted id="initial-table-units" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
             <changeSetExecuted id="initial-table-items" author="gassan" changeLogFile="liquibase/initial-setup.xml"/>
+            <changeSetExecuted id="initial-events" author="gassan" changeLogFile="liquibase/initial-setup-events.xml"/>
         </preConditions>
         <!--        sequences-->
         <createSequence sequenceName="s_dungeon_event_id" dataType="int" startValue="1" incrementBy="1"/>
@@ -70,6 +71,20 @@
             <column name="description" type="varchar"/>
             <column name="is_recurrent" type="boolean"/>
         </createTable>
+        <createTable tableName="dungeon_event_encounters_units">
+            <column name="encounter_event_id" type="int"/>
+            <column name="unit_id" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="dungeon_event_encounters_units" columnNames="unit_id,encounter_event_id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_event_encounters_units"
+                                 baseColumnNames="encounter_event_id"
+                                 constraintName="fk_dungeon_event_encounters_units_encounter_event_id"
+                                 referencedTableName="dungeon_event_encounters"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dungeon_event_encounters_units" baseColumnNames="unit_id"
+                                 constraintName="fk_dungeon_event_encounters_units_unit_id"
+                                 referencedTableName="units"
+                                 referencedColumnNames="id"/>
         <createTable tableName="dungeon_event_treasure">
             <column name="id" type="int" defaultValueSequenceNext="s_dungeon_event_id">
                 <constraints primaryKey="true"/>
@@ -119,6 +134,7 @@
             </column>
             <column name="dungeon_instance_id" type="int"/>
             <column name="user_id" type="int"/>
+            <column name="is_encountered" type="boolean"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="dungeon_expeditions" baseColumnNames="user_id"
                                  constraintName="fk_dungeon_expeditions_user_id"
@@ -176,5 +192,10 @@
                                  constraintName="fk_dungeon_instance_expedition_location_expedition_id"
                                  referencedTableName="dungeon_expeditions"
                                  referencedColumnNames="id"/>
+        <insert tableName="events">
+            <column name="id" value="10000000"/>
+            <column name="event_type" value="DungeonEncounter"/>
+            <column name="status" value="Permanent"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

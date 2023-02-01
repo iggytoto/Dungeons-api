@@ -23,6 +23,7 @@ public class DungeonExpedition {
 
     public static final String TABLE_NAME = "dungeon_expeditions";
     public static final String DUNGEON_INSTANCE_ID_COLUMN_NAME = "dungeon_instance_id";
+    public static final String IS_ENCOUNTERED_COLUMN_NAME = "dungeon_instance_id";
     public static final String USER_ID_COLUMN_NAME = Constants.USER_ID_FOREIGN_KEY_COLUMN_NAME;
 
 
@@ -45,6 +46,8 @@ public class DungeonExpedition {
 
     @Column(name = USER_ID_COLUMN_NAME)
     private long userId;
+    @Column
+    private boolean isEncountered;
 
     @ManyToMany
     @JoinTable(name = DungeonExpeditionUnit.TABLE_NAME, joinColumns = @JoinColumn(name = DungeonExpeditionUnit.EXPEDITION_ID_COLUMN_NAME), inverseJoinColumns = @JoinColumn(name = DungeonExpeditionUnit.UNIT_ID_COLUMN_NAME))

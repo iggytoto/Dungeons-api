@@ -28,6 +28,12 @@
                 <constraints notNullConstraintName="c_nn_users_role"/>
             </column>
         </createTable>
+        <insert tableName="users">
+            <column name="id" value="-1"/>
+            <column name="role" value="Player"/>
+            <column name="name" value="World"/>
+            <column name="password_sha" value=""/>
+        </insert>
     </changeSet>
     <changeSet id="initial-table-tokens" author="gassan">
         <createTable tableName="tokens">

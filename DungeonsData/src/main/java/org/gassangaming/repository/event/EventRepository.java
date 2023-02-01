@@ -26,4 +26,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query(value = SET_CLOSED_BY_ID)
     @Modifying
     void setClosedById(@Param(PARAM_1) long eventId);
+
+    Event findByEventType(EventType type);
 }
