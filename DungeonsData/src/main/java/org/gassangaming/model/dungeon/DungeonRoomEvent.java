@@ -43,7 +43,7 @@ public abstract class DungeonRoomEvent {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = ROOM_ID_COLUMN_NAME)
-    DungeonRoom room;
+    private DungeonRoom room;
 
     public void setRoom(DungeonRoom room) {
         if (room == null) {

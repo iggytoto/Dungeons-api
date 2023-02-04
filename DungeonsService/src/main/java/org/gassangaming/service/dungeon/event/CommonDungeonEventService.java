@@ -8,7 +8,7 @@ import java.util.Collection;
 @Service
 public interface CommonDungeonEventService {
 
-    boolean processEvents(DungeonRoomEvent event);
+    boolean processEvent(DungeonRoomEvent event);
 
     Collection<Long> processEvents(Collection<DungeonRoomEvent> events);
 }

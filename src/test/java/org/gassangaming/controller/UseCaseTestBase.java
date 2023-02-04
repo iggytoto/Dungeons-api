@@ -4,6 +4,8 @@ package org.gassangaming.controller;
 import org.gassangaming.model.Account;
 import org.gassangaming.model.event.Event;
 import org.gassangaming.model.event.EventInstance;
+import org.gassangaming.model.event.EventStatus;
+import org.gassangaming.model.event.EventType;
 import org.gassangaming.model.item.Item;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.AccountRepository;
@@ -92,5 +94,13 @@ public class UseCaseTestBase {
 
     protected Item addItem(Item i) {
         return itemRepository.save(i);
+    }
+
+    protected Event getEncounterEvent() {
+        final var event = eventRepository.findByEventType(EventType.DungeonEncounter);
+        if (event == null) {
+            return eventRepository.save(new Event(EventType.DungeonEncounter, EventStatus.Permanent));
+        }
+        return event;
     }
 }

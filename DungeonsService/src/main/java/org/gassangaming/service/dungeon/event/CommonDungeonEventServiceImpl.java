@@ -14,8 +14,7 @@ public class CommonDungeonEventServiceImpl implements CommonDungeonEventService 
     @Autowired
     Collection<DungeonEventService> dungeonEventServices;
 
-    @Override
-    public boolean processEvents(DungeonRoomEvent event) {
+    public boolean processEvent(DungeonRoomEvent event) {
         return dungeonEventServices.stream().filter(s -> s.getTargetEventType() == event.getEventType()).findFirst().orElseThrow().process(event);
     }
 
@@ -23,13 +22,13 @@ public class CommonDungeonEventServiceImpl implements CommonDungeonEventService 
     public Collection<Long> processEvents(Collection<DungeonRoomEvent> events) {
         final var processedEventsIds = new ArrayList<Long>();
         for (var event : events.stream().filter(e -> e.getEventType() == DungeonEventType.Encounter).toList()) {
-            if (processEvents(event)) {
+            if (processEvent(event)) {
                 processedEventsIds.add(event.getId());
                 return processedEventsIds;
             }
         }
         for (var event : events.stream().filter(e -> e.getEventType() == DungeonEventType.Treasure).toList()) {
-            processEvents(event);
+            processEvent(event);
             processedEventsIds.add(event.getId());
         }
         return processedEventsIds;
