@@ -25,10 +25,10 @@ public class Item {
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
     @SequenceGenerator(name = SEQUENCE_NAME, allocationSize = 1)
-    private Long id;
+    private long id;
 
     @Column(name = USER_ID_COLUMN_NAME)
-    private long userId;
+    private Long userId;
 
     @Column(name = ITEM_TYPE_COLUMN_NAME)
     @Enumerated(EnumType.STRING)
@@ -44,11 +44,15 @@ public class Item {
     public Item() {
     }
 
-    public Item(long userId, ItemType itemType, String name, ItemRarity rarity) {
+    public Item(Long userId, ItemType itemType, String name, ItemRarity rarity) {
         this.userId = userId;
         this.itemType = itemType;
         this.name = name;
         this.rarity = rarity;
+    }
+
+    public Item(ItemType itemType, String name, ItemRarity rarity) {
+        this(null, itemType, name, rarity);
     }
 
 }

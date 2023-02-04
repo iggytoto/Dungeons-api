@@ -4,11 +4,13 @@ package org.gassangaming.controller;
 import org.gassangaming.model.Account;
 import org.gassangaming.model.event.Event;
 import org.gassangaming.model.event.EventInstance;
+import org.gassangaming.model.item.Item;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.AccountRepository;
 import org.gassangaming.repository.UserRepository;
 import org.gassangaming.repository.event.EventInstanceRepository;
 import org.gassangaming.repository.event.EventRepository;
+import org.gassangaming.repository.item.ItemRepository;
 import org.gassangaming.repository.unit.UnitRepository;
 import org.gassangaming.service.Role;
 import org.gassangaming.service.UserContext;
@@ -37,6 +39,8 @@ public class UseCaseTestBase {
     EventRepository eventRepository;
     @Autowired
     EventInstanceRepository eventInstanceRepository;
+    @Autowired
+    ItemRepository itemRepository;
 
 
     protected long registerServerUser(String login, String password) throws ServiceException {
@@ -84,5 +88,9 @@ public class UseCaseTestBase {
 
     protected EventInstance addEventInstance(EventInstance eventInstance) {
         return eventInstanceRepository.save(eventInstance);
+    }
+
+    protected Item addItem(Item i) {
+        return itemRepository.save(i);
     }
 }

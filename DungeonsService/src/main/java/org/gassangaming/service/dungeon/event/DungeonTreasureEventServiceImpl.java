@@ -31,7 +31,7 @@ public class DungeonTreasureEventServiceImpl implements DungeonEventService<Trea
 
     @Override
     public boolean process(DungeonRoomEvent event) {
-        if (rng.nextFloat() >= event.getProbability()) {
+        if (rng.nextFloat() <= event.getProbability()) {
             final var treasureEvent = (TreasureDungeonRoomEvent) event;
             final var expeditionLocations = dungeonInstanceExpeditionLocationRepository.findAllInRoomById(treasureEvent.getRoom().getId());
             final var winnerExpedition = expeditionLocations.get(rng.nextInt(expeditionLocations.size()));

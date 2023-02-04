@@ -38,10 +38,19 @@ public abstract class DungeonRoomEvent {
     @Column(name = DESCRIPTION_COLUMN_NAME)
     private String description;
 
-    @Column(name = ROOM_ID_COLUMN_NAME,updatable = false,insertable = false)
+    @Column(name = ROOM_ID_COLUMN_NAME, updatable = false, insertable = false)
     private long roomId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = ROOM_ID_COLUMN_NAME)
     DungeonRoom room;
+
+    public void setRoom(DungeonRoom room) {
+        if (room == null) {
+            throw new IllegalStateException();
+        } else {
+            this.room = room;
+            this.roomId = room.getId();
+        }
+    }
 }

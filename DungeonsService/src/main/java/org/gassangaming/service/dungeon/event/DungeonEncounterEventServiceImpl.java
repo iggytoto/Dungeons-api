@@ -43,7 +43,7 @@ public class DungeonEncounterEventServiceImpl implements DungeonEventService<Enc
     @Override
     public boolean process(DungeonRoomEvent roomEvent) {
         final var encounterEvent = (EncounterDungeonRoomEvent) roomEvent;
-        if (rng.nextFloat() >= roomEvent.getProbability()) {
+        if (rng.nextFloat() <= roomEvent.getProbability()) {
             final var room = roomEvent.getRoom();
             final var expeditionLocations = dungeonInstanceExpeditionLocationRepository.findAllInRoomById(room.getId());
             if (expeditionLocations.isEmpty()) {
