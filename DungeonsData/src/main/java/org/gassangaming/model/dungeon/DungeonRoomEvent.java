@@ -1,41 +1,47 @@
 package org.gassangaming.model.dungeon;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
-import static org.gassangaming.model.dungeon.DungeonRoomEvent.TABLE_NAME;
 
 @Entity
 @Getter
 @Setter
-@Table(name = TABLE_NAME)
-@IdClass(DungeonRoomEvent.DungeonRoomEventId.class)
-public class DungeonRoomEvent {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class DungeonRoomEvent {
 
-    public static final String TABLE_NAME = "dungeon_rooms_events";
+    public static final String SEQUENCE_NAME = "s_dungeon_event_id";
+    public static final String EVENT_TYPE_COLUMN_NAME = "event_type";
+    public static final String PROBABILITY_COLUMN_NAME = "probability";
+    public static final String IS_RECURRENT_COLUMN_NAME = "is_recurrent";
+    public static final String DESCRIPTION_COLUMN_NAME = "description";
     public static final String ROOM_ID_COLUMN_NAME = "room_id";
-    public static final String EVENT_ID_COLUMN_NAME = "dungeon_event_id";
 
     @Id
-    @Column(name = ROOM_ID_COLUMN_NAME)
+    @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
+    @SequenceGenerator(name = SEQUENCE_NAME, allocationSize = 1)
+    private long id;
+
+    @Column(name = EVENT_TYPE_COLUMN_NAME)
+    @Enumerated(EnumType.STRING)
+    private DungeonEventType eventType;
+
+    @Column(name = PROBABILITY_COLUMN_NAME)
+    private float probability;
+
+    @Column(name = IS_RECURRENT_COLUMN_NAME)
+    private boolean isRecurrent;
+
+    @Column(name = DESCRIPTION_COLUMN_NAME)
+    private String description;
+
+    @Column(name = ROOM_ID_COLUMN_NAME,updatable = false,insertable = false)
     private long roomId;
 
-    @Id
-    @Column(name = EVENT_ID_COLUMN_NAME)
-    private long eventId;
-
-
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Getter
-    @Setter
-    public static class DungeonRoomEventId implements Serializable {
-        private long roomId;
-        private long eventId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = ROOM_ID_COLUMN_NAME)
+    DungeonRoom room;
 }

@@ -70,6 +70,7 @@
             <column name="probability" type="float"/>
             <column name="description" type="varchar"/>
             <column name="is_recurrent" type="boolean"/>
+            <column name="room_id" type="int"/>
         </createTable>
         <createTable tableName="dungeon_event_encounters_units">
             <column name="encounter_event_id" type="int"/>
@@ -94,6 +95,7 @@
             <column name="description" type="varchar"/>
             <column name="is_recurrent" type="boolean"/>
             <column name="item_id" type="int"/>
+            <column name="room_id" type="int"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="dungeon_event_treasure" baseColumnNames="item_id"
                                  constraintName="fk_dungeon_event_treasure_item_id"
@@ -122,10 +124,6 @@
         <addForeignKeyConstraint baseTableName="dungeon_rooms_events" baseColumnNames="room_id"
                                  constraintName="fk_dungeon_room_events_room_id"
                                  referencedTableName="dungeon_rooms"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="dungeon_rooms_events" baseColumnNames="dungeon_event_id"
-                                 constraintName="fk_dungeon_rooms_events_event_id"
-                                 referencedTableName="dungeon_event"
                                  referencedColumnNames="id"/>
         <!--        dungeon expeditions-->
         <createTable tableName="dungeon_expeditions">

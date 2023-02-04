@@ -1,9 +1,11 @@
 package org.gassangaming.service.dungeon.event;
 
-import org.gassangaming.model.dungeon.DungeonEvent;
+import org.gassangaming.model.dungeon.DungeonRoomEvent;
+import org.gassangaming.model.dungeon.DungeonEventType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -13,7 +15,23 @@ public class CommonDungeonEventServiceImpl implements CommonDungeonEventService 
     Collection<DungeonEventService> dungeonEventServices;
 
     @Override
-    public boolean processEvent(DungeonEvent event) {
+    public boolean processEvents(DungeonRoomEvent event) {
         return dungeonEventServices.stream().filter(s -> s.getTargetEventType() == event.getEventType()).findFirst().orElseThrow().process(event);
+    }
+
+    @Override
+    public Collection<Long> processEvents(Collection<DungeonRoomEvent> events) {
+        final var processedEventsIds = new ArrayList<Long>();
+        for (var event : events.stream().filter(e -> e.getEventType() == DungeonEventType.Encounter).toList()) {
+            if (processEvents(event)) {
+                processedEventsIds.add(event.getId());
+                return processedEventsIds;
+            }
+        }
+        for (var event : events.stream().filter(e -> e.getEventType() == DungeonEventType.Treasure).toList()) {
+            processEvents(event);
+            processedEventsIds.add(event.getId());
+        }
+        return processedEventsIds;
     }
 }

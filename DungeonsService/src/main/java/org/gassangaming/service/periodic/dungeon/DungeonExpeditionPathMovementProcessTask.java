@@ -4,6 +4,8 @@ import org.gassangaming.model.dungeon.DungeonInstanceExpeditionLocation;
 import org.gassangaming.model.unit.Unit;
 import org.gassangaming.repository.dungeon.DungeonInstanceExpeditionLocationRepository;
 import org.gassangaming.repository.dungeon.DungeonPathRepository;
+import org.gassangaming.repository.dungeon.DungeonRoomRepository;
+import org.gassangaming.service.dungeon.event.CommonDungeonEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,10 @@ public class DungeonExpeditionPathMovementProcessTask {
     DungeonInstanceExpeditionLocationRepository dungeonInstanceExpeditionLocationRepository;
     @Autowired
     DungeonPathRepository dungeonPathRepository;
+    @Autowired
+    DungeonRoomRepository dungeonRoomRepository;
+    @Autowired
+    CommonDungeonEventService commonDungeonEventService;
 
     private final static long FIVE_MINUTES = 1000 * 60 * 5;
 
@@ -38,6 +44,8 @@ public class DungeonExpeditionPathMovementProcessTask {
             dungeonInstanceExpeditionLocation.setRoom(true);
             dungeonInstanceExpeditionLocation.setLocationEnteredTimestamp(new Date());
             dungeonInstanceExpeditionLocationRepository.save(dungeonInstanceExpeditionLocation);
+            final var room = dungeonRoomRepository.findById(path.getToRoomId()).orElseThrow();
+            commonDungeonEventService.processEvents(room.getDungeonRoomEvents());
         }
     }
 

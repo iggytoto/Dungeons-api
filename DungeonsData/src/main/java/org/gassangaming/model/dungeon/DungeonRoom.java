@@ -52,9 +52,8 @@ public class DungeonRoom {
     @JoinTable(name = DungeonRoomItem.TABLE_NAME, joinColumns = @JoinColumn(name = DungeonRoomItem.ROOM_ID_COLUMN_NAME), inverseJoinColumns = @JoinColumn(name = DungeonRoomItem.ITEM_ID_COLUMN_NAME))
     Collection<Item> items = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = DungeonRoomEvent.TABLE_NAME, joinColumns = @JoinColumn(name = DungeonRoomEvent.ROOM_ID_COLUMN_NAME), inverseJoinColumns = @JoinColumn(name = DungeonRoomEvent.EVENT_ID_COLUMN_NAME))
-    Collection<DungeonEvent> events = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
+    Collection<DungeonRoomEvent> dungeonRoomEvents = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = DUNGEON_INSTANCE_ID_COLUMN_NAME)

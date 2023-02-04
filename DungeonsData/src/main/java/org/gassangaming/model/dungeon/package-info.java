@@ -5,7 +5,7 @@
  * of dungeons where room is a node and path is a edge.
  * Dungeons are visited by {@link org.gassangaming.model.dungeon.DungeonExpedition} a set of {@link  org.gassangaming.model.unit.Unit}
  * that enters the dungeon and moves by pathes between rooms.
- * While in the dungeon expedition may or may not trigger {@link org.gassangaming.model.dungeon.DungeonEvent} found
+ * While in the dungeon expedition may or may not trigger {@link org.gassangaming.model.dungeon.DungeonRoomEvent} found
  * loot or encounter etc.
  */
 package org.gassangaming.model.dungeon;

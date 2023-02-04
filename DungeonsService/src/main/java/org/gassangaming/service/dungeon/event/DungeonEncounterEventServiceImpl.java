@@ -1,8 +1,8 @@
 package org.gassangaming.service.dungeon.event;
 
-import org.gassangaming.model.dungeon.DungeonEvent;
+import org.gassangaming.model.dungeon.DungeonRoomEvent;
 import org.gassangaming.model.dungeon.DungeonEventType;
-import org.gassangaming.model.dungeon.event.EncounterDungeonEvent;
+import org.gassangaming.model.dungeon.event.EncounterDungeonRoomEvent;
 import org.gassangaming.model.event.*;
 import org.gassangaming.repository.dungeon.DungeonExpeditionRepository;
 import org.gassangaming.repository.dungeon.DungeonInstanceExpeditionLocationRepository;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Random;
 
-public class DungeonEncounterEventServiceImpl implements DungeonEventService<EncounterDungeonEvent> {
+public class DungeonEncounterEventServiceImpl implements DungeonEventService<EncounterDungeonRoomEvent> {
 
     private final Random rng = new Random();
 
@@ -41,8 +41,8 @@ public class DungeonEncounterEventServiceImpl implements DungeonEventService<Enc
     }
 
     @Override
-    public boolean process(DungeonEvent roomEvent) {
-        final var encounterEvent = (EncounterDungeonEvent) roomEvent;
+    public boolean process(DungeonRoomEvent roomEvent) {
+        final var encounterEvent = (EncounterDungeonRoomEvent) roomEvent;
         if (rng.nextFloat() >= roomEvent.getProbability()) {
             final var room = roomEvent.getRoom();
             final var expeditionLocations = dungeonInstanceExpeditionLocationRepository.findAllInRoomById(room.getId());

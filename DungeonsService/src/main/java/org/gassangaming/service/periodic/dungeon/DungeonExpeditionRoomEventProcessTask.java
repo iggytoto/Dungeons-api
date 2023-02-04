@@ -1,6 +1,5 @@
 package org.gassangaming.service.periodic.dungeon;
 
-import org.gassangaming.model.dungeon.DungeonEventType;
 import org.gassangaming.model.dungeon.DungeonInstanceExpeditionLocation;
 import org.gassangaming.repository.dungeon.DungeonInstanceExpeditionLocationRepository;
 import org.gassangaming.repository.dungeon.DungeonRoomRepository;
@@ -29,14 +28,6 @@ public class DungeonExpeditionRoomEventProcessTask {
 
     private void processLocation(DungeonInstanceExpeditionLocation dungeonInstanceExpeditionLocation) {
         final var room = dungeonRoomRepository.findById(dungeonInstanceExpeditionLocation.getLocationId()).orElseThrow();
-        final var events = room.getEvents();
-        for (var event : events.stream().filter(e -> e.getEventType() == DungeonEventType.Encounter).toList()) {
-            if (commonDungeonEventService.processEvent(event)) {
-                break;
-            }
-        }
-        for (var event : events.stream().filter(e -> e.getEventType() == DungeonEventType.Treasure).toList()) {
-            commonDungeonEventService.processEvent(event);
-        }
+        commonDungeonEventService.processEvents(room.getDungeonRoomEvents());
     }
 }

@@ -1,9 +1,9 @@
 package org.gassangaming.service.dungeon.event;
 
-import org.gassangaming.model.dungeon.DungeonEvent;
+import org.gassangaming.model.dungeon.DungeonRoomEvent;
 import org.gassangaming.model.dungeon.DungeonEventType;
 import org.gassangaming.model.dungeon.DungeonExpeditionItem;
-import org.gassangaming.model.dungeon.event.TreasureDungeonEvent;
+import org.gassangaming.model.dungeon.event.TreasureDungeonRoomEvent;
 import org.gassangaming.repository.dungeon.DungeonExpeditionItemRepository;
 import org.gassangaming.repository.dungeon.DungeonInstanceExpeditionLocationRepository;
 import org.gassangaming.repository.dungeon.event.DungeonTreasureEventRepository;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-public class DungeonTreasureEventServiceImpl implements DungeonEventService<TreasureDungeonEvent> {
+public class DungeonTreasureEventServiceImpl implements DungeonEventService<TreasureDungeonRoomEvent> {
 
     @Autowired
     DungeonExpeditionItemRepository dungeonExpeditionItemRepository;
@@ -30,9 +30,9 @@ public class DungeonTreasureEventServiceImpl implements DungeonEventService<Trea
     }
 
     @Override
-    public boolean process(DungeonEvent event) {
+    public boolean process(DungeonRoomEvent event) {
         if (rng.nextFloat() >= event.getProbability()) {
-            final var treasureEvent = (TreasureDungeonEvent) event;
+            final var treasureEvent = (TreasureDungeonRoomEvent) event;
             final var expeditionLocations = dungeonInstanceExpeditionLocationRepository.findAllInRoomById(treasureEvent.getRoom().getId());
             final var winnerExpedition = expeditionLocations.get(rng.nextInt(expeditionLocations.size()));
             dungeonExpeditionItemRepository.save(new DungeonExpeditionItem(winnerExpedition.getId(), treasureEvent.getItemId()));
