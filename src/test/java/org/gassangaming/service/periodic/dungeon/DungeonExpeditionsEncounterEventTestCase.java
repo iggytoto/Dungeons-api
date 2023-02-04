@@ -4,6 +4,7 @@ import org.gassangaming.controller.UseCaseTestBase;
 import org.gassangaming.model.dungeon.DungeonExpedition;
 import org.gassangaming.model.dungeon.DungeonInstance;
 import org.gassangaming.model.dungeon.DungeonRoom;
+import org.gassangaming.model.dungeon.DungeonRoomEventState;
 import org.gassangaming.model.dungeon.event.EncounterDungeonRoomEvent;
 import org.gassangaming.model.dungeon.event.TreasureDungeonRoomEvent;
 import org.gassangaming.model.event.Event;
@@ -81,6 +82,8 @@ public class DungeonExpeditionsEncounterEventTestCase extends UseCaseTestBase {
     private final List<Unit> encounterUnits = new ArrayList<>();
     private long user1Id;
     private long user2Id;
+    private TreasureDungeonRoomEvent treasureEvent;
+    private EncounterDungeonRoomEvent encounterEvent;
 
     @Before
     public void setup() throws ServiceException {
@@ -90,11 +93,11 @@ public class DungeonExpeditionsEncounterEventTestCase extends UseCaseTestBase {
         final var dungeonInstance = dungeonInstanceRepository.save(new DungeonInstance());
         DungeonRoom room = dungeonRoomRepository.save(new DungeonRoom(true, dungeonInstance));
         Item treasure = addItem(new Item(ItemType.Boots, "WoodyBoot", ItemRarity.Legendary));
-        TreasureDungeonRoomEvent treasureEvent = treasureEventRepository.save(new TreasureDungeonRoomEvent(treasure.getId(), room, "Test treasure", 1, false));
+        treasureEvent = treasureEventRepository.save(new TreasureDungeonRoomEvent(treasure.getId(), room, "Test treasure", 1, false));
         long worldUserId = registerUser(LOGIN_WORLD, PASSWORD_WORLD);
         final var u = addUnit(new HumanSpearman(), worldUserId);
         encounterUnits.add(u);
-        EncounterDungeonRoomEvent encounterEvent = dungeonEncounterEventRepository.save(new EncounterDungeonRoomEvent(List.of(u), 1, false, room));
+        encounterEvent = dungeonEncounterEventRepository.save(new EncounterDungeonRoomEvent(List.of(u), 1, false, room));
         // setting up user1 and units
         final var roster1 = new ArrayList<Unit>();
         user1Id = registerUser(LOGIN_1, PASSWORD_1);
@@ -130,5 +133,9 @@ public class DungeonExpeditionsEncounterEventTestCase extends UseCaseTestBase {
         Assert.assertTrue(eventInstances.stream().anyMatch(ei -> ei.getUserId() == user1Id));
         Assert.assertTrue(eventInstances.stream().anyMatch(ei -> ei.getUserId() == user2Id));
         Assert.assertEquals(eventInstances.get(0).getEventInstanceId(), eventInstances.get(1).getEventInstanceId());
+        final var updatedTreasureEvent = treasureEventRepository.findById(treasureEvent.getId()).orElseThrow();
+        Assert.assertEquals(DungeonRoomEventState.Active, updatedTreasureEvent.getState());
+        final var updatedEncounterEvent = dungeonEncounterEventRepository.findById(encounterEvent.getId()).orElseThrow();
+        Assert.assertEquals(DungeonRoomEventState.InProgress, updatedEncounterEvent.getState());
     }
 }

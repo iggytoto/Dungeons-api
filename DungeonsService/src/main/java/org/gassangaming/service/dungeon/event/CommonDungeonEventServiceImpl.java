@@ -2,6 +2,7 @@ package org.gassangaming.service.dungeon.event;
 
 import org.gassangaming.model.dungeon.DungeonRoomEvent;
 import org.gassangaming.model.dungeon.DungeonEventType;
+import org.gassangaming.model.dungeon.DungeonRoomEventState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,9 @@ public class CommonDungeonEventServiceImpl implements CommonDungeonEventService 
     Collection<DungeonEventService> dungeonEventServices;
 
     public boolean processEvent(DungeonRoomEvent event) {
+        if (!event.getState().equals(DungeonRoomEventState.Active)) {
+            return false;
+        }
         return dungeonEventServices.stream().filter(s -> s.getTargetEventType() == event.getEventType()).findFirst().orElseThrow().process(event);
     }
 

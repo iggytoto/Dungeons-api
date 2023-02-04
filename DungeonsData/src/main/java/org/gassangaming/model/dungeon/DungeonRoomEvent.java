@@ -18,6 +18,7 @@ public abstract class DungeonRoomEvent {
     public static final String IS_RECURRENT_COLUMN_NAME = "is_recurrent";
     public static final String DESCRIPTION_COLUMN_NAME = "description";
     public static final String ROOM_ID_COLUMN_NAME = "room_id";
+    public static final String STATE_COLUMN_NAME = "state";
 
     @Id
     @Column
@@ -37,6 +38,8 @@ public abstract class DungeonRoomEvent {
 
     @Column(name = DESCRIPTION_COLUMN_NAME)
     private String description;
+    @Column(name = STATE_COLUMN_NAME)
+    private DungeonRoomEventState state = DungeonRoomEventState.Active;
 
     @Column(name = ROOM_ID_COLUMN_NAME, updatable = false, insertable = false)
     private long roomId;

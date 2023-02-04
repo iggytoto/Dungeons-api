@@ -2,9 +2,11 @@ package org.gassangaming.service.dungeon.event;
 
 import org.gassangaming.model.dungeon.DungeonEventType;
 import org.gassangaming.model.dungeon.DungeonRoomEvent;
+import org.gassangaming.model.dungeon.DungeonRoomEventState;
 import org.gassangaming.model.dungeon.event.EncounterDungeonRoomEvent;
 import org.gassangaming.model.event.*;
 import org.gassangaming.repository.dungeon.DungeonExpeditionRepository;
+import org.gassangaming.repository.dungeon.DungeonRoomEventRepository;
 import org.gassangaming.repository.event.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ public class DungeonEncounterDungeonEventServiceImpl extends DungeonEventService
     @Autowired
     UserEventInstanceRepository userEventInstanceRepository;
     @Autowired
-    UserEventRegistrationRepository userEventRegistrationRepository;
+    DungeonRoomEventRepository dungeonRoomEventRepository;
     @Autowired
     UnitEventRegistrationRepository unitEventRegistrationRepository;
 
@@ -50,6 +52,8 @@ public class DungeonEncounterDungeonEventServiceImpl extends DungeonEventService
                 userEventInstanceRepository.save(new UserEventInstance(expedition.getUserId(), event.getId(), eventInstance.getId()));
             }
             encounterEvent.getUnits().forEach(u -> unitEventRegistrationRepository.save(new UnitEventRegistration(eventId, u.getId(), u.getOwnerId())));
+            roomEvent.setState(DungeonRoomEventState.InProgress);
+            dungeonRoomEventRepository.save(roomEvent);
             return true;
         } else {
             return false;
