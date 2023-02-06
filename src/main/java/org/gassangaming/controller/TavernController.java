@@ -8,6 +8,7 @@ import org.gassangaming.service.UserContext;
 import org.gassangaming.service.exception.ServiceException;
 import org.gassangaming.service.tavern.TavernService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class TavernController {
     }
 
     @PostMapping(PATH + BUY_UNIT_PATH)
+    @Transactional
     public DtoBase buyUnit(@RequestBody BuyUnitRequestDto buyUnitRequestDto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
             return UnitDto.of(tavernService.buyUnit(buyUnitRequestDto.getType(), context.getToken().getUserId()));

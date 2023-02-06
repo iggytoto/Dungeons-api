@@ -13,6 +13,7 @@ import org.gassangaming.service.UserContext;
 import org.gassangaming.service.barrack.BarrackService;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
@@ -42,6 +43,7 @@ public class BarrackController {
     }
 
     @PostMapping(PATH + EQUIP_ITEM_PATH)
+    @Transactional
     public DtoBase equipItem(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody EquipItemRequestDto dto) {
         try {
             return ItemDto.of(barrackService.equipItem(dto.getItemId(), dto.getUnitId(), context));
@@ -51,6 +53,7 @@ public class BarrackController {
     }
 
     @PostMapping(PATH + UNEQUIP_ITEM_PATH)
+    @Transactional
     public DtoBase unEquipItem(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UnEquipItemRequestDto dto) {
         try {
             return ItemDto.of(barrackService.unEquipItem(dto.getItemId(), context));
@@ -60,6 +63,7 @@ public class BarrackController {
     }
 
     @PostMapping(PATH + CHANGE_UNIT_NAME_PATH)
+    @Transactional
     public DtoBase changeUnitName(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitNameRequestDto request) {
         try {
             return UnitDto.of(barrackService.ChangeUnitName(request.getUnitId(), request.getNewName(), context));
@@ -69,6 +73,7 @@ public class BarrackController {
     }
 
     @PostMapping(PATH + CHANGE_UNIT_BATTLE_BEHAVIOR_PATH)
+    @Transactional
     public DtoBase changeUnitBehavior(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ChangeUnitBattleBehaviorRequestDto request) {
         try {
             return UnitDto.of(barrackService.ChangeUnitBattleBehavior(request.getUnitId(), request.getNewBattleBehavior(), context));
@@ -78,6 +83,7 @@ public class BarrackController {
     }
 
     @PostMapping(PATH + UPGRADE_UNIT_skillsMENT_PATH)
+    @Transactional
     public DtoBase upgradeUnitEquipment(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody UpgradeUnitSkillsRequestDto request) {
         try {
             return UnitSkillsDto.of(barrackService.UpgradeUnitEquipment(request.getSkillsId(), request.getUnitType(), request.getParamNameToUpgrade(), context));
