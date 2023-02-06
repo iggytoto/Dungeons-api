@@ -11,13 +11,13 @@ import org.gassangaming.service.UserContext;
 import org.gassangaming.service.event.EventsService;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
 @RestController
 public class EventsController {
-
     public static final String PATH = "/events";
     public static final String REGISTER_PATH = "/register";
     public static final String STATUS_PATH = "/status";
@@ -30,6 +30,7 @@ public class EventsController {
     EventsService eventsService;
 
     @PostMapping(PATH + REGISTER_PATH)
+    @Transactional
     public DtoBase register(@RequestBody EventRegisterRequestDto dto, @RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context) {
         try {
             return EventDto.of(eventsService.register(dto.getUnitsIds(), dto.getEventType(), context.getToken().getUserId()));
@@ -44,6 +45,7 @@ public class EventsController {
     }
 
     @PostMapping(PATH + APPLY_SERVER_PATH)
+    @Transactional
     public DtoBase apply(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody ServerApplicationRequestDto dto) {
         try {
             return EventInstanceDto.of(eventsService.applyServer(dto.getHost(), dto.getPort(), context.getToken().getUserId()));
@@ -53,6 +55,7 @@ public class EventsController {
     }
 
     @PostMapping(PATH + CANCEL_PATH)
+    @Transactional
     public DtoBase cancel(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody EventCancelRequestDto dto) {
         try {
             eventsService.cancel(dto.getEventId(), context.getToken().getUserId());
@@ -68,6 +71,7 @@ public class EventsController {
     }
 
     @PostMapping(PATH + SAVE_EVENT_INSTANCE_RESULT)
+    @Transactional
     public DtoBase save(@RequestAttribute(UserContext.CONTEXT_ATTRIBUTE_NAME) UserContext context, @RequestBody EventInstanceResultDto dto) {
         try {
             eventsService.saveResult(dto.toDomain(), context.getToken().getUserId());

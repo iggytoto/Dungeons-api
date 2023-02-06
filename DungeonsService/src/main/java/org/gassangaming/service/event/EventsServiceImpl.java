@@ -78,6 +78,7 @@ public class EventsServiceImpl implements EventsService {
     @Override
     public void saveResult(EventInstanceResult result, long userId) throws ServiceException {
         final var ei = eventInstanceRepository.findById(result.getEventInstanceId()).orElseThrow(() -> new ServiceException("Unknown event instance"));
+        final var e = eventRepository.findById(ei.getEventId()).orElseThrow(() -> new ServiceException("Unknown event"));
         eventInstanceRepository.deleteById(ei.getId());
         userEventRegistrationRepository.deleteByEventId(ei.getEventId());
         unitEventRegistrationRepository.deleteAllByUnitId(result.getUnitsHitPoints().keySet());
@@ -89,7 +90,7 @@ public class EventsServiceImpl implements EventsService {
             u.setHitPoints(hp);
         }
         unitRepository.saveAll(units);
-        if (eventInstanceRepository.countByEventId(ei.getEventId()) == 0) {
+        if (!e.getStatus().equals(EventStatus.Permanent) && eventInstanceRepository.countByEventId(ei.getEventId()) == 0) {
             eventRepository.setClosedById(ei.getEventId());
         }
     }

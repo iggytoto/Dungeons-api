@@ -7,8 +7,6 @@ import org.gassangaming.model.unit.Unit;
 import org.gassangaming.service.event.result.EventInstanceResult;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -22,7 +20,6 @@ public interface EventsService {
     /**
      * Register player ream participation in event
      */
-    @Transactional
     Event register(Collection<Long> unitsIds, EventType eventType, long userId) throws ServiceException;
 
     /**
@@ -34,7 +31,6 @@ public interface EventsService {
     /**
      * Registers server to process event instance
      */
-    @Transactional(isolation = Isolation.SERIALIZABLE)
     EventInstance applyServer(String host, String port, long userId) throws ServiceException;
 
     /**
@@ -42,7 +38,6 @@ public interface EventsService {
      *
      * @param userId processing server user id
      */
-    @Transactional
     void saveResult(EventInstanceResult result, long userId) throws ServiceException;
 
     /**
@@ -53,6 +48,5 @@ public interface EventsService {
     /**
      * Cancels event registration for given user
      */
-    @Transactional
     void cancel(long eventType, long userId) throws ServiceException;
 }
