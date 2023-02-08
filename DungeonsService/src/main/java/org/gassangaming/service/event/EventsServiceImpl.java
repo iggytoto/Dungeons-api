@@ -96,8 +96,13 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public Collection<Unit> getEventInstanceData(long eventInstanceId) {
-        return eventInstanceRepository.findAllUnitsById(eventInstanceId);
+    public EventInstanceData getEventInstanceData(long eventInstanceId) {
+        final var ei = eventInstanceRepository.findById(eventInstanceId).orElseThrow();
+        return EventInstanceData.builder().
+                eventInstanceId(eventInstanceId).
+                eventParticipants(eventInstanceRepository.findAllUnitsById(eventInstanceId)).
+                eventType(ei.getEventType()).
+                build();
     }
 
     @Override

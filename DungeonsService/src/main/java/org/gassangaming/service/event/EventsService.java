@@ -3,7 +3,6 @@ package org.gassangaming.service.event;
 import org.gassangaming.model.event.Event;
 import org.gassangaming.model.event.EventInstance;
 import org.gassangaming.model.event.EventType;
-import org.gassangaming.model.unit.Unit;
 import org.gassangaming.service.event.result.EventInstanceResult;
 import org.gassangaming.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
@@ -43,7 +42,7 @@ public interface EventsService {
     /**
      * Gets event instance data to start process the event
      */
-    Collection<Unit> getEventInstanceData(long eventInstanceId);
+    EventInstanceData getEventInstanceData(long eventInstanceId);
 
     /**
      * Cancels event registration for given user

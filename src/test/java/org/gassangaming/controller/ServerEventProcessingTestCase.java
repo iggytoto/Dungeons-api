@@ -1,11 +1,10 @@
 package org.gassangaming.controller;
 
-import org.gassangaming.dto.ListResponseDto;
 import org.gassangaming.dto.controllers.events.EventInstanceDataRequestDto;
 import org.gassangaming.dto.controllers.events.EventInstanceDto;
+import org.gassangaming.dto.controllers.events.EventInstanceDataDto;
 import org.gassangaming.dto.controllers.events.ServerApplicationRequestDto;
 import org.gassangaming.dto.controllers.events.eventinstanceresult.EventInstanceResultDto;
-import org.gassangaming.dto.unit.UnitDto;
 import org.gassangaming.model.event.*;
 import org.gassangaming.model.unit.Activity;
 import org.gassangaming.model.unit.human.HumanWarrior;
@@ -85,9 +84,9 @@ public class ServerEventProcessingTestCase extends UseCaseTestBase {
         // get event data
         final var eventInstanceDataRequestDto = new EventInstanceDataRequestDto();
         eventInstanceDataRequestDto.setEventInstanceId(eventInstanceId);
-        final var dataResponse = (ListResponseDto<UnitDto>) eventsController.getData(eventInstanceDataRequestDto);
+        final var dataResponse = (EventInstanceDataDto) eventsController.getData(eventInstanceDataRequestDto);
         Assert.assertNotNull(dataResponse);
-        Assert.assertEquals(2, dataResponse.getItems().size());
+        Assert.assertEquals(2, dataResponse.getEventParticipants().size());
         //save result
         final var saveResultDto = new TestResultDto();
         saveResultDto.setEventInstanceId(eventInstanceId);

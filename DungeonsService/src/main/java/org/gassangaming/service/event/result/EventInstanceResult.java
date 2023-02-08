@@ -10,4 +10,6 @@ public abstract class EventInstanceResult {
     private long eventInstanceId;
     private EventType eventType;
     private Map<Long, Integer> unitsHitPoints;
+    private Map<Long, Integer> unitsDamageDealt;
+    private Map<Long, Integer> unitsDamageHealed;
 }
